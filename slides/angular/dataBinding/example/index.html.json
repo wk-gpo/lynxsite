@@ -1,0 +1,6 @@
+{
+    "links" : {
+        "ng-model" : "http://docs.angularjs.org/api/ng.directive:ngModel"
+    },
+    "toolbar": true
+}

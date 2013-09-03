@@ -9,14 +9,19 @@
         to the model section and modifies HTML expressions in the view via a controller. Likewise, any alterations to
         the view are reflected in the model. This circumvents the need to actively manipulate the DOM and encourages
         bootstrapping and rapid prototyping of web applications.
+
+        <div class="example">
+            <div class="appRun">
+                <div class="body" ng-include="'slides/angular/dataBinding/example/index.html' | github"></div>
+            </div>
+            <div class="tabbable higlightable editable">
+                <div class="tab-pane" title="index.html">
+                    <pre class="linenums" pp-url="'slides/angular/dataBinding/example/index.html' | github"></pre>
+                </div>
+            </div>
+        </div>
     </div>
     <ul>
-        <li>
-            <h2>easy asynchronous</h2>
-            <div class="pointCommentary">
-                Developers don’t have to care about asynchronous actions, do not need to use callbacks, synchronization, etc...
-            </div>
-        </li>
         <li>
             <h2>readable</h2>
             <div class="pointCommentary">
@@ -29,6 +34,18 @@
                 Flexible and open model, without any inheritance/wrappers/etc requirements.
                 Models are JavaScript objects, arrays, primitives, it doesn’t matter. Angular Js provides also
                 easy data conversion mechanism by filters.
+            </div>
+        </li>
+        <li>
+            <h2>data driven</h2>
+            <div class="pointCommentary">
+                There is no any DOM event handling all what you need to do is observing/binding the data.
+            </div>
+        </li>
+        <li>
+            <h2>easy asynchronous</h2>
+            <div class="pointCommentary">
+                Developers don’t have to care about asynchronous actions, do not need to use callbacks, synchronization, etc...
             </div>
         </li>
         <li>
