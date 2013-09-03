@@ -1,0 +1,10 @@
+{
+    "links" : {
+        "ng-include" : "http://docs.angularjs.org/api/ng.directive:ngInclude",
+        "page.html": {"tab": 1}
+    },
+    "replace" : {
+        "slides/angular/htmlTemplating/example/page.html" : "page.html"
+    },
+    "toolbar": true
+}

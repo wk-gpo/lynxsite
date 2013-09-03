@@ -1,34 +1,5 @@
 <div class="topF agenda">
 
-    <script type="text/ng-template" id="slide/angularjs/templating.html">
-        <div>
-            <div class="info">
-                This is simple example of html template
-                with snippet inclusion.
-            </div>
-            <ng-include src="'page.html'"></ng-include>
-        </div>
-    </script>
-
-    <script type="text/ng-template" id="page.html">
-        <div>
-            <h3>Hello Word</h3>
-        </div>
-
-
-
-        &nbsp;
-    </script>
-
-    <script type="text/ng-template" id="slide/angularjs/templating.html.json">
-        {
-        "links" : {
-        "ng-include" : "http://docs.angularjs.org/api/ng.directive:ngInclude",
-        "page.html": {"tab": 1}
-        }
-        }
-    </script>
-
     <h1>
         angularJS - html templating
     </h1>
@@ -40,24 +11,14 @@
 
         <div class="example">
             <div class="appRun">
-                <div class="body">
-                    <div>
-                        <div class="info">
-                            This is simple example of html template
-                            with snippet inclusion.
-                        </div>
-                        <div>
-                            <h3>Hello Word</h3>
-                        </div>
-                    </div>
-                </div>
+                <div class="body" git-include="slides/angular/htmlTemplating/example/index.html"></div>
             </div>
-            <div class="tabbable higlightable">
+            <div class="tabbable higlightable editable">
                 <div class="tab-pane" title="index.html">
-                    <pre class="linenums" pp-template="slide/angularjs/templating.html"></pre>
+                    <pre class="linenums" pp-git-url="slides/angular/htmlTemplating/example/index.html"></pre>
                 </div>
                 <div class="tab-pane" title="page.html">
-                    <pre class="linenums" pp-template="page.html"></pre>
+                    <pre class="linenums" pp-git-url="slides/angular/htmlTemplating/example/page.html"></pre>
                 </div>
             </div>
         </div>
