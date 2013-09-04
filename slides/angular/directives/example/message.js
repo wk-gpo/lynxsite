@@ -1,4 +1,4 @@
-alert("dupa");
+alert("dupsdsdadsaa");
 
 angular.module("wk.lynx.site").directive("message", function() {
     return {
