@@ -1,3 +1,5 @@
+alert("dupa");
+
 angular.module("wk.lynx.site").directive("message", function() {
     return {
         restrict : "E",
