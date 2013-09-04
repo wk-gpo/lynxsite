@@ -1,3 +1,11 @@
 {
+    "replace" : {
+        "gitContents/slides/angular/directives/example/message.html" : "message.html"
+    },
+    "links" : {
+        "module" : "http://docs.angularjs.org/api/angular.module",
+        "directive" : "http://docs.angularjs.org/api/angular.Module#directive",
+        "message.html" : {"tab" : 2}
+    },
     "toolbar": true
 }

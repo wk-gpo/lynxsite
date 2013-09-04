@@ -1,10 +1,12 @@
 {
     "links" : {
-        "ng-include" : "http://docs.angularjs.org/api/ng.directive:ngInclude",
-        "message.html": {"tab": 1}
+        "ng-model" : "http://docs.angularjs.org/api/ng.directive:ngModel",
+        "ng-app" :  "http://docs.angularjs.org/api/ng.directive:ngApp",
+        "message": {"tab": 1}
     },
     "replace" : {
-        "slides/angular/htmlTemplating/example/message.html" : "message.html"
+        "git-app" : "ng-app"
+
     },
     "toolbar": true
 }
