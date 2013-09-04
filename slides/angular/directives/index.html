@@ -1,45 +1,58 @@
 <div class="topF agenda">
+
     <h1>
         angularJS - directives
     </h1>
     <div class="desc">
         Directives are a way to teach HTML new tricks. During DOM compilation directives are matched against the HTML
-        and executed. This allows directives to register behavior, or transform the DOM. For creating the reusable
-        UI components Lynx is using Directives. Directives covers:
-        <ul>
-            <li>generic simple  UI controls (tree, popup, …)</li>
-            <li>functional UI components (login form, search form, search results, …)</li>
-            <li>UI layout components (split panel, …)</li>
-            <li>custom events handlers (click, keypress,...)</li>
-            <li>logical elements (if, switch, loops ....)</li>
-        </ul>
+        and executed. This allows directives to register behavior, or transform the DOM. Directives can use direct DOM creation
+        by Javascript or be templated. For creating the reusable UI components Angular is using Directives.
+        <div class="example">
+            <div class="appRun">
+                <div class="body" ng-include="'slides/angular/directives/example/index.html'"></div>
+            </div>
+            <div class="tabbable higlightable editable">
+                <div class="tab-pane" title="index.html">
+                    <pre class="linenums" pp-url="slides/angular/directives/example/index.html"></pre>
+                </div>
+                <div class="tab-pane" title="message.js">
+                    <pre class="linenums" pp-url="slides/angular/directives/example/message.js"></pre>
+                </div>
+                <div class="tab-pane" title="message.html">
+                    <pre class="linenums" pp-url="slides/angular/directives/example/message.html"></pre>
+                </div>
+            </div>
+        </div>
     </div>
     <ul>
         <li>
-            <h2>easy asynchronous</h2>
+            <h2>generic controls</h2>
             <div class="pointCommentary">
-                Developers don’t have to care about asynchronous actions, do not need to use callbacks, synchronization, etc...
+                Eg. tree, grid, popup ...
             </div>
         </li>
         <li>
-            <h2>readable</h2>
+            <h2>layout components</h2>
             <div class="pointCommentary">
-                Simple, readable and natural syntax of binding expressions based on referenced API.
+                Eg. split panel, box layout, ...
             </div>
         </li>
         <li>
-            <h2>flexible</h2>
+            <h2>functional components</h2>
             <div class="pointCommentary">
-                Flexible and open model, without any inheritance/wrappers/etc requirements.
-                Models are JavaScript objects, arrays, primitives, it doesn’t matter. Angular Js provides also
-                easy data conversion mechanism by filters.
+                Eg. login form, search form, search results, …
             </div>
         </li>
         <li>
-            <h2>isolation</h2>
+            <h2>events handlers</h2>
             <div class="pointCommentary">
-                There is no direct DOM manipulation and no DOM referencing from logic.
-                Perfect isolation of Model and View Layer. This dramaticaly siplyfing testing.
+                Eg. click, keypress, ...
+            </div>
+        </li>
+        <li>
+            <h2>flow controll elements</h2>
+            <div class="pointCommentary">
+                Eg. show, hide, if, switch, loops, ...
             </div>
         </li>
     </ul>

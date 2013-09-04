@@ -1,6 +1,11 @@
 {
     "links" : {
-        "ng-model" : "http://docs.angularjs.org/api/ng.directive:ngModel"
+        "ng-include" : "http://docs.angularjs.org/api/ng.directive:ngInclude",
+        "ng-model" : "http://docs.angularjs.org/api/ng.directive:ngModel",
+        "message.html": {"tab": 1}
+    },
+    "replace" : {
+        "slides/angular/dataBinding/example/message.html" : "message.html"
     },
     "toolbar": true
 }
