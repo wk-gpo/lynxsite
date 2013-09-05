@@ -1,0 +1,79 @@
+<ul class="pageMenu">
+    <li class="search">
+        <input type="text" ng-model="selection.query"
+            ng-change="updateMenu()">
+        <i class="icon-search"></i>
+    </li>
+    <li>
+        <label>
+            Modules:
+        </label>
+    </li>
+    <li ng-repeat="module in modules"
+        ng-class="{true: 'active'}[selection.module == module]">
+        <a href="javascript:void(0)" ng-click="setModule(module)">
+            {{ module }}
+        </a>
+    </li>
+    <li class="separator" ng-show="namespaces.length > 0"></li>
+    <li ng-show="namespaces.length > 0">
+        <label>
+            Namespaces:
+        </label>
+    </li>
+    <li ng-repeat="namespace in namespaces"
+        ng-class="{true: 'active'}[namespace == selection.namespace]">
+        <a href="javascript:void(0)" ng-click="setNamespace(namespace)">
+            {{ namespace }}
+        </a>
+    </li>
+    <li class="separator" ng-show="objects.directive.length > 0"></li>
+    <li ng-show="objects.directive.length > 0">
+        <label>
+            Directives:
+        </label>
+    </li>
+    <li ng-repeat="item in objects.directive"
+        ng-class="{true: 'active'}[item == selection.selectedItem]">
+        <a href="javascript:void(0)" ng-click="setItem(item);">
+            {{ item.kindName }}
+        </a>
+    </li>
+    <li class="separator" ng-show="objects.filter.length > 0"></li>
+    <li ng-show="objects.filter.length > 0">
+        <label>
+            Filters :
+        </label>
+    </li>
+    <li ng-repeat="item in objects.filter"
+        ng-class="{true: 'active'}[item == selection.selectedItem]">
+        <a href="javascript:void(0)" ng-click="setItem(item);">
+            {{ item.kindName }}
+        </a>
+    </li>
+    <li class="separator" ng-show="objects.service.length > 0"></li>
+    <li ng-show="objects.service.length > 0">
+        <label>
+            Services :
+        </label>
+    </li>
+    <li ng-repeat="item in objects.service"
+        ng-class="{true: 'active'}[item == selection.selectedItem]">
+        <a href="javascript:void(0)" ng-click="setItem(item);">
+            {{ item.kindName }}
+        </a>
+    </li>
+    <li class="separator" ng-show="objects.type.length > 0"></li>
+    <li ng-show="objects.type.length > 0">
+        <label>
+            Types :
+        </label>
+    </li>
+    <li ng-repeat="item in objects.type"
+        ng-class="{true: 'active'}[item == selection.selectedItem]">
+        <a href="javascript:void(0)" ng-click="setItem(item);">
+            {{ item.kindName }}
+        </a>
+    </li>
+
+</ul>

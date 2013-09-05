@@ -1,0 +1,52 @@
+<div>
+    <div class="pageTitle">
+        <h4>
+            <span class="access">{{ content.access }}</span>
+            <span ng-show="content.virtual" class="abstract">abstract</span>
+            {{ content.kind }}
+        </h4>
+        <h1>{{ content.kindName }}</h1>
+        <h3 lx-if="content.augments.length > 0" class="ex">
+            extends
+            <a href="javascript:void(0)" ng-click="openLink(content.augments[0], 'class')">
+                {{ content.augments[0] }}
+            </a>
+        </h3>
+    </div>
+
+    <ul class="extends" lx-if="content.allAugments.length > 0">
+        <li>
+            <a href="javascript:void(0);" ng-click="openLink('Object');">
+                Object
+            </a>
+        </li>
+        <li ng-repeat="item in content.allAugments.reverse()">
+            <a href="javascript:void(0);" ng-click="openLink(item);">
+                <i class="icon-circle-arrow-up"></i>{{ item }}
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0);" ng-click="openLink(content.longname, content.kind, content.module);">
+                <i class="icon-circle-arrow-up"></i>{{ content.longname }}
+            </a>
+        </li>
+    </ul>
+
+    <div lx-if="content.description">
+        <h2>
+            Overview
+        </h2>
+        <div class="description" ng-bind-html-unsafe="content.description" ></div>
+    </div>
+
+
+
+    <ng-switch on="content.kind">
+        <ng-include ng-switch-when="module" src="'partials/api/module.html'" ></ng-include>
+        <div ng-switch-default>
+        </div>
+    </ng-switch>
+
+    <pre>{{ content | json }}</pre>
+
+</div>

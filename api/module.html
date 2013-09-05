@@ -1,0 +1,66 @@
+<div>
+
+    <div class="description" ng-bind-html-unsafe="content.readme" lx-if="content.readme"></div>
+
+    <lx-eval exp="names = (content.members | filter: {kind: 'namespace'} | orderBy:'longname')" watch="content"></lx-eval>
+    <div lx-if="names.length > 0">
+        <h2>Namespaces</h2>
+        <ul>
+            <li ng-repeat="item in names">
+                <a href="javascript:void(0);" ng-click="openLink(item);">
+                    {{ item.longname }}
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <lx-eval exp="filtr = (content.members | filter: {kind: 'filter'} | orderBy:'longname')" watch="content"></lx-eval>
+    <div lx-if="filtr.length > 0">
+        <h2>Filters</h2>
+        <ul>
+            <li ng-repeat="item in filtr">
+                <a href="javascript:void(0);" ng-click="openLink(item);">
+                    {{ item.longname }}
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <lx-eval exp="dir = (content.members | filter: {kind: 'directive'} | orderBy:'longname')" watch="content"></lx-eval>
+    <div lx-if="dir.length > 0">
+        <h2>Directives</h2>
+        <ul>
+            <li ng-repeat="item in dir">
+                <a href="javascript:void(0);" ng-click="openLink(item);">
+                    {{ item.memberof }}.{{ item.kindName }}
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <lx-eval exp="ser = (content.members | filter: {kind: 'service'} | orderBy:'longname' )" watch="content"></lx-eval>
+    <div lx-if="ser.length > 0">
+        <h2>Services</h2>
+        <ul>
+            <li ng-repeat="item in ser">
+                <a href="javascript:void(0);" ng-click="openLink(item);">
+                    {{ item.memberof }}.{{ item.kindName }}
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <lx-eval exp="classes = (types(content.members) | orderBy:'longname')" watch="content"></lx-eval>
+    <div lx-if="classes.length > 0">
+        <h2>Types</h2>
+        <ul>
+            <li ng-repeat="item in classes" ng-click="openLink(item);">
+                <a href="javascript:void(0);">
+                    {{ item.longname }}
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</div>
