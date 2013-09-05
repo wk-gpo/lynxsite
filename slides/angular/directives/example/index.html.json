@@ -5,8 +5,7 @@
         "message": {"tab": 1}
     },
     "replace" : {
-        "git-app" : "ng-app"
-
+        "dynamic-app" : "ng-app"
     },
     "toolbar": true
 }

@@ -4,7 +4,7 @@
         "message.html": {"tab": 1}
     },
     "replace" : {
-        "gitContents/slides/angular/htmlTemplating/example/message.html" : "message.html"
+        "content/slides/angular/htmlTemplating/example/message.html" : "message.html"
     },
     "toolbar": true
 }

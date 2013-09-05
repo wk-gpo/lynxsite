@@ -3,6 +3,6 @@ angular.module("angularDirectivesExample", ["ng"])
         return {
             restrict : "E",
             scope : { name: '=' },
-            templateUrl: "gitContents/slides/angular/directives/example/message.html"
+            templateUrl: "content/slides/angular/directives/example/message.html"
         }
     });

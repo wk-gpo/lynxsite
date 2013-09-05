@@ -1,0 +1,123 @@
+<div>
+    <script id="osa.js">
+        /* Configurate velvet connection */
+        velvet.configure({
+            host: "http://velvet.cheetah.dev.lynxapp.net",
+            apikey: "5D2000D799874109A65DD0C984102DCC",
+            productId: "WKUS-Legal-Cheetah"
+        });
+
+        /**
+         * @param {angular.Scope} $scope
+         * @param {velvet.service.Search} $velvetSearch
+         * @param {velvet.service.Auth} $velvetAuth
+         */
+        function OsaSearchCtl($scope, $velvetSearch, $velvetAuth) {
+            $scope.doSearch = function(id, pswd, query) {
+                $velvetAuth.authenticate(id, pswd, function(authenticated) {
+                    if (authenticated) {
+                        $scope.search = $velvetSearch.searchByPhrase(query);
+                    } else {
+                        alert("Untable to authenticate");
+                    }
+                });
+            };
+        }
+    </script>
+
+    <script type="text/ng-template" id="osa.html">
+        <div ng-controller="OsaSearchCtl">
+            <div class="info">
+                To perform any action on OSA/Velvet, you have to authenticate
+                first. Please provide correct cridentials, type search phrase,
+                and click go to perform the search
+            </div>
+            <div>
+                user: <input type="text" ng-model="userName">
+                password: <input type="password" ng-model="userPassword">
+                query: <input type="text" ng-model="query">
+                <button ng-click="doSearch(userName,userPassword,query)">
+                    search
+                </button>
+            </div>
+            <div ng-show="search" class="result">
+                Search returns {{ search.getResult().TotalResults }} results.
+            </div>
+        </div>
+    </script>
+
+
+    <script type="text/ng-template" id="osa.js.json">
+        {
+        "links" :{
+            "angular.Scope": "http://docs.angularjs.org/api/ng.$rootScope.Scope",
+            "velvet.service.Search": "docs.html",
+            "velvet.service.Auth": "docs.html",
+            "configure": "docs.html",
+            "authenticate" : "docs.html",
+            "searchByPhrase": "docs.html"
+        },
+        "annotate" : {
+            "configure": "To work with OSA/Velvet you have to provide url to endpoint, and apikey.",
+            "doSearch": "Expose search trigger function in controller scope",
+            "authenticate": "At start you have to authenticate to Velvet instance",
+            "search": "Put the promiss of service call to scope",
+            "searchByPhrase": "On callback (afrer authentication), you are able to perform the search on OSA/Velvet. The result of each service call is promisse of server response."
+        },
+        "fold" : [[2,6,true],[18,20,true]],
+        "toolbar": true
+        }
+    </script>
+
+    <script type="text/ng-template" id="osa.html.json">
+        {
+        "links" :{
+            "ng-controller": "http://docs.angularjs.org/api/ng.directive:ngController",
+            "ng-model": "http://docs.angularjs.org/api/ng.directive:ngModel",
+            "ng-click" : "http://docs.angularjs.org/api/ng.directive:ngClick",
+            "ng-show" : "http://docs.angularjs.org/api/ng.directive:ngShow",
+            "getResult": "docs.html",
+            "TotalResults": "docs.html"
+        },
+        "annotate" : {
+            "OsaSearchCtl": "Initilalize controller",
+            "doSearch": "On click calling search method definied in <code>OsaSearchCtl</code>",
+            "search.": "This object will be created by controller on search performing",
+            "getResult": "All what you have to do to diosplay results is binding to the search object. <code>Search</code> object (also the result of method <code>getResults</code>) is a promis, but you do not have to care about this, the view will be rewrited automatically on data bacs from server side."
+        },
+        "fold" : [[3,6,true],[9,13,true]],
+        "toolbar": true
+        }
+    </script>
+
+    <div>
+        <div class="topF">
+            <h2>easy OSA integration</h2>
+            <div class="desc">
+                Lynx dostarcza implementację serwisów pokrywających OSA, będącego ustandaryzowanom formą komunikacji w
+                ramach organizacji. Za pośrednictwem Velvetu mozliwe jest prosta integracja aplikacji z Atlas Platform,
+                lub inną implementacją OSA. Wszystkie detale dotyczące komunikacji (także cross-domain) są ukryte pod
+                ścisłym i dobrze udokumentowanym, javascryptowym api serwisów lynxa. <br/>
+            </div>
+            <div class="right fullscreenable" >
+                <div app_source="osa.html osa.js"
+                    resource="resource"></div>
+            </div>
+
+            <div class="appRun">
+                <span class="run" js-fiddle="osa.html osa.js" ></span>
+                <div class="clear"></div>
+                <div app-run="osa.html" class="body"></div>
+            </div>
+
+            <div class="clear"></div>
+            <div class="desc">
+                <button>
+                    lern more
+                </button>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+</div>

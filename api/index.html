@@ -1,0 +1,36 @@
+<div>
+    <div ng-include="'partials/common/navigation.html'"></div>
+
+
+    <div class="pageRow" ng-controller="ApiCtrl">
+        <div class="left">
+            <ng-include src="'partials/api/menu.html'"></ng-include>
+        </div>
+        <div class="right content">
+            <ng-switch on="selection.module == 'any' && selection.namespace == 'any' && !selection.selectedItem">
+                <ng-include ng-switch-when="true" src="'partials/api/home.html'"></ng-include>
+                <ng-include ng-switch-default src="'partials/api/content.html'"></ng-include>
+            </ng-switch>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="copyright">
+            Copyright (c) 2003-2013 Wolters Kluwer Technology B.V. and/or its affiliates. All Rights Reserved.
+        </div>
+        <div class="clear"></div>
+        <div class="license">
+            This application source code (the "Software") is the confidential and proprietary information of
+            Wolters Kluwer Technology BV and/or its affiliates. The Software contains trade secret information,
+            and you may not reverse-engineer, decompile, disclose, copy, modify, upload, download, transmit,
+            republish, or otherwise misappropriate the Software without the express written approval of
+            Wolters Kluwer Technology BV and/or its affiliates. In addition, the Software is protected by U.S.
+            and other applicable copyright laws. The Software is provided solely for the purpose of technical
+            analysis within the scope of a single project, subject to applicable license requirements set forth
+            by Wolters Kluwer Technology BV and/or its affiliates. All copies of this Software must be destroyed
+            or otherwise removed from your system and any associated hardware when any applicable license terminates
+            or expires.
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

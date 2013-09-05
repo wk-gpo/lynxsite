@@ -1,0 +1,63 @@
+<div>
+
+    <script type="text/ng-template" id="blurFocus.html">
+        <div>
+            <div class="info">
+                Set cursor on input box and leave the element.
+                Watch label underneath input box.
+            </div>
+            <input type="text"
+                lx-blur="model.out = 'blur on element'"
+                lx-focus="model.out = 'focus on element'"/>
+            <div class="result">
+                Event: {{model.out = model.out || 'no event received, yet'}}
+            </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="blurFocus">
+        {
+        "annotations": {
+            "lx-blur": "Directive specifies actions to be undertaken on blur event of <code>input</code> element.",
+            "lx-focus": "Similarly to <code>lx-blur</code> defines actions in case of focus event.",
+            "{{model.out = model.out || 'no event received, yet'}}": "That defines model in angular scope which encompass <code>input</code> element. Since <code>lx-focus</code> creates it's own scope it's crutial to use model defined in encompasing scope to be able to pass values from <code>lx-focus</code>.<br/>Notice syntax used here which is supposed to assign initial value to <code>model.out</code>.",
+            "model.out": "Here model value is altered."
+            }
+        }
+    </script>
+
+
+    <div class="topF" >
+        <h2>realy rich ui</h2>
+        <div class="desc">
+            Lynx dostarcza bogaty zbiór dyrektyw rozszeżających język. HTML, a dzięki temu upraszcza i przyśpiesza
+            proces tworzenia bogatych aplikacji i skomplikowanych layoutów. Dostarczane filtry upraszczają konwersję
+            danych. Elementy logiczne pozwalają na szybkie sterowanie przepływem aplikacji wprost z kodu html. Lynx
+            ma na celu dostarczać ortaz upraszaczać sposób tworzenia skomplikowanych fukcjonalnych komponentów, z
+            których w prosty sposób można złożyć aplikację. Jednocześnie Lynx nie wymusza korzystania z wbudowanych
+            dyrektyw i łatwo integruje się z innymi bibliotekami.<br/>
+        </div>
+
+        <div class="right highlightable">
+            <div app_source="blurFocus.html"
+                resource="resource"
+                annotate="blurFocus.annotation"></div>
+        </div>
+
+        <div class="appRun">
+            <span class="run" js-fiddle="blurFocus.html" ></span>
+            <div class="clear"></div>
+            <div app-run="blurFocus.html" class="body"></div>
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="desc">
+            <button>
+                lern more
+            </button>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+</div>

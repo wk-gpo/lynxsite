@@ -1,0 +1,20 @@
+<div>
+<div ng-include="'partials/common/navigation.html'"></div>
+
+<lx-define name="setStep"
+    exp="step = $args[0]">
+</lx-define>
+
+
+<div class="pageRow" ng-init="setStep(0)">
+    <div class="left">
+        <ng-include src="'partials/tutorial/menu.html'"></ng-include>
+    </div>
+    <div class="right">
+        <ng-include src="'partials/tutorial/step'+step+'.html'"></ng-include>
+    </div>
+</div>
+
+<div ng-include="'partials/common/footer.html'"></div>
+
+</div>
