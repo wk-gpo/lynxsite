@@ -1,54 +1,66 @@
-<div slide-show>
-    <div slide>
-        <div ng-include="'partials/home/teaser.html'"></div>
+<div class="slide-show-container"
+    lx-destroy="$slides.stop()">
+
+    <div slide="$slides">
+        <div ng-include="'content/home/teaser.html'"></div>
     </div>
 
-    <div slide>
-        <div  ng-include="'partials/home/mainInfoBox.html'"></div>
+    <div slide="$slides">
+        <div  ng-include="'content/home/mainInfoBox.html'"></div>
     </div>
 
-    <div slide>
+    <div slide="$slides">
         <div ng-include="'content/slides/agenda/index.html'"></div>
     </div>
 
-    <div slide>
+    <div slide="$slides">
         <div ng-include="'content/slides/goals/index.html'"></div>
     </div>
 
-    <div slide>
+    <div slide="$slides">
         <div ng-include="'content/slides/angular/index.html'"></div>
     </div>
 
-    <div slide>
+    <div slide="$slides">
         <div ng-include="'content/slides/angular/htmlTemplating/index.html'"></div>
     </div>
 
-    <div slide>
+    <div slide="$slides">
         <ng-include src="'content/slides/angular/dataBinding/index.html'"></ng-include>
     </div>
 
-    <div slide>
+    <div slide="$slides">
         <ng-include src="'content/slides/angular/directives/index.html'"></ng-include>
     </div>
 
-    <div slide>
+    <div slide="$slides">
         <div ng-include="'content/slides/middleware/osa.html'"></div>
     </div>
 
-    <div slide>
-        <div ng-include="'slides/middleware/velvet.html'"></div>
+    <div slide="$slides">
+        <div ng-include="'content/slides/middleware/velvet.html'"></div>
     </div>
 
-    <div slide>
-        <div ng-include="'slides/middleware/velvetSandbox.html'"></div>
+    <div slide="$slides">
+        <div ng-include="'content/slides/middleware/velvetSandbox.html'"></div>
     </div>
 
-    <div slide>
-        <div ng-include="'slides/framework/index.html'"></div>
+    <div slide="$slides">
+        <div ng-include="'content/slides/framework/index.html'"></div>
     </div>
 
-    <div slide>
-        <div ng-include="'slides/framework/services/index.html'"></div>
+    <div slide="$slides">
+        <div ng-include="'content/slides/framework/services/index.html'"></div>
     </div>
+
+    <a class="btn slid-show-next" href="javascript:void(0)" ng-click="$slides.next()">
+        <i class="icon-arrow-down"></i>
+    </a>
+
+    <a class="btn slid-show-prev" href="javascript:void(0)" ng-click="$slides.prev()">
+        <i class="icon-arrow-up"></i>
+    </a>
+
+    <lx-eval exp="$slides.play()"></lx-eval>
 
 </div>
