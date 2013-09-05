@@ -51,8 +51,10 @@
         <li class="logo-small">
             <img src="img/logo.png"/>
             lynx
-            <span ng-show="$github.edit">editable</span>
-            <span ng-show="$github.enabled">master</span>
+            <span ng-show="$github.enabled">
+                <span ng-show="$github.edit">editable</span> lynxsite {{ $github.version }} git version
+            </span>
+
         </li>
     </ul>
     <div class="splitter"></div>

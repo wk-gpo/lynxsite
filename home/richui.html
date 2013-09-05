@@ -17,12 +17,17 @@
 
     <script type="text/ng-template" id="blurFocus.html.json">
         {
-            "annotations": {
+            "links" :{
+                "lx-blur": "#api/wk.lynx.ui/lynx.directives/%6Cx-blur",
+                "lx-focus": "#api/wk.lynx.ui/lynx.directives/%6Cx-focus"
+            },
+            "annotate": {
                     "lx-blur": "Directive specifies actions to be undertaken on blur event of <code>input</code> element.",
                     "lx-focus": "Similarly to <code>lx-blur</code> defines actions in case of focus event.",
                     "{{model.out = model.out || 'no event received, yet'}}": "That defines model in angular scope which encompass <code>input</code> element. Since <code>lx-focus</code> creates it's own scope it's crutial to use model defined in encompasing scope to be able to pass values from <code>lx-focus</code>.<br/>Notice syntax used here which is supposed to assign initial value to <code>model.out</code>.",
                     "model.out": "Here model value is altered."
                 },
+            "fold" : [[3,5,true],[8,11,true]],
             "toolbar": true
         }
     </script>
