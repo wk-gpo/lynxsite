@@ -1,19 +1,19 @@
 <div>
 
-<lx-define name="setStep"
+<!--<lx-define name="setStep"
     exp="step = $args[0]">
-</lx-define>
+</lx-define>-->
 
 
-<div class="pageRow" ng-init="setStep(0)">
+<div class="pageRow">
     <div class="left">
-        <ng-include src="'partials/tutorial/menu.html'"></ng-include>
+        <ng-include src="'content/tutorial/menu.html'"></ng-include>
     </div>
     <div class="right">
-        <ng-include src="'partials/tutorial/step'+step+'.html'"></ng-include>
+        <ng-include src="'content/tutorial/step'+$tutorial.step+'.html'"></ng-include>
     </div>
 </div>
 
-<div ng-include="'partials/common/footer.html'"></div>
+<div ng-include="'content/common/footer.html'"></div>
 
 </div>
