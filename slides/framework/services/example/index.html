@@ -1,0 +1,25 @@
+<div ng-controller="ServiceExampleCtrl">
+    <div class="info">
+        This is example of calling velvet services.<br/>
+        To perform any action on OSA/Velvet, you have to authenticate
+        first. Please provide correct cridentials and login, then
+        type search phrase, and click 'search' to perform action.
+    </div>
+    <div ng-hide="authenticated">
+        <input placeholder="user" type="text" ng-model="user">
+        <input placeholder="password" type="password" ng-model="pswd">
+        <button ng-click="doLogin(user,pswd)">
+            login
+        </button>
+    </div>
+    <div ng-show="authenticated">
+        <input type="text" ng-model="query" placeholder="query">
+        <button ng-click="doSearch(query)">
+            search
+        </button>
+    </div>
+    <div ng-show="search" class="result">
+        First document title:
+        {{ search.getResult().getItems()[0].Title }}
+    </div>
+</div>

@@ -1,0 +1,35 @@
+{
+    "links" : {
+        "module" : {"line" : 2 , "value": "../dist/app/docs.html#/api/wk.lynx.core/lynx"},
+        "moduleName" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=moduleName",
+        "pages" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=pages",
+        "defaultPath" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=defaultPath",
+        "globals" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=globals",
+        "velvetConfig" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration",
+        "AuthModel": "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.%41uthModel",
+        "AUTH_RC4_TOKEN": "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.service.Auth?scrollTo=AUTH_RC4_TOKEN",
+        "wk.lynx.ui" : "../dist/app/docs.html#/api/%77k.lynx.ui/index",
+        "name" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=name",
+        "path" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=path",
+        "view" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=view",
+        "alias" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.ValueDefinition?scrollTo=alias",
+        " factory" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.ValueDefinition?scrollTo=factory",
+        "host" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.config.Configuration?scrollTo=host",
+        "apikey" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.config.Configuration?scrollTo=apikey",
+        "productId" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.config.Configuration?scrollTo=productId",
+        "lynx" : {"line" : 2, "value" :"../dist/app/docs.html#/api/wk.lynx.core/lynx"},
+        "page/home.html" : {"tab" : 3},
+        "page/res.html" : {"tab" : 4},
+        "page/doc.html" : {"tab" : 5}
+    },
+    "annotate" : {
+        "velvetConfig" : "provides information regarding Velvet instance to be used by application:  <code>host</code> sets url on which the velvet instance is exposed, <code>apikey</code> for authorize client application and <code>productId</code> used as default Carbon Product ID in communication with Velvet",
+        "globals": "this is a collection of global accessible objects, each object in this collection can be used in any angular expression in Lynx application (objects can be provided by value or by factory)",
+        "AuthModel": "object <code>lynx.models.AuthModel</code> is dedicated in Lynx framework to be used for authentication purposes; it is instantiated by factory method as all Lynx global objects provide factory  method",
+        "authMode": "Velvet switch for setting authentication algorithm; supported modes are BASIC and RC4Token",
+        "$auth": "model instance of <code>lynx.models.AuthModel</code> object is exposed under $auth alias to any expression; you may create multiple instances of the same model type each binded to different aliases"
+    },
+    "fold" : [[8,12], [15,17], [20, 24, true]],
+    "hide" : [],
+    "toolbar" : true
+}

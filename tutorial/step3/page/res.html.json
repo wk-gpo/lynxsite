@@ -1,0 +1,16 @@
+{
+    "links" : {
+        "ng-include" : "http://docs.angularjs.org/api/ng.directive:ngInclude",
+        "component/form.html": {"tab" : 6}
+    },
+    "annotate" : {
+        "component/form.html" :
+            "including the search form on search result page",
+//        "&lt;" : "simple 'previous page' switch; use &lt; in your page instead",
+//        "&gt;" : "simple 'next page' switch; use &gt; in your page instead",
+        "#/document" : "for navigate to document view page we simple set hash in url, everything else will be made by lynx routing, application will switch to proper page"
+
+    },
+    "fold" : [[10,16,true], [19,26,true], [31, 43]],
+    "toolbar" : true
+}

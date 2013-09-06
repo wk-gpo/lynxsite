@@ -1,0 +1,25 @@
+{
+    "links" : {
+        "ng-switch-default" : "http://docs.angularjs.org/api/ng.directive:ngSwitch",
+        "ng-switch-when" : "http://docs.angularjs.org/api/ng.directive:ngSwitch",
+        "ng-switch" : "http://docs.angularjs.org/api/ng.directive:ngSwitch",
+        "ng-include" : "http://docs.angularjs.org/api/ng.directive:ngInclude",
+        "ng-click" : "http://docs.angularjs.org/api/ng.directive:ngClick",
+        "page/log.html": {"tab" : 1},
+        "page.view" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=view"
+    },
+    "annotate" : {
+        "authenticated": {"line":7, "value":
+             "condition based on global variable which keep authentication status"},
+        "ng-switch-default" :
+            "in case <code>$root.authenticated</code> is different then <code>true</code> (by default value is <code>undefined</code>) login page will be displayed",
+        "ng-switch-when" :
+            "if <code>$root.authenticated</code> value will change to <code>true</code>, proper page content will be displayed",
+        "authenticated = false" : "it is simple logout logic",
+        "#/home" : "as navigation to home page use relative URI with hash followed by page name you need to navigate to - everything else will be made by lynx routing, application will switch to proper page",
+        "page.view" : "<code>page</code> object represents current page in global scope. Page objects are managed by Lynx configuration. Object <code>page</code> is automatically by Lynx routing."
+    },
+    "fold" : [[14,30,true]],
+    "hide" : [],
+    "toolbar" : true
+}

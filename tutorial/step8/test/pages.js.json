@@ -1,0 +1,19 @@
+{
+    "links" : {
+        "ng-autotest" : "http://docs.angularjs.org/guide/dev_guide.e2e-testing"
+    },
+    "annotate" : {
+        "LoginPage": {"first" : true, "value" : "object representing the login form overlay"},
+        "RegularPage" : {"line" : 24, "value" : "base object for each pages where we have title and logout button"},
+        "HomePage": "object representing home page, this page objects extends <code>RegularPage</code>",
+        "ResultsPage": "object representing search results page, this page objects extends <code>RegularPage</code>",
+        "DocumentPage": "object representing document view page, this page objects extends <code>RegularPage</code>",
+        "doLogin": "login action on login form, this will shorting and simplify test code, each action should return page, after login the home page will be returned",
+        "getSearchForm": "this is getter for search form component",
+        "doOpenDocument" : "open document action will return the document view page",
+        "getSearchResultRow" : "will return the search result row for specified row no"
+    },
+    "fold" : [[1,22],[24,31,true], [33,40,true],[42,63,true],[65,69,true]],
+    "hide" : [],
+    "toolbar" : true
+}

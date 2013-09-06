@@ -1,0 +1,86 @@
+<div>
+
+    <div class="pageTitle">
+        <h1>tutorial</h1>
+        <h3>html decorating</h3>
+    </div>
+    <p>
+        Up until now tutorial application was only a prototype. You will add logic to your application. It will use back-end system functionality exposed by Velvet interface. Two new models for searching and for document view will be used. Those are implemented in SearchModel and DocumentModel and are defined in configuration under <strong>$search</strong> and <strong>$document</strong> aliases accordingly. Both are defined in app.js file.
+    </p>
+	
+    <div class="tabbable fullscreenable higlightable">
+        <div class="tab-pane" title="app.js">
+            <pre class="linenums onlyHighlight" pp-url="partials/tutorial/step5/snippet/1/app.js"></pre>
+        </div>
+    </div>
+    <div class="alert alert-info">
+        <div>
+            We use <strong>$search</strong> and <strong>$document</strong> just by convention we found clear. You may choose as aliases any other names.<br/> 
+			You may also define more then one model objects of same kind e.g. $document1 and $document2 to let simultaneous access to two documents. 
+        </div>
+    </div>
+	<p>
+		Examine res.html and form.html code snippets to see how <strong>$search</strong> and <strong>$document</strong> models are used. You will noticed that in res.html page two local variables have been defined: 
+		<dl class="dl-vertical">
+        <dt>pageNo</dt>
+        <dd>it represents number of current result page to be shown</dd>
+        <dt>perPage</dt>
+        <dd>it is number of result items presented on one page</dd>
+		</dl> 
+		Both are required by search paging functionality which allows presentation only certain number of result items. Assuming that <strong>pageNo = 2</strong> and <strong>perPage = 50</strong>, application will present result items from 51st to 100th.
+	</p>
+	<p>
+		Notice how <strong>pageNo</strong> and <strong>perPage</strong> are initialized (line 3.) and how navigation buttons use them  (line 24.). 
+	</p>
+    <div class="tabbable fullscreenable higlightable">
+        <div class="tab-pane" title="res.html">
+            <pre class="linenums onlyHighlight" pp-url="partials/tutorial/step5/snippet/2/res.html"></pre>
+        </div>
+    </div>
+	<p>
+		Have a looka at line 43. where search model is called. 
+	</p>
+	<p>
+		Run application and test search and document view functionalities. Now, you will actually search document storage of your test environment. Each search result is related to document. Just click on it and application will open document view page with chosen doc loaded.
+	</p>
+
+
+    <div class="tabbable previewable fullscreenable higlightable">
+        <!--<div class="tab-pane active" title="index.html">-->
+            <!--<pre class="linenums" pp-url="partials/tutorial/step5/index.html"></pre>-->
+        <!--</div>-->
+        <div class="tab-pane" title="app.js">
+            <pre class="linenums" pp-url="partials/tutorial/step5/app.js"></pre>
+        </div>
+        <!--<div class="tab-pane" title="log.html">-->
+            <!--<pre class="linenums" pp-url="partials/tutorial/step5/page/log.html"></pre>-->
+        <!--</div>-->
+        <!--<div class="tab-pane" title="home.html">-->
+            <!--<pre class="linenums" pp-url="partials/tutorial/step5/page/home.html"></pre>-->
+        <!--</div>-->
+        <div class="tab-pane" title="res.html">
+            <pre class="linenums" pp-url="partials/tutorial/step5/page/res.html"></pre>
+        </div>
+        <div class="tab-pane" title="doc.html">
+            <pre class="linenums" pp-url="partials/tutorial/step5/page/doc.html"></pre>
+        </div>
+        <div class="tab-pane" title="form.html">
+            <pre class="linenums" pp-url="partials/tutorial/step5/component/form.html"></pre>
+        </div>
+        <div class="tab-pane preview" title="preview"
+            iframe-toolbar="staticTemplateFrame">
+            <iframe id="staticTemplateFrame"
+                width="100%" height="100%" src="partials/tutorial/step5/index.html"></iframe>
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        <div>
+            <strong>Notice</strong> that our application is now connected to back-end system and it provides required functionality based on document storage exposed by Velvet interface. 
+        </div>
+    </div>
+
+    <button class="next" ng-click="setStep(6)">
+        next
+    </button>
+</div>

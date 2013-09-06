@@ -1,0 +1,42 @@
+<div dynamic-app="modelsExample">
+
+    <div class="info">
+        This is example of usage the lynx models.<br/>
+        To perform any action on OSA/Velvet, you have to authenticate
+        first. Please provide correct cridentials and login, then
+        type search phrase, and click 'search' to perform action.
+    </div>
+
+    <!-- login form -->
+    <div ng-show="!$auth.authenticated"
+        ng-init="$auth.rememberUserName = true">
+        <input placeholder="user" type="text"
+            ng-model="$auth.userName">
+        <input placeholder="password" type="password"
+            ng-model="$auth.userPassword">
+        <span ng-show="$auth.authentionFailed">
+            Wrong password or user name.
+        </span>
+        <button ng-click="$auth.login()">
+            login
+        </button>
+    </div>
+
+    <!-- search form -->
+    <div ng-show="$auth.authenticated">
+        <input type="text" ng-model="query" placeholder="query">
+        <button ng-click="$search.searchByPhrase(query)">
+            search
+        </button>
+        <button ng-click="$auth.logout()">
+            logout
+        </button>
+    </div>
+
+    <!-- result -->
+    <div ng-show="$search.getSearch()" class="result">
+        First document title:
+        {{ $search.getSearch().getResult().getItems()[0].Title }}
+    </div>
+
+</div>

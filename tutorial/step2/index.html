@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <!-- link to CDN of bootstrap.min.css -->
+        <link rel="stylesheet" href="http://goo.gl/xEjbRC">
+        <!-- loading jquery -->
+        <script type="text/javascript" src="LynxLibs/jQuery/src/jquery.js"></script>
+
+        <script>
+            document.domain = document.domain;
+        </script>
+    </head>
+    <body>
+
+        <!-- Login form -->
+        <div class="container loginForm" style="margin-top: 30px">
+            <div class="row">
+                <div class="col-3"></div>
+                <form role="form" class="col-6">
+                    <fieldset>
+                        <legend>Login</legend>
+                        <div class="alert alert-error">
+                            Login failed
+                        </div>
+                        <div class="form-group">
+                            <input placeholder="Username" type="text"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input placeholder="Password" type="password"
+                                class="form-control">
+                        </div>
+                        <button class="btn btn-primary" type="submit"
+                            onclick="$('nav, .searchForm, .homePage').show();
+                                $('.loginForm').hide();
+                                return false;">
+                            Login
+                        </button>
+                    </fieldset>
+                </form>
+                <div class="col-3"></div>
+            </div>
+        </div>
+
+        <!-- global navigation bar -->
+        <nav class="navbar" role="navigation" style="display: none">
+            <button type="button"
+                class="btn btn-default navbar-btn pull-right logoutBtn"
+                onclick="$('nav, .searchForm, .homePage, .resultsPage, .docPage').hide();
+                    $('.loginForm').show();
+                    return false;">
+                Logout
+            </button>
+            <a class="navbar-brand homeLink"
+                href="javascript:$('.resultsPage, .docPage').hide();
+                    $('.homePage').show();
+                    return false;">
+                Lynx Tutorial
+            </a>
+        </nav>
+
+        <!-- search bar component -->
+        <div class="container">
+            <div class="row searchForm" style="display: none;">
+                <form role="form" class="col-12">
+                    <div class="input-group">
+                        <input type="text" class="form-control"
+                            placeholder="Type text for search">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit"
+                                onclick="$('.resultsPage').show();
+                                    $('.homePage , .docPage').hide();
+                                    return false;">
+                                Search
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- home page -->
+        <div class="container homePage" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Welcome</h1>
+                    <div class="lead">
+                        This is simple tutorial application made in lynx framework.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- search results page -->
+        <div class="container resultsPage" style="display: none;">
+            <div class="row">
+
+                <!-- search results header-->
+                <div class="col-8">
+                    <h3>
+                        <span class="hits">100</span>
+                        results for
+                        <span class="query">query</span>
+                    </h3>
+                </div>
+
+                <!-- pagination -->
+                <div class="col-4" style="margin-top: 10px; text-align: right">
+                    <button class="btn btn-default prevBtn">
+                        &lt;
+                    </button>
+                    <button class="btn btn-default nextBtn">
+                        &gt;
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- search results -->
+            <div class="row">
+                <table class="table table-striped col-12">
+                    <tr>
+                        <td class="no">1.</td>
+                        <td>
+                            <a href="javascript:
+                                $('.searchForm, .resultsPage').hide();
+                                $('.docPage').show();" class="title">
+                                Document title
+                            </a>
+                            <div>Document summary</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- document view page -->
+        <div class="container docPage" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    Document Body.
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

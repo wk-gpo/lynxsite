@@ -7,5 +7,6 @@
     "replace" : {
         "dynamic-app" : "ng-app"
     },
+    "fold": [[2,6, true]],
     "toolbar": true
 }

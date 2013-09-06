@@ -1,0 +1,17 @@
+{
+    "links" : {
+        "ng-click" : "http://docs.angularjs.org/api/ng.directive:ngClick",
+        "ng-disabled" : "http://docs.angularjs.org/api/ng.directive:ngDisabled",
+        "ng-submit" : "http://docs.angularjs.org/api/ng.directive:ngSubmit",
+        "ng-show" : "http://docs.angularjs.org/api/ng.directive:ngShow",
+        "ng-model": "http://docs.angularjs.org/api/ng.directive:ngModel",
+        "component/form.html": {"tab" : 6},
+
+        "login" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=login",
+        "authentionFailed" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=authentionFailed",
+        "pending" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=pending"
+
+    },
+
+    "toolbar" : true
+}

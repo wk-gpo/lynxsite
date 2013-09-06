@@ -1,0 +1,22 @@
+{
+    "replace" : {
+        "content/slides/angular/directives/example/message.html" : "message.html"
+    },
+    "links" : {
+        "angular.Scope" : "http://docs.angularjs.org/api/ng.$rootScope.Scope",
+        "host" : "",
+        "velvet.service.Search" : "" ,
+        "velvet.service.Auth" : "",
+        "authenticate" : "",
+        "searchByPhrase" : "",
+        "apikey" : ""
+    },
+    "annotate": {
+        "ServiceExampleCtrl" : "",
+        "configure" : "",
+        "doLogin" : "" ,
+        "doSearch" : ""
+    },
+    "fold": [[2,6],[13,26]],
+    "toolbar": true
+}

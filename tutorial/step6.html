@@ -1,0 +1,142 @@
+<div>
+
+    <div class="pageTitle">
+        <h1>tutorial</h1>
+        <h3>routing</h3>
+    </div>
+    <p>
+        Since our application is Single Page App default way of navigation is based switch content in index.html file.
+        We need to manage page URLs to let distinguish between different pages. Each pages should have different url to let it be bookmarkable and to be properly presented in browser history. It is not enough to expose static urls for each page. Application should be able to accept parameters passed via url means only. Lynx provides all that as a feature called <strong>page navigarion</strong> or simply <strong>routing</strong>.
+    </p>
+	<h2>1. URL structure</h2>
+	<p>
+		Lynx uses hash bang URL notation. It means that application extends URL with certain anchor-like
+		string with a structure usually providing clues on what view should be presented to user.
+		Have a look on following example:
+		<pre class="prettyprint linenums">
+		http://svr.wk.com/index.html#/home
+		</pre>
+		It loads <strong>index.html</strong> which has logic of switching page snippets. Page mapped to <strong>/home</strong> path would be presented.
+	</p>
+	<p>
+		Next example is more complicated. In this situation snippet path includes not only definition of view (it is <strong>/result</strong>) but also some information regarding content.
+<pre class="prettyprint linenums">
+http://svr.wk.com/index.html#/result/id/1213321231/1
+                  __________/   ___________________/
+                  html page     anchor defining page snippet
+</pre>
+		
+		<dl class="dl-vertical">
+        <dt>/id/1213321231</dt>
+        <dd>show results of search which id="1213321231"</dd>
+        <dt>/pageNo/1</dt>
+        <dd>show first page of results (do not load all result records)</dd>
+		<dt>/pageSize/30</dt>
+        <dd>show 30 results per page</dd>
+		</dl>
+		Lynx routing implementation provides solution to pass to page parameters directly from url string.
+        Above presented url structure is only an example. You may use any other URL schema most suitable for your needs. All you need is to design proper URL structure and then define it in web application configuration.
+	</p>	
+	<h2>2. URL to model binding</h2>
+	<p>
+		We will extend <strong>app.js</strong> file where application configuration is located. We will use bindings between url and models used by your application, we will map certain events to page and will define couple of url structures for one page. 
+	</p>
+    <div class="tabbable fullscreenable higlightable">
+        <div class="tab-pane" title="app.js">
+            <pre class="linenums onlyHighlight" pp-url="partials/tutorial/step6/snippet/1/app.js"></pre>
+        </div>
+    </div>
+    <p>
+	    Have a look at <strong>resultsPage</strong> configuration. Definition of <strong>path</strong> includes angular expressions. Those are binds of url fragments to model. This particular definition binds to <strong>$search</strong> model and will cause to automatically read those values from url e.g. if user types in:
+		<pre class="prettyprint linenums">
+		http://svr.wk.com/index.html#/results/id/a3-7cb0-4687-808b/2
+		</pre>
+		following mappings will take place:
+		<ul>
+			<li>$search.getSearch().Id = a3-7cb0-4687-808b</li>
+			<li>$search.getSearch().getParams().pageNo = 2</li>
+		</ul>
+	</p>
+	<p>
+		Data binding works as well in opposite direction. All model values changed by your application logic will automatically update url presented by browser. That means that if you will initiate search with <strong>$search.getSearch().getParams().pageNo = 1</strong> and $search will return results with <strong>$search.getSearch().Id</strong> set to <strong>ere-343</strong> the url will be updated to:
+		<pre class="prettyprint linenums">
+			http://svr.wk.com/index.html#/results/id/ere-343/1
+		</pre>
+	</p>
+
+	<h2>3. Events assignment</h2>
+    <p>
+        Events makes page navigation simpler. Every event defined in <strong>eventBindings</strong> will cause the page to be presented. Thus you do not have to care about page flow programmatically in application. Just call some method on model, it will trigger proper event which will cause page switch.
+	</p>
+    <div class="tabbable fullscreenable higlightable">
+        <div class="tab-pane" title="app.js">
+            <pre class="linenums onlyHighlight" pp-url="partials/tutorial/step6/snippet/2/app.js"></pre>
+        </div>
+    </div>
+	<p>
+		Having that configuration in place, if you want to perform the search you just need to call <strong>searchByPhrase</strong> method.  This will fire <strong>searchByPhrase</strong> event and since your page is binded to it, search page will be immediately displayed.
+    </p>
+
+	<h2>4. Multiple url schemas per page</h2>
+	<p>
+		Let's go back for a moment to path schema defined for <strong>resultsPage</strong>. It's quite complex. User may use it as browser bookmark but it would be quite inconvenient to type it in. Application should accept not only full-blown url but also its shorter forms. Have a look on following configuration snippet.
+	</p>
+    <div class="tabbable fullscreenable higlightable">
+        <div class="tab-pane" title="app.js">
+            <pre class="linenums onlyHighlight" pp-url="partials/tutorial/step6/snippet/3/app.js"></pre>
+        </div>
+    </div>
+	<p>
+		
+	</p>
+	<p>
+		You may see there <strong>routes</strong> configuration array. This is a collection of routs definitions accepted by result page. Each route path can be parametrized just like main <strong>path</strong> of the page configuration. Values of those parameters are available for <strong>eval</strong> expression. 
+	</p>
+	<p>
+		Now user may use e.g. <strong>http://svr.wk.com/index.html#/result/id/ere-343</strong> which will cause application view switch to result page and initialization of search ere-343 to be performed. Since route <strong>/resutls/id/{id}</strong>gets matched, the page will be switched, and <strong>eval</strong> expression is evaluated.
+	</p>
+	
+	<h2>5. Use $search model in pages</h2>
+	<p>
+		It is enough now to use in your application $search model. It will cause logic execution but at the same time will be reflected in page url. Have look at following code snippet. Notice, how $search is initialized in res.html, how it is used in pagination section. It is also use to present search results.
+	</p>
+
+    <div class="tabbable previewable fullscreenable higlightable">
+        <!--<div class="tab-pane active" title="index.html">-->
+            <!--<pre class="linenums" pp-url="partials/tutorial/step6/index.html"></pre>-->
+        <!--</div>-->
+        <div class="tab-pane" title="app.js">
+            <pre class="linenums" pp-url="partials/tutorial/step6/app.js"></pre>
+        </div>
+        <!--<div class="tab-pane" title="log.html">-->
+            <!--<pre class="linenums" pp-url="partials/tutorial/step6/page/log.html"></pre>-->
+        <!--</div>-->
+        <!--<div class="tab-pane" title="home.html">-->
+            <!--<pre class="linenums" pp-url="partials/tutorial/step6/page/home.html"></pre>-->
+        <!--</div>-->
+        <div class="tab-pane" title="res.html">
+            <pre class="linenums" pp-url="partials/tutorial/step6/page/res.html"></pre>
+        </div>
+        <!--<div class="tab-pane" title="doc.html">-->
+            <!--<pre class="linenums" pp-url="partials/tutorial/step6/page/doc.html"></pre>-->
+        <!--</div>-->
+        <div class="tab-pane" title="form.html">
+            <pre class="linenums" pp-url="partials/tutorial/step6/component/form.html"></pre>
+        </div>
+        <div class="tab-pane preview" title="preview"
+            iframe-toolbar="staticTemplateFrame">
+            <iframe id="staticTemplateFrame"
+                width="100%" height="100%" src="partials/tutorial/step6/index.html"></iframe>
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        <div>
+            <strong>Notice</strong> that our application now supports page navigation on result view and it is reflected in page url. Give it a try to open application with hash matching to one of routes definitions e.g. #/results/law.
+        </div>
+    </div>
+
+    <button class="next" ng-click="setStep(7)">
+        next
+    </button>
+</div>

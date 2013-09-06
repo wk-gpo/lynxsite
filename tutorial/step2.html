@@ -1,0 +1,59 @@
+<div xmlns="http://www.w3.org/1999/html">
+
+    <div class="pageTitle">
+        <h1>tutorial</h1>
+        <h3>creating static template</h3>
+    </div>
+    <p>
+		Nevertheless that we are doing simple application we will start from design and prototyping. That is standard procedure in real life. We found it extremely useful as that shortens development loop. Web designer and Developer work on same HTML&amp;CSS sources.  
+	</p>
+	<p>
+		So, we will create prototype of the application in pure HTML. We will create following pages which you will find in most applications exposing content:</p>
+    <dl class="dl-vertical">
+        <dt>login page</dt>
+        <dd>with just username and password fields to keep our project simple</dd>
+        <dt>search page</dt>
+        <dd>which will let you provide search query and initiate search function</dd>
+        <dt>search result</dt>
+        <dd>page obviously to present list of found entires</dd>
+        <dt>document view</dt>
+        <dd>page to complete functional scope of our application</dd>
+    </dl>
+    <p>
+		We will not devise CSS stylesheets from scratch. We will use <a href="http://getbootstrap.com">Twitter Bootstrap</a> library. Visit Bootstrap tutorial pages for information on base <a href="http://getbootstrap.com/css/">CSS</a> and <a href="http://getbootstrap.com/components/">components</a> provided in the library. For page flow we will use <a href="http://jquery.com/">jQuery</a>.
+    </p>
+	<p>
+		Have a look at index.html code presented below. Please, press <i class="icon-collapse-alt"></i> button on right top menu bar on code view area. It will cause collapse of all groups in index.html. As you can see now, we created a single page which encompass functionality for all pages that will be created in our tutorial.
+	</p>
+
+    <div class="tabbable previewable fullscreenable higlightable">
+        <div class="tab-pane active" title="index.html">
+            <pre class="linenums" ng-bind="staticTemplate.data"
+                pp-url="partials/tutorial/step2/index.html">
+            </pre>
+        </div>
+        <div class="tab-pane preview" title="preview"
+            iframe-toolbar="staticTemplateFrame">
+            <iframe id="staticTemplateFrame"
+                width="100%" height="100%" src="partials/tutorial/step2/index.html"></iframe>
+        </div>
+    </div>
+
+	<p>
+		Press "preview" tab on top of code view area to switch it to preview mode. You can play a little bit with that site to familiarize with main page flow of the application. Press "Login" button to get to main application page. Press "Search" button to see how search result page should look like. Click at document link to see document view page. 
+	</p>
+	<div class="alert alert-info">
+       <div>
+            <strong>Notice</strong> that you are working with prototype with no logic behind. You will be shown all pages without any need to provide data.
+        </div>
+    </div>
+
+    <p>
+        Now we have a prototype of our future application. We know how it should look like, how the page flows are organized. We will use that HTML page as starting point for rest of steps in this tutorial. You may copy&amp;paste that code to run it in you environment or <a href="">download full version</a> of web application.  
+    </p>
+
+
+    <button class="next" ng-click="setStep(3)">
+        next
+    </button>
+</div>

@@ -1,0 +1,38 @@
+{
+    "links" : {
+        "ng-include" : "http://docs.angularjs.org/api/ng.directive:ngInclude",
+        "ng-click" : "http://docs.angularjs.org/api/ng.directive:ngClick",
+        "ng-disabled" : "http://docs.angularjs.org/api/ng.directive:ngDisabled",
+        "ng-repeat" : "http://docs.angularjs.org/api/ng.directive:ngRepeat",
+        "ng-bind-html-unsafe": "http://docs.angularjs.org/api/ng.directive:ngBindHtml",
+        "ng-init": "http://docs.angularjs.org/api/ng.directive:ngInit",
+        "component/form.html": {"tab" : 6},
+        "$search": {"tab" : 1},
+        "$document" : {"tab" : 1},
+
+        "getSearch" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.SearchModel?scrollTo=getSearch",
+        "getResult" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.Search?scrollTo=getResult",
+        "TotalResults" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultList?scrollTo=TotalResults",
+        "Query" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.Search?scrollTo=Query",
+        "getPage" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultList?scrollTo=getPage",
+        "getItems" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultSet?scrollTo=getItems",
+        "Index" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=Index",
+        "Title" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=Title",
+        "Summary" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=Summary",
+        "DocumentId" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=DocumentId",
+        "openDocumentById" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=openDocumentById"
+    },
+    "annotate" : {
+        "hits" : "here we want to display total hit count, so we need to bind to current <code>velvet.vo.Search</code> object in <cod>lynx.models.SearchModel</cod>",
+        "query" : "here we want to display search query, this information is available directly in <code>velvet.vo.Search</code> object",
+        "pageNo = 1" : "for navigating on pages we creating local variable",
+        "perPage = 100" : "we can set the page size",
+        "pageNo = pageNo - 1" : "for navigating results pages we simple changing the variable",
+        "pageNo = pageNo + 1" : "for navigating results pages we simple changing the variable",
+        "item" : {"line" : 43, "value" :"so the main part is displaying items in search results, we simple iterate over the items in the page in current search results, each item will be available in local scope"},
+        "openDocumentById" : "for opening the document we have to call proper method on <code>lynx.models.DocumentModel</code>, model will be automatically retrieving all required data from Velvet",
+        "Summary" : "summary of search item can contains HTML, e.g. highlights, thats why we have to use html binding attribute instead of simple text node binding"
+    },
+    "fold" : [[11,21], [24,36], [41, 54]],
+    "toolbar" : true
+}

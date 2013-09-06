@@ -1,15 +1,61 @@
 <div class="topF agenda">
+
+    <dynamic-script src="'content/slides/framework/models/example/app.js'" model="scriptLoaded"></dynamic-script>
+
     <h1>
-        title
+        lynx framework - models
     </h1>
     <div class="desc">
-        Descritipn
+        Lynx is providing reusable and stateful models layer for keeping the state of Application.
+        Models colspad the services calls and hide the all synhronization code.
+        <div class="example">
+            <div class="appRun" lx-if="scriptLoaded">
+                <div class="body" ng-include="'content/slides/framework/models/example/index.html'"></div>
+            </div>
+            <div class="tabbable higlightable editable foldable fullscreenable">
+                <div class="tab-pane" title="index.html">
+                    <pre class="linenums" pp-url="'content/slides/framework/models/example/index.html'"></pre>
+                </div>
+                <div class="tab-pane" title="app.js">
+                    <pre class="linenums" pp-url="'content/slides/framework/models/example/app.js'"></pre>
+                </div>
+            </div>
+        </div>
     </div>
     <ul>
         <li>
-            <h2>point</h2>
+            <h2>statefull</h2>
             <div class="pointCommentary">
-                point comment
+                Models are for keeping the applications state.
+                If some data have to be reused this data have to be stored in model for limiting the services calls.
+            </div>
+        </li>
+        <li>
+            <h2>global</h2>
+            <div class="pointCommentary">
+                Models are globaly avaliable. You can bind your expressions to models actions from any template.
+                Models instances are created declarative and you are able to create many instances of the same model.
+            </div>
+        </li>
+        <li>
+            <h2>self controll</h2>
+            <div class="pointCommentary">
+                Models care about integration of any actions. If some action require multiple services call
+                model will do this by self, and will care of data integrity.
+            </div>
+        </li>
+        <li>
+            <h2>testable</h2>
+            <div class="pointCommentary">
+                Models are covered by the unit tests.
+                Models are independend form UI what give as simplicity of testing.
+            </div>
+        </li>
+        <li>
+            <h2>integration</h2>
+            <div class="pointCommentary">
+                There is possibility for cross models comunication. Also models are triggering events, so we are able to
+                handle them to perform some additional actio.
             </div>
         </li>
     </ul>

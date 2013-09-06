@@ -1,52 +1,81 @@
 <div>
     <div class="pageTitle">
         <h4>
-            <span class="access">{{ content.access }}</span>
-            <span ng-show="content.virtual" class="abstract">abstract</span>
-            {{ content.kind }}
+            <span ng-show="$api.content.virtual" class="abstract">abstract</span>
+            {{ $api.content.kind }}
         </h4>
-        <h1>{{ content.kindName }}</h1>
-        <h3 lx-if="content.augments.length > 0" class="ex">
+        <h1>{{ $api.content.kindName }}</h1>
+        <h3 lx-if="$api.content.augments.length > 0" class="ex">
             extends
-            <a href="javascript:void(0)" ng-click="openLink(content.augments[0], 'class')">
-                {{ content.augments[0] }}
+            <a href="javascript:void(0)" ng-click="openLink($api.content.augments[0], 'class')">
+                {{ $api.content.augments[0] }}
             </a>
         </h3>
     </div>
 
-    <ul class="extends" lx-if="content.allAugments.length > 0">
+    <ul class="extends" lx-if="$api.content.allAugments.length > 0">
         <li>
             <a href="javascript:void(0);" ng-click="openLink('Object');">
                 Object
             </a>
         </li>
-        <li ng-repeat="item in content.allAugments.reverse()">
+        <li ng-repeat="item in $api.content.allAugments.reverse()">
             <a href="javascript:void(0);" ng-click="openLink(item);">
                 <i class="icon-circle-arrow-up"></i>{{ item }}
             </a>
         </li>
         <li>
-            <a href="javascript:void(0);" ng-click="openLink(content.longname, content.kind, content.module);">
-                <i class="icon-circle-arrow-up"></i>{{ content.longname }}
+            <a href="javascript:void(0);" ng-click="openLink($api.content.longname, $api.content.kind, $api.content.module);">
+                <i class="icon-circle-arrow-up"></i>{{ $api.content.longname }}
             </a>
         </li>
     </ul>
 
-    <div lx-if="content.description">
+    <div lx-if="$api.content.description">
         <h2>
             Overview
         </h2>
-        <div class="description" ng-bind-html-unsafe="content.description" ></div>
+        <p class="description" ng-bind-html-unsafe="$api.content.description" ></p>
     </div>
 
 
 
-    <ng-switch on="content.kind">
-        <ng-include ng-switch-when="module" src="'partials/api/module.html'" ></ng-include>
+    <ng-switch on="$api.content.kind">
+        <ng-include ng-switch-when="module" src="'content/api/module.html'" autoscroll></ng-include>
         <div ng-switch-default>
+            <div lx-if="$api.content.kind == 'class'" class="constructor">
+                <h2>
+                    Constructor
+                </h2>
+                <p>
+                    <span class="access">{{ $api.content.access }}</span>
+                    <span class="name">{{ $api.content.longname }}</span> (
+                    <span lx-if="$api.content.params.length > 0">
+                        <br/>
+                        <span class="param" ng-repeat="param in $api.content.params">
+                            <span class="name">{{ param.name }}</span> :
+                            <a class="type" href="javascript:void(0)" ng-click="$api.open(param.type.names[0])">{{ param.type.names[0] }}</a>
+                            <span ng-show="$index < $api.content.params.length - 1">, <br/></span>
+                        </span>
+                    </span>);
+                </p>
+            </div>
+            <div lx-if="$api.content.members.function.length > 0" class="functions">
+                <h2>
+                    Functions
+                </h2>
+                <p>
+                   <div ng-repeat="fn in $api.content.members.function" class="function">
+                        <span id="{{ fn.name }}" class="name">{{ fn.name }}</span>
+                        <pre>{{ fn | json }}</pre>
+                   </div>
+                </p>
+            </div>
         </div>
     </ng-switch>
 
-    <pre>{{ content | json }}</pre>
+    <a href="#/api/wk.lynx.core/any/lynx.models.AnnotationModel#getAll">ssssssss</a>
+
+    <pre>{{ $api.content | json }}</pre>
 
 </div>

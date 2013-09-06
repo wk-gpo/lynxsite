@@ -1,0 +1,16 @@
+{
+    "links" : {
+        "$preferencesDataProvider" : {"first" : true, "value" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PreferencesDataProvider"},
+		"init" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PreferencesDataProvider?scrollTo=init",
+		"map" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PreferencesConfigDefinition?scrollTo=map",
+		"$auth.authenticated" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=authenticated",
+		"authenticated" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PreferencesConfigDefinition?scrollTo=authenticated"
+    },
+    "annotate" : {
+        "perPage": "this is name of parameter which will be exposed to Lynx application",
+		"userprefs.search.options.perpage": "this is User Preference name read by PreferenceDataProvider"
+    },
+    "fold" : [],
+    "hide" : [],
+    "toolbar" : true
+}

@@ -1,8 +1,8 @@
 <div>
 
-    <div class="description" ng-bind-html-unsafe="content.readme" lx-if="content.readme"></div>
+    <div class="description" ng-bind-html-unsafe="$api.content.readme" lx-if="$api.content.readme"></div>
 
-    <lx-eval exp="names = (content.members | filter: {kind: 'namespace'} | orderBy:'longname')" watch="content"></lx-eval>
+    <lx-eval exp="names = ($api.content.members | filter: {kind: 'namespace'} | orderBy:'longname')" watch="$api.content"></lx-eval>
     <div lx-if="names.length > 0">
         <h2>Namespaces</h2>
         <ul>
@@ -14,7 +14,7 @@
         </ul>
     </div>
 
-    <lx-eval exp="filtr = (content.members | filter: {kind: 'filter'} | orderBy:'longname')" watch="content"></lx-eval>
+    <lx-eval exp="filtr = ($api.content.members | filter: {kind: 'filter'} | orderBy:'longname')" watch="$api.content"></lx-eval>
     <div lx-if="filtr.length > 0">
         <h2>Filters</h2>
         <ul>
@@ -26,7 +26,7 @@
         </ul>
     </div>
 
-    <lx-eval exp="dir = (content.members | filter: {kind: 'directive'} | orderBy:'longname')" watch="content"></lx-eval>
+    <lx-eval exp="dir = ($api.content.members | filter: {kind: 'directive'} | orderBy:'longname')" watch="$api.content"></lx-eval>
     <div lx-if="dir.length > 0">
         <h2>Directives</h2>
         <ul>
@@ -38,7 +38,7 @@
         </ul>
     </div>
 
-    <lx-eval exp="ser = (content.members | filter: {kind: 'service'} | orderBy:'longname' )" watch="content"></lx-eval>
+    <lx-eval exp="ser = ($api.content.members | filter: {kind: 'service'} | orderBy:'longname' )" watch="$api.content"></lx-eval>
     <div lx-if="ser.length > 0">
         <h2>Services</h2>
         <ul>
@@ -51,7 +51,7 @@
     </div>
 
 
-    <lx-eval exp="classes = (types(content.members) | orderBy:'longname')" watch="content"></lx-eval>
+    <lx-eval exp="classes = ($api.types($api.content.members) | orderBy:'longname')" watch="$api.content"></lx-eval>
     <div lx-if="classes.length > 0">
         <h2>Types</h2>
         <ul>

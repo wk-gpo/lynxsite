@@ -1,0 +1,10 @@
+{
+    "links" : {
+       "ng-autotest" : "http://docs.angularjs.org/guide/dev_guide.e2e-testing"
+    },
+    "annotate" : {
+        "angular-scenario.js": "for running e2e in angular application you have to load angular-scenario.js library",
+        "scenario.js": "lynx is also providing a set of helpers to simplified test code writing"
+    },
+    "toolbar" : true
+}

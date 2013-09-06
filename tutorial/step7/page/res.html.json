@@ -1,0 +1,34 @@
+{
+    "links" : {
+        "ng-include" : "http://docs.angularjs.org/api/ng.directive:ngInclude",
+        "ng-click" : "http://docs.angularjs.org/api/ng.directive:ngClick",
+        "ng-disabled" : "http://docs.angularjs.org/api/ng.directive:ngDisabled",
+        "ng-repeat" : "http://docs.angularjs.org/api/ng.directive:ngRepeat",
+        "ng-bind-html-unsafe": "http://docs.angularjs.org/api/ng.directive:ngBindHtml",
+        "ng-init": "http://docs.angularjs.org/api/ng.directive:ngInit",
+
+        "component/form.html": {"tab" : 6},
+        "$search": {"tab" : 1},
+        "$document" : {"tab" : 1},
+
+        "getSearch" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.SearchModel?scrollTo=getSearch",
+        "getResult" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.Search?scrollTo=getResult",
+        "TotalResults" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultList?scrollTo=TotalResults",
+        "Query" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.Search?scrollTo=Query",
+        "getPage" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultList?scrollTo=getPage",
+        "getItems" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultSet?scrollTo=getItems",
+        "Index" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=Index",
+        "Title" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=Title",
+        "Summary" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=Summary",
+        "DocumentId" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=DocumentId",
+        "openDocumentById" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=openDocumentById",
+
+
+        "getParams" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.Search?scrollTo=getParams",
+        "pageNo" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchParam?scrollTo=pageNo"
+    },
+    "annotate" : {
+    },
+    "fold" : [[10,58,true]],
+    "toolbar" : true
+}

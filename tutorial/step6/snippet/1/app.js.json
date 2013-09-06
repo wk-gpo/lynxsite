@@ -1,0 +1,52 @@
+{
+    "links" : {
+        "module" : {"line" : 2 , "value": "../dist/app/docs.html#/api/wk.lynx.core/lynx"},
+        "moduleName" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=moduleName",
+        "pages" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=pages",
+        "defaultPath" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=defaultPath",
+        "globals" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=globals",
+        "velvetConfig" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration",
+        "AuthModel": "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.%41uthModel",
+        "wk.lynx.ui" : "../dist/app/docs.html#/api/%77k.lynx.ui/index",
+        "name" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=name",
+        "path" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=path",
+        "view" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=view",
+        "alias" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.ValueDefinition?scrollTo=alias",
+        " factory" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.ValueDefinition?scrollTo=factory",
+        "host" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.config.Configuration?scrollTo=host",
+        "apikey" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.config.Configuration?scrollTo=apikey",
+        "productId" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.config.Configuration?scrollTo=productId",
+        "lynx" : {"line" : 2, "value" :"../dist/app/docs.html#/api/wk.lynx.core/lynx"},
+        "page/home.html" : {"tab" : 3},
+        "page/res.html" : {"tab" : 4},
+        "page/doc.html" : {"tab" : 5},
+        "SearchModel": "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.Search%4Dodel",
+        "DocumentModel": "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.Document%4Dodel",
+        "eventBinding": "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=eventBinding",
+        "routes" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=routes",
+        "model" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.EventBinding?scrollTo=model",
+        "event" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.EventBinding?scrollTo=event",
+        "eval" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.RouteDefinition?scrollTo=eval",
+
+        "getSearch" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.SearchModel?scrollTo=getSearch",
+        "getParams" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.Search?scrollTo=getParams",
+        "pageNo" : { "first": true, "value": "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchParams?scrollTo=pageNo"},
+        "searchByPhrase"  : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.SearchModel?scrollTo=searchByPhrase",
+        "searchById"  : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.SearchModel?scrollTo=searchById",
+
+        "getDocument" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.Document%4Dodel?scrollTo=getDocument",
+        "openDocumentById" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.Document%4Dodel?scrollTo=openDocumentById",
+        "openDocument" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.Document%4Dodel?scrollTo=openDocument"
+
+
+
+    },
+    "annotate" : {
+        "path": {"line" : 26, "value" : "please notice the path for data binded pages is changed, now the path is contains some model bindings, if binded data will change the url in application will be automatically change also, this is for kipping the state of app in the url, such parametrized page can be bookmarked or shared"},
+        "eventBinding": "this is collection of bindings to model events, if specified event will occur application will automatically switch the page, you do not have to care about page flow programmatically in application, all what you need to do is call some method on model, e.g. if you want to perform the search on search model you have to call <code>searchByPhrase</code> method, this method fires <code>searchByPhrase</code> event, if your page is binded to this event on this model, your page will be immediately displayed",
+        "routes": "this is a collection of routs definitions, each route path can be parametrized, and the value of this parameters will be available for <code>eval</code> expression, if route will be matched, the page will be switched, and <code>eval</code> expression will be evaluated"
+    },
+    "fold" : [[3,20,true], [29,51, true], [53,69,true], [71,75,true]],
+    "hide" : [],
+    "toolbar" : true
+}

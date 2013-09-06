@@ -1,7 +1,7 @@
 <ul class="pageMenu">
     <li class="search">
-        <input type="text" ng-model="selection.query"
-            ng-change="updateMenu()">
+        <input type="text" ng-model="$api.query"
+            ng-change="$api.update()">
         <i class="icon-search"></i>
     </li>
     <li>
@@ -9,69 +9,94 @@
             Modules:
         </label>
     </li>
-    <li ng-repeat="module in modules"
-        ng-class="{true: 'active'}[selection.module == module]">
-        <a href="javascript:void(0)" ng-click="setModule(module)">
+    <li ng-repeat="module in $api.modules"
+        ng-class="{true: 'active'}[$api.module == module]">
+        <a href="javascript:void(0)" ng-click="$api.set(module)">
             {{ module }}
         </a>
     </li>
-    <li class="separator" ng-show="namespaces.length > 0"></li>
-    <li ng-show="namespaces.length > 0">
+
+    <li class="separator" ng-show="$api.namespaces.length > 0"></li>
+    <li ng-show="$api.namespaces.length > 0">
         <label>
             Namespaces:
         </label>
     </li>
-    <li ng-repeat="namespace in namespaces"
-        ng-class="{true: 'active'}[namespace == selection.namespace]">
-        <a href="javascript:void(0)" ng-click="setNamespace(namespace)">
+    <li ng-repeat="namespace in $api.namespaces"
+        ng-class="{true: 'active'}[namespace == $api.namespace]">
+        <a href="javascript:void(0)" ng-click="$api.set(null, namespace)">
             {{ namespace }}
         </a>
     </li>
-    <li class="separator" ng-show="objects.directive.length > 0"></li>
-    <li ng-show="objects.directive.length > 0">
+
+    <lx-eval
+        exp="directives = ($api.items | filter:{kind: 'directive'})"
+        watch="$api.items">
+    </lx-eval>
+
+    <li class="separator" ng-show="directives.length > 0"></li>
+    <li ng-show="directives.length > 0">
         <label>
             Directives:
         </label>
     </li>
-    <li ng-repeat="item in objects.directive"
-        ng-class="{true: 'active'}[item == selection.selectedItem]">
-        <a href="javascript:void(0)" ng-click="setItem(item);">
+    <li ng-repeat="item in directives"
+        ng-class="{true: 'active'}[item.longname == $api.item]">
+        <a href="javascript:void(0)" ng-click="$api.set(null, null, item.longname);">
             {{ item.kindName }}
         </a>
     </li>
-    <li class="separator" ng-show="objects.filter.length > 0"></li>
-    <li ng-show="objects.filter.length > 0">
+
+    <lx-eval
+        exp="filters = ($api.items | filter:{kind: 'filter'})"
+        watch="$api.items">
+    </lx-eval>
+
+    <li class="separator" ng-show="filters.length > 0"></li>
+    <li ng-show="filters.length > 0">
         <label>
-            Filters :
+            Filters:
         </label>
     </li>
-    <li ng-repeat="item in objects.filter"
-        ng-class="{true: 'active'}[item == selection.selectedItem]">
-        <a href="javascript:void(0)" ng-click="setItem(item);">
+    <li ng-repeat="item in filters"
+        ng-class="{true: 'active'}[item.longname == $api.item]">
+        <a href="javascript:void(0)" ng-click="$api.set(null, null, item.longname);">
             {{ item.kindName }}
         </a>
     </li>
-    <li class="separator" ng-show="objects.service.length > 0"></li>
-    <li ng-show="objects.service.length > 0">
+
+    <lx-eval
+        exp="services = ($api.items | filter:{kind: 'service'})"
+        watch="$api.items">
+    </lx-eval>
+
+    <li class="separator" ng-show="services.length > 0"></li>
+    <li ng-show="services.length > 0">
         <label>
-            Services :
+            Services:
         </label>
     </li>
-    <li ng-repeat="item in objects.service"
-        ng-class="{true: 'active'}[item == selection.selectedItem]">
-        <a href="javascript:void(0)" ng-click="setItem(item);">
+    <li ng-repeat="item in services"
+        ng-class="{true: 'active'}[item.longname == $api.item]">
+        <a href="javascript:void(0)" ng-click="$api.set(null, null, item.longname);">
             {{ item.kindName }}
         </a>
     </li>
-    <li class="separator" ng-show="objects.type.length > 0"></li>
-    <li ng-show="objects.type.length > 0">
+
+    <lx-eval
+        exp="types = ($api.items | filter:{kind: 'type'})"
+        watch="$api.items">
+    </lx-eval>
+
+    <li class="separator" ng-show="types.length > 0"></li>
+    <li ng-show="types.length > 0">
         <label>
-            Types :
+            Types:
         </label>
     </li>
-    <li ng-repeat="item in objects.type"
-        ng-class="{true: 'active'}[item == selection.selectedItem]">
-        <a href="javascript:void(0)" ng-click="setItem(item);">
+    <li ng-repeat="item in types"
+        ng-class="{true: 'active'}[item.longname == $api.item]">
+        <a href="javascript:void(0)" ng-click="$api.set(null, null, item.longname);">
             {{ item.kindName }}
         </a>
     </li>

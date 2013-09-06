@@ -1,0 +1,11 @@
+{
+    "links" : {
+        "ng-click" : "http://docs.angularjs.org/api/ng.directive:ngClick",
+        "component/form.html": {"tab" : 6}
+    },
+    "annotate" : {
+        "authenticated = true" :
+            "for simplicity we will keep now authentication state in global flag"
+    },
+    "toolbar" : true
+}

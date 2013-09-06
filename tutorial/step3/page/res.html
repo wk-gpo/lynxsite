@@ -1,0 +1,45 @@
+<!-- search results page -->
+<div class="container">
+
+    <!-- including search form -->
+    <ng-include src="'component/form.html'"></ng-include>
+
+    <div class="row">
+
+        <!-- search results header-->
+        <div class="col-8">
+            <h3>
+                <span class="hits">100</span>
+                results for
+                <span class="query">query</span>
+            </h3>
+        </div>
+
+        <!-- pagination -->
+        <div class="col-4" style="margin-top: 10px; text-align: right">
+            <button class="btn btn-default prevBtn">
+                &lt;
+            </button>
+            <button class="btn btn-default nextBtn">
+                &gt;
+            </button>
+        </div>
+
+    </div>
+
+    <!-- search results -->
+    <div class="row">
+        <table class="table table-striped col-12">
+            <tr>
+                <td class="no">1.</td>
+                <td>
+                    <a href="#/document" class="title">
+                        Document title
+                    </a>
+                    <div>Document summary</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>

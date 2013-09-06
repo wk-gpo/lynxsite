@@ -1,0 +1,106 @@
+<div>
+
+    <div class="pageTitle">
+        <h1>tutorial</h1>
+        <h3>application parametrization</h3>
+    </div>
+	<p>
+		Up until now the only parametrization of test application has been done via application configuration. But in real life you will use many other parameter providers. Perhaps some data will be stored at client site (browser local store, user session). Some preferences may be read from user profile. And of course you will use CRAs.
+	</p>
+	<h2>1. Data Providers</h2>
+	<p>	
+		Lynx gives an easy way to get or set parameter values from those sources. you possibility to access application parameters from following sources:
+		<dl class="dl-vertical">
+        <dt>SessionDataProvider</dt>
+        <dd>
+			manages properties stored in browser cache; keep in mind that it may be cleared by user action (e.g. with Ctrl+F5)
+		</dd>
+        <dt>PreferencesDataProvider</dt>
+        <dd>
+			exposes preferences stored in GARE
+		</dd>
+		<dt>CraDataProvider</dt>
+		<dd>
+			provides read-only access to CRAs defined in Jaguar
+		</dd>
+		<dt>StoreDataProvider</dt>
+		<dd>
+			exposes local storage of your application as defined by HTML5 <a href="http://dev.w3.org/html5/webstorage/">Web Storage</a> specification
+		</dd>
+		<dt>StaticDataProvider</dt>
+		<dd>
+			provides access to static properties considered as constants
+        </dd>
+		</dl> 
+	</p>
+	<p>
+		We will use <strong>PreferenceDataProvider</strong> in our tutorial. First, we will add configuration of that data provider to our application. We will do that in dedicated js file.
+	</p>
+    <div class="tabbable fullscreenable higlightable">
+        <div class="tab-pane active" title="index.html">
+            <pre class="linenums" pp-url="partials/tutorial/step7/snippet/1/index.html"></pre>
+        </div>
+        <div class="tab-pane" title="pref.js">
+            <pre class="linenums onlyHighlight" pp-url="partials/tutorial/step7/pref.js"></pre>
+        </div>
+    </div>
+	<h2>2. Application Properties</h2>
+	<p>
+		You may use many data providers data providers you need to use in your application. Each of data providers configured will be ready for your application. You will not access them directly but via <strong>$properties</strong> object. It is implemented by <strong>lynx.core.AppProperties</strong> object. Any operation on <strong>$properties</strong> scans all data providers one by one.</p>
+    <p>
+        To access application properties use following functions of <strong>$properties</strong> object:
+		<dl class="dl-vertical">
+        <dt>get(name)</dt>
+        <dd>
+			Returns value of property <strong>name</strong> from first data provider that has property defined. In case property is not found at any of defined data providers an exception is thrown.
+		</dd>
+        <dt>set(name, value)</dt>
+        <dd>
+			Sets new <strong>value</strong> for property <strong>name</strong>. It changes value on first data provider which exposed that property. An exception is thrown if property is not found if it is exposed by read-only data provider.
+		</dd>
+        </dl>
+    </p>
+	<p>
+		Now we just need to use <strong>perPage</strong> property in your application. It will initialize value of perPage on result page. Switch to preview, login to application and search e.g. for 'models' string. You will receive 1500 results but only first 50 will be on your page - that value has been read from 'userprefs.search.options.perpage' preference. 
+	</p>
+	
+	
+    <div class="tabbable previewable fullscreenable higlightable">
+        <!--<div class="tab-pane active" title="index.html">
+            <pre class="linenums" pp-url="partials/tutorial/step7/index.html"></pre>
+        </div>-->
+        <!--<div class="tab-pane" title="app.js">-->
+            <!--<pre class="linenums" pp-url="partials/tutorial/step7/app.js"></pre>-->
+        <!--</div>-->
+        <!--<div class="tab-pane" title="log.html">-->
+            <!--<pre class="linenums" pp-url="partials/tutorial/step7/page/log.html"></pre>-->
+        <!--</div>-->
+        <!--<div class="tab-pane" title="home.html">-->
+            <!--<pre class="linenums" pp-url="partials/tutorial/step7/page/home.html"></pre>-->
+        <!--</div>-->
+        <div class="tab-pane" title="res.html">
+            <pre class="linenums" pp-url="partials/tutorial/step7/page/res.html"></pre>
+        </div>
+        <!--<div class="tab-pane" title="doc.html">-->
+            <!--<pre class="linenums" pp-url="partials/tutorial/step7/page/doc.html"></pre>-->
+        <!--</div>-->
+        <!--<div class="tab-pane" title="form.html">-->
+            <!--<pre class="linenums" pp-url="partials/tutorial/step7/component/form.html"></pre>-->
+        <!--</div>-->
+        <div class="tab-pane preview" title="preview"
+            iframe-toolbar="staticTemplateFrame">
+            <iframe id="staticTemplateFrame"
+                width="100%" height="100%" src="partials/tutorial/step7/index.html"></iframe>
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        <div>
+            <strong>After this step</strong> our application can utilize multiple parametrization storages. You will definitely use them in your work.
+        </div>
+    </div>
+
+    <button class="next" ng-click="setStep(8)">
+        next
+    </button>
+</div>

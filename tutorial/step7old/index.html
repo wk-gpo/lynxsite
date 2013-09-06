@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="http://goo.gl/xEjbRC">
+
+        <!-- 3Party libs -->
+        <script type="text/javascript" src="LynxLibs/jQuery/src/jquery.js"></script>
+        <script type="text/javascript" src="LynxLibs/angular/src/angular.js"></script>
+        <script type="text/javascript" src="LynxLibs/store/src/store.js"></script>
+        <script type="text/javascript" src="LynxCore/js/lynx.js?module=wk.lynx"></script>
+
+        <script src="app.js"></script>
+        <script src="pref.js"></script>
+
+        <style> [ng-cloak] { display: none; } </style>
+    </head>
+    <body>
+
+        <!-- header -->
+        <ng-switch on="$auth.authenticated" lx-if="$appState.ready">
+
+            <ng-include ng-switch-when="false" ng-hide="$auth.pending"
+                src="'page/log.html'">
+            </ng-include>
+
+            <div ng-switch-when="true">
+                <nav class="navbar" role="navigation">
+                    <button ng-click="$auth.logout()"
+                        class="btn btn-default navbar-btn pull-right logoutBtn"
+                        type="button">
+                        Logout
+                    </button>
+                    <a href="#/home" class="navbar-brand homeLink">
+                        Lynx Tutorial
+                    </a>
+                </nav>
+                <ng-include src="page.view"></ng-include>
+            </div>
+
+        </ng-switch>
+    </body>
+</html>

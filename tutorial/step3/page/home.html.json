@@ -1,0 +1,12 @@
+{
+    "links" : {
+        "ng-include" : "http://docs.angularjs.org/api/ng.directive:ngInclude",
+        "component/form.html": {"tab" : 6}
+    },
+    "annotate" : {
+        "component/form.html" :
+            "including the search form on home page"
+    },
+    "fold" : [[7,14]],
+    "toolbar" : true
+}

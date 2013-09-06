@@ -1,0 +1,56 @@
+<!-- search results page -->
+<div class="container"
+    ng-init="pageNo = 1; perPage = 100">
+
+    <!-- including search form -->
+    <ng-include src="'component/form.html'"></ng-include>
+
+    <div class="row">
+
+        <!-- search results header-->
+        <div class="col-8">
+            <h3>
+                <span class="hits">
+                    {{ $search.getSearch().getResult().TotalResults }}
+                </span>
+                results for
+                <span class="query">
+                    {{ $search.getSearch().Query }}
+                </span>
+            </h3>
+        </div>
+
+        <!-- pagination -->
+        <div class="col-4" style="margin-top: 10px; text-align: right">
+            <button class="btn btn-default prevBtn"
+                ng-click="pageNo = pageNo - 1"
+                ng-disabled="pageNo < 2">
+                &lt;
+            </button>
+            <button class="btn btn-default nextBtn"
+                ng-click="pageNo = pageNo + 1"
+                ng-disabled="((pageNo+1) * perPage) >
+                    $search.getSearch().getResult().TotalResults">
+                &gt;
+            </button>
+        </div>
+
+    </div>
+
+    <!-- search results -->
+    <div class="row">
+        <table class="table table-striped col-12">
+            <tr ng-repeat="item in ($search.getSearch().getResult().getPage(pageNo, perPage).getItems())">
+                <td class="no">{{ item.Index + 1 }}.</td>
+                <td>
+                    <a href="#/document" class="title"
+                        ng-click="$document.openDocumentById(item.DocumentId)">
+                        {{ item.Title }}
+                    </a>
+                    <div ng-bind-html-unsafe="item.Summary"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>

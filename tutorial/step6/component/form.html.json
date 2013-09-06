@@ -1,0 +1,12 @@
+{
+    "links" : {
+        "ng-submit" : "http://docs.angularjs.org/api/ng.directive:ngSubmit",
+        "ng-model": "http://docs.angularjs.org/api/ng.directive:ngModel",
+        "searchByPhrase" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.SearchModel?scrollTo=searchByPhrase",
+        "$search" : {"tab" : 1}
+    },
+    "annotate" : {
+        "searchByPhrase" : "now we do not have to switch page by self all what you have to do is call <code>searchByPhrase</code> function on <code>$search</code> model"
+    },
+    "toolbar" : true
+}

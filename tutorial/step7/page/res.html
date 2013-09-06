@@ -1,0 +1,60 @@
+<!-- search results page -->
+<div class="container"
+    ng-init="
+        $search.getSearch().getParams().pageNo = $search.getSearch().getParams().pageNo || 1;
+        perPage = $properties.get('perPage');">
+
+    <!-- including search form -->
+    <ng-include src="'component/form.html'"></ng-include>
+
+    <div class="row">
+
+        <!-- search results header-->
+        <div class="col-8">
+            <h3>
+                <span class="hits">
+                    {{ $search.getSearch().getResult().TotalResults }}
+                </span>
+                results for
+                <span class="query">
+                    {{ $search.getSearch().Query }}
+                </span>
+            </h3>
+        </div>
+
+        <!-- pagination -->
+        <div class="col-4" style="margin-top: 10px; text-align: right">
+            <button class="btn btn-default prevBtn"
+                ng-click="$search.getSearch().getParams().pageNo =
+                    $search.getSearch().getParams().pageNo - 1"
+                ng-disabled="$search.getSearch().getParams().pageNo < 2">
+                &lt;
+            </button>
+            <button class="btn btn-default nextBtn"
+                ng-click="$search.getSearch().getParams().pageNo =
+                    $search.getSearch().getParams().pageNo + 1"
+                ng-disabled="(($search.getSearch().getParams().pageNo+1) * perPage) >
+                    $search.getSearch().getResult().TotalResults">
+                &gt;
+            </button>
+        </div>
+
+    </div>
+
+    <!-- search results -->
+    <div class="row">
+        <table class="table table-striped col-12">
+            <tr ng-repeat="item in ($search.getSearch().getResult().getPage($search.getSearch().getParams().pageNo, perPage).getItems())">
+                <td class="no">{{ item.Index + 1 }}.</td>
+                <td>
+                    <a href="javascript:void(0);" class="title"
+                        ng-click="$document.openDocumentById(item.DocumentId)">
+                        {{ item.Title }}
+                    </a>
+                    <div ng-bind-html-unsafe="item.Summary"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>

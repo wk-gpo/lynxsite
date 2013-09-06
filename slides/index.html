@@ -1,6 +1,7 @@
 <div class="slide-show-container"
     lx-destroy="$slides.stop()">
 
+<!--
     <div slide="$slides">
         <div ng-include="'content/home/teaser.html'"></div>
     </div>
@@ -48,18 +49,15 @@
     <div slide="$slides">
         <div ng-include="'content/slides/framework/index.html'"></div>
     </div>
+    -->
 
     <div slide="$slides">
         <div ng-include="'content/slides/framework/services/index.html'"></div>
     </div>
 
-    <a class="btn slid-show-next" href="javascript:void(0)" ng-click="$slides.next()">
-        <i class="icon-arrow-down"></i>
-    </a>
-
-    <a class="btn slid-show-prev" href="javascript:void(0)" ng-click="$slides.prev()">
-        <i class="icon-arrow-up"></i>
-    </a>
+    <div slide="$slides">
+        <div ng-include="'content/slides/framework/models/index.html'"></div>
+    </div>
 
     <lx-eval exp="$slides.play()"></lx-eval>
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <!-- link to CDN of bootstrap.min.css -->
+        <link rel="stylesheet" href="http://goo.gl/xEjbRC">
+
+        <!-- required libraries-->
+        <script type="text/javascript" src="LynxLibs/jQuery/src/jquery.js"></script>
+        <script type="text/javascript" src="LynxLibs/angular/src/angular.js"></script>
+        <script type="text/javascript" src="LynxLibs/store/src/store.js"></script>
+        <script type="text/javascript" src="LynxCore/js/lynx.js"></script>
+
+        <!-- application code -->
+        <script src="app.js"></script>
+
+    </head>
+    <body>
+
+        <!-- switching view by anuthentication status -->
+        <ng-switch on="$root.authenticated">
+
+            <!-- if not authenticated including login page -->
+            <ng-include ng-switch-default src="'page/log.html'">
+            </ng-include>
+
+            <!-- if authenticated -->
+            <div ng-switch-when="true">
+
+                <!-- global navigation bar -->
+                <nav class="navbar" role="navigation">
+                    <button type="button"
+                        class="btn btn-default navbar-btn pull-right logoutBtn"
+                        ng-click="$root.authenticated = false">
+                        Logout
+                    </button>
+                    <a href="#/home" class="navbar-brand homeLink">
+                        Lynx Tutorial
+                    </a>
+                </nav>
+
+                <!-- including current page view -->
+                <ng-include src="page.view"></ng-include>
+            </div>
+        </ng-switch>
+
+    </body>
+</html>

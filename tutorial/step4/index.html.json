@@ -1,0 +1,30 @@
+{
+    "links" : {
+        "ng-switch-default" : "http://docs.angularjs.org/api/ng.directive:ngSwitch",
+        "ng-switch-when" : "http://docs.angularjs.org/api/ng.directive:ngSwitch",
+        "ng-switch" : "http://docs.angularjs.org/api/ng.directive:ngSwitch",
+        "ng-include" : "http://docs.angularjs.org/api/ng.directive:ngInclude",
+        "ng-click" : "http://docs.angularjs.org/api/ng.directive:ngClick",
+
+        "xEjbRC": "http://getbootstrap.com/",
+        "jquery.js": "http://jquery.com/",
+        "store.js": "https://github.com/marcuswestin/store.js",
+        "angular.js": "http://angularjs.org/",
+        "lynx.js": "http://home.lynxapp.net/" ,
+        "app.js": {"tab": 1},
+        "$auth": {"tab": 1},
+        "page/log.html": {"tab" : 2},
+
+        "page.view" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=view",
+        "logout" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=logout",
+        "authenticated" : {"line":21, "value":"../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=authenticated"}
+
+    },
+    "annotate" : {
+        "authenticated": {"line":21, "value":"<code>lynx.model.AuthModel</code> property which keep authentication status; we use it instead of global variable"},
+        "logout" : "instead of changing global variable, we have to call now <code>logout</code> function on <code>lynx.model.AuthModel</code> to force logout from application "
+    },
+    "fold" : [[3,17, true],[28,44]],
+    "hide" : [],
+    "toolbar" : true
+}

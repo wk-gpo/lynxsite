@@ -1,0 +1,15 @@
+{
+    "links" : {
+        "ng-include" : "http://docs.angularjs.org/api/ng.directive:ngInclude",
+        "lx-if" : "../dist/app/docs.html#/api/wk.lynx.ui/lynx.directives.%6Cx-if",
+        "getDocumentStreamUrl" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.DocumentModell?scrollTo=getDocumentStreamUrl",
+        "ga-mobile" : "../dist/app/docs.html#/func/documentView",
+        "$document" : {"tab": 1}
+    },
+    "annotate" : {
+        "getDocumentStreamUrl" : "we will include the document body by the url provided by <code>DocumentModel</code> for current opened document, this method returns proper (e.g. with auth data) url to current opened document",
+        "ga-mobile" : "Velvet is providing document body in many channels, please read linked documentation for more informations",
+        "lx-if" : "until document metadata is loaded to model we do not want to display the content"
+    },
+    "toolbar" : true
+}

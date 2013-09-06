@@ -1,0 +1,11 @@
+{
+    "links" : {
+        "app.js": {"tab": 1}
+    },
+    "annotate" : {
+        "app.js": "Lynx based web application is initialized in this script. We found it useful to make initialization in dedicated <code>*.js</code> file."
+    },
+    "fold" : [],
+    "hide" : [],
+    "toolbar" : true
+}

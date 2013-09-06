@@ -1,0 +1,26 @@
+{
+    "links" : {
+        "ng-click" : "http://docs.angularjs.org/api/ng.directive:ngClick",
+        "ng-disabled" : "http://docs.angularjs.org/api/ng.directive:ngDisabled",
+        "ng-submit" : "http://docs.angularjs.org/api/ng.directive:ngSubmit",
+        "ng-show" : "http://docs.angularjs.org/api/ng.directive:ngShow",
+        "ng-model": "http://docs.angularjs.org/api/ng.directive:ngModel",
+        "component/form.html": {"tab" : 6},
+
+        "login" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=login",
+        "authentionFailed" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=authentionFailed",
+        "pending" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=pending",
+
+        "$auth" : {"tab" : 1}
+
+    },
+    "annotate" : {
+        "login" : "on form submit we will call <code>login</code> function on <code>lynx.models.AuthModel</code> instance, as a parameters we will provide the local scope values binded to fields",
+        "authentionFailed" : "we will display the failed message only if authentication fails",
+        "pending" : "we need to disable buttons and inputs during the authentication progress",
+
+        "username" : {"line" : 16, "value" : "username field value will be binded to local scope variable, and will be used on submit"},
+        "password" : {"line" : 22, "value" : "password field value will be binded to local scope variable, and will be used on submit"}
+    },
+    "toolbar" : true
+}

@@ -7,5 +7,6 @@
     "replace" : {
         "content/slides/angular/dataBinding/example/message.html" : "message.html"
     },
+    "fold": [[2,5, true]],
     "toolbar": true
 }

@@ -1,0 +1,13 @@
+{
+    "links" : {
+        "ng-submit" : "http://docs.angularjs.org/api/ng.directive:ngSubmit",
+        "ng-model": "http://docs.angularjs.org/api/ng.directive:ngModel",
+        "searchByPhrase" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.SearchModel?scrollTo=searchByPhrase",
+        "$search" : {"tab" : 1}
+    },
+    "annotate" : {
+        "searchByPhrase" : "on search form submit we will call <code>searchByPhrase</code> function on <code>lynx.models.SearchModel</code> instance, as a parameters we will provide the local scope value binded to input filed",
+        "query" : {"line" : 9, "value" : "field value will be binded to local scope variable, and will be used on form submit"}
+    },
+    "toolbar" : true
+}

@@ -1,0 +1,33 @@
+{
+    "links" : {
+        "module" : {"line" : 2 , "value": "../dist/app/docs.html#/api/wk.lynx.core/lynx"},
+        "moduleName" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=moduleName",
+        "pages" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=pages",
+        "defaultPath" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=defaultPath",
+        "globals" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=globals",
+        "velvetConfig" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration",
+        "AuthModel": "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.%41uthModel",
+        "wk.lynx.ui" : "../dist/app/docs.html#/api/%77k.lynx.ui/index",
+        "name" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=name",
+        "path" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=path",
+        "view" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=view",
+        "alias" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.ValueDefinition?scrollTo=alias",
+        " factory" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.ValueDefinition?scrollTo=factory",
+        "host" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.config.Configuration?scrollTo=host",
+        "apikey" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.config.Configuration?scrollTo=apikey",
+        "productId" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.config.Configuration?scrollTo=productId",
+        "lynx" : {"line" : 2, "value" :"../dist/app/docs.html#/api/wk.lynx.core/lynx"},
+        "page/home.html" : {"tab" : 3},
+        "page/res.html" : {"tab" : 4},
+        "page/doc.html" : {"tab" : 5},
+        "SearchModel": "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.Search%4Dodel",
+        "DocumentModel": "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.Document%4Dodel"
+    },
+    "annotate" : {
+        "SearchModel": "our application have to provide the search functionality so we need provide <code>lynx.models.SearchModel</code>, which provides implementation of searching functionality",
+        "DocumentModel": "also we want to display documents so we need provide <code>lynx.models.DocumentModel</code>, which provides implementation of documents functionality"
+},
+    "fold" : [[8,12,true], [15,19], [22, 26, true]],
+    "hide" : [],
+    "toolbar" : true
+}

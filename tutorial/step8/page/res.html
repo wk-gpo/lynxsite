@@ -1,0 +1,59 @@
+<div class="container resultsPage"
+    ng-init="
+        $search.getSearch().getParams().pageNo = $search.getSearch().getParams().pageNo || 1;
+        $search.getSearch().getParams().perPage = $properties.getNumber('perPage') || 100">
+
+    <ng-include src="'component/form.html'"></ng-include>
+
+    <div class="row">
+        <div class="col-8">
+            <h3>
+                <span class="hits">{{ $search.getSearch().getResult().TotalResults }}</span>
+                results for
+                <span class="query">{{ $search.getSearch().Query }}</span>
+            </h3>
+        </div>
+        <div class="col-4" style="margin-top: 10px; text-align: right">
+            <button class="btn btn-default prevBtn"
+                ng-click="$search.getSearch().getParams().pageNo =
+                    $search.getSearch().getParams().pageNo - 1"
+                ng-disabled="$search.getSearch().getParams().pageNo < 2">
+                <
+            </button>
+            <button class="btn btn-default nextBtn"
+                ng-click="$search.getSearch().getParams().pageNo =
+                    $search.getSearch().getParams().pageNo + 1"
+                ng-disabled="(($search.getSearch().getParams().pageNo+1) *
+                    $search.getSearch().getParams().perPage) >
+                    $search.getSearch().getResult().TotalResults">
+                >
+            </button>
+        </div>
+    </div>
+
+
+    <div class="row"  style="margin:10px 0;">
+        <div class="col-12">
+            Items per page:
+            <select
+                ng-model="$search.getSearch().getParams().perPage"
+                ng-options="value for value in [25,50,100,200]"
+                ng-change="$search.getSearch().getParams().pageNo = 1;
+                    $properties.set('perPage', $search.getSearch().getParams().perPage + '')">
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table table-striped col-12">
+            <tr ng-repeat="item in ($search.getSearch().getResult().getPage($search.getSearch().getParams().pageNo, $search.getSearch().getParams().perPage).getItems())">
+                <td class="no">{{ item.Index + 1 }}.</td>
+                <td>
+                    <a href="#/document/{{ item.DocumentId }}"
+                        class="title">{{ item.Title }}</a>
+                    <div ng-bind-html-unsafe="item.Summary"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

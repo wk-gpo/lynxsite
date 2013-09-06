@@ -1,0 +1,6 @@
+{
+    "annotate" : {
+        "/results" : "on click we will change the url hash to /results, routing will automatically switch the page"
+    },
+    "toolbar" : true
+}

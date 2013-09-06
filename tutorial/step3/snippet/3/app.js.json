@@ -1,0 +1,23 @@
+{
+    "links" : {
+        "module" : {"line" : 2 , "value": "../dist/app/docs.html#/api/wk.lynx.core/lynx"},
+        "moduleName" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=moduleName",
+        "pages" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=pages",
+        "defaultPath" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=defaultPath",
+        "wk.lynx.ui" : "../dist/app/docs.html#/api/%77k.lynx.ui/index",
+        "name" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=name",
+        "path" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=path",
+        "view" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=view",
+        "lynx" : {"line" : 2, "value" :"../dist/app/docs.html#/api/wk.lynx.core/lynx"}
+    },
+    "annotate" : {
+        "module" : {"line" : 2 , "value": "This is <strong>main</strong> lynx framework method. It returns <code>angular.Module</code> object based on configuration you provided."},
+        "moduleName" : "This is an identifier for <code>angular.Module</code>. You may find your application module using  <code>angular.module()</code> function with this name provided as parameter.",
+        "pages": "Basic configuration of application structure and routing. Each entry contains information on one of application pages and has assigned <code>name</code>, default page <code>path</code> used for routing, and relative url defined in <code>view</code> which points to snippet which should be loaded for given routing path.",
+        "defaultPath": "For any url unmatched by Lynx routing, application will be redirected to this path",
+        "wk.lynx.ui": "Put every module you need to load here. Modules <code>wk.lynx.core</code>, <code>wk.lynx.velvet</code> and <code>ng</code> are loaded regardless of providing their names here."
+    },
+    "fold" : [],
+    "hide" : [],
+    "toolbar" : true
+}
