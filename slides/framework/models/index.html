@@ -7,8 +7,8 @@
     </h1>
 
     <div class="desc">
-        Lynx is providing reusable and stateful models layer for keeping the state of Application.
-        Models colspad the services calls and hide the all synhronization code.
+        Lynx provides layer of reusable and statefull models designed to keep state of the application.
+        Models encapsulate the service calls and hide synchronization code required.
     </div>
 
     <div class="example">
@@ -30,36 +30,36 @@
         <li>
             <h2>statefull</h2>
             <div class="pointCommentary">
-                Models are for keeping the applications state.
-                If some data have to be reused this data have to be stored in model for limiting the services calls.
+                Models keep the application state.
+                If some data have to be reused this data have to be stored in model to limit the services calls number.
             </div>
         </li>
         <li>
             <h2>global</h2>
             <div class="pointCommentary">
-                Models are globaly avaliable. You can bind your expressions to models actions from any template.
-                Models instances are created declarative and you are able to create many instances of the same model.
+                Models are globally available. You can bind your expressions to model's actions from any template.
+                Models instances are created declaratively and it is possible to create many instances of the same model.
             </div>
         </li>
         <li>
-            <h2>self controll</h2>
+            <h2>self control</h2>
             <div class="pointCommentary">
                 Models care about integration of any actions. If some action require multiple services call
-                model will do this by self, and will care of data integrity.
+                model will do this by itself and will take care of data integrity.
             </div>
         </li>
         <li>
             <h2>testable</h2>
             <div class="pointCommentary">
-                Models are covered by the unit tests.
-                Models are independend form UI what give as simplicity of testing.
+                Models are covered by unit tests.
+                Models are independent from UI what make testing very easy.
             </div>
         </li>
         <li>
             <h2>integration</h2>
             <div class="pointCommentary">
-                There is possibility for cross models comunication. Also models are triggering events, so we are able to
-                handle them to perform some additional actio.
+                There is possibility for cross models communication. Models may trigger events. By handling those event it is possible to 
+				perform some additional actions.
             </div>
         </li>
     </ul>
