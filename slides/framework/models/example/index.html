@@ -23,7 +23,7 @@
         </button>
         <button ng-click="$auth.logout()">logout</button>
     </div>
-    <div ng-show="$search.getSearch()" class="result">
+    <div ng-show="$auth.authenticated && $search.getSearch()" class="result">
         First document title:
         {{ $search.getSearch().getResult().getItems()[0].Title }}
     </div>

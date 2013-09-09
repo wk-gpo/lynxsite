@@ -17,6 +17,6 @@
         "doLogin" : "" ,
         "doSearch" : ""
     },
-    "fold": [[2,6,true],[13,26,true]],
+    "fold": [[2,6,true],[12,25,true]],
     "toolbar": true
 }
