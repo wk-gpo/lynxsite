@@ -2,8 +2,7 @@
 /* Configurate velvet connection */
 velvet.configure({
     host: "http://velvet.cheetah.dev.lynxapp.net",
-    apikey: "5D2000D799874109A65DD0C984102DCC",
-    productId: "WKUS-Legal-Cheetah"
+    apikey: "5D2000D799874109A65DD0C984102DCC"
 });
 
 /**

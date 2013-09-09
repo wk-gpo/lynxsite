@@ -1,4 +1,4 @@
-<div dynamic-app="directivesExample">
+<div dynamic-app="markupExapmle" class="markupExapmle">
     <div class="info">
         This is example of usage the lynx models.<br/>To perform
         any action on OSA/Velvet, you have to authenticate first.
@@ -25,7 +25,7 @@
         </button>
         <button ng-click="$auth.logout()">logout</button>
         <div lx-autocomplete class="suggestions"
-            input="[dynamic-app='directivesExample'] input[ng-model='query']"
+            input=".markupExapmle input[ng-model='query']"
             model="query"
             visible="inputFocus && query.length > 1"
             options="item.Id for item in $search.getSuggestions(query, 5)">
@@ -34,7 +34,7 @@
             </span>
         </div>
     </form>
-    <div ng-show="$search.getSearch()" class="result">
+    <div ng-show="$auth.authenticated && $search.getSearch()" class="result">
         First document title:
         {{ $search.getSearch().getResult().getItems()[0].Title }}
     </div>
