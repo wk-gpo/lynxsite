@@ -25,7 +25,7 @@
 
 
         "getParams" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.Search?scrollTo=getParams",
-        "pageNo" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchParam?scrollTo=pageNo""
+        "pageNo" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchParam?scrollTo=pageNo"
     },
     "annotate" : {
         "pageNo" : {"first" :true, "value" :"now if we want to use some value in routing, like page no, we have to use value from model instead local variable"},

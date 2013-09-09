@@ -1,7 +1,6 @@
 <div class="slide-show-container"
     lx-destroy="$slides.stop()">
 
-<!--
     <div slide="$slides">
         <div ng-include="'content/home/teaser.html'"></div>
     </div>
@@ -16,6 +15,12 @@
 
     <div slide="$slides">
         <div ng-include="'content/slides/goals/index.html'"></div>
+    </div>
+
+    <div slide="$slides">
+        <div class="titleSlide">
+            <h1>angularJS</h1>
+        </div>
     </div>
 
     <div slide="$slides">
@@ -35,6 +40,12 @@
     </div>
 
     <div slide="$slides">
+        <div class="titleSlide">
+            <h1>middleware</h1>
+        </div>
+    </div>
+
+    <div slide="$slides">
         <div ng-include="'content/slides/middleware/osa.html'"></div>
     </div>
 
@@ -47,9 +58,14 @@
     </div>
 
     <div slide="$slides">
+        <div class="titleSlide">
+            <h1>lynx framework</h1>
+        </div>
+    </div>
+
+    <div slide="$slides">
         <div ng-include="'content/slides/framework/index.html'"></div>
     </div>
-    -->
 
     <div slide="$slides">
         <div ng-include="'content/slides/framework/services/index.html'"></div>
@@ -59,6 +75,40 @@
         <div ng-include="'content/slides/framework/models/index.html'"></div>
     </div>
 
+    <div slide="$slides">
+        <div ng-include="'content/slides/framework/directives/index.html'"></div>
+    </div>
+
+    <div slide="$slides">
+        <div class="titleSlide">
+            <h1>lynx application tutorial</h1>
+        </div>
+    </div>
+
+    <div slide="$slides">
+        <div ng-include="'content/tutorial/step1.html'" class="tutorialSlide"></div>
+    </div>
+    <div slide="$slides">
+        <div ng-include="'content/tutorial/step2.html'" class="tutorialSlide"></div>
+    </div>
+    <div slide="$slides">
+        <div ng-include="'content/tutorial/step3.html'"  class="tutorialSlide"></div>
+    </div>
+    <div slide="$slides">
+        <div ng-include="'content/tutorial/step4.html'" class="tutorialSlide"></div>
+    </div>
+    <div slide="$slides">
+        <div ng-include="'content/tutorial/step5.html'" class="tutorialSlide"></div>
+    </div>
+    <div slide="$slides">
+        <div ng-include="'content/tutorial/step6.html'" class="tutorialSlide"></div>
+    </div>
+    <div slide="$slides">
+        <div ng-include="'content/tutorial/step7.html'" class="tutorialSlide"></div>
+    </div>
+    <div slide="$slides">
+        <div ng-include="'content/tutorial/step8.html'" class="tutorialSlide"></div>
+    </div>
     <lx-eval exp="$slides.play()"></lx-eval>
 
 </div>

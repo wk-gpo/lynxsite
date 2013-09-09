@@ -1,19 +1,27 @@
 <div class="topF agenda">
+
+    <dynamic-script src="'content/slides/framework/directives/example/app.js'" model="scriptLoaded"></dynamic-script>
+
     <h1>
-        title
+        lynx framework - markup
     </h1>
     <div class="desc">
-        Descritipn
+        Lynx is providing set of resulable ui directives, and data filters. On each application creation proccess we recomedate
+        to creation of ui components, such component can be leater moved and integrate with framework to be reused in other application.
     </div>
-    <ul>
-        <li>
-            <h2>point</h2>
-            <div class="pointCommentary">
-                point comment
+
+    <div class="example">
+        <div class="appRun" lx-if="($slides.current == 17) && scriptLoaded">
+            <div class="body" ng-include="'content/slides/framework/directives/example/index.html'"></div>
+        </div>
+        <div class="tabbable higlightable editable foldable fullscreenable">
+            <div class="tab-pane" title="index.html">
+                <pre class="linenums" pp-url="'content/slides/framework/directives/example/index.html'"></pre>
             </div>
-        </li>
-    </ul>
-    <div class="tip">
-        take mouse over the points
+            <div class="tab-pane" title="app.js">
+                <pre class="linenums" pp-url="'content/slides/framework/directives/example/app.js'"></pre>
+            </div>
+        </div>
+        <div class="clear"></div>
     </div>
 </div>

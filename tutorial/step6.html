@@ -4,11 +4,17 @@
         <h1>tutorial</h1>
         <h3>routing</h3>
     </div>
+
     <p>
         Since our application is Single Page App default way of navigation is based switch content in index.html file.
-        We need to manage page URLs to let distinguish between different pages. Each pages should have different url to let it be bookmarkable and to be properly presented in browser history. It is not enough to expose static urls for each page. Application should be able to accept parameters passed via url means only. Lynx provides all that as a feature called <strong>page navigarion</strong> or simply <strong>routing</strong>.
+        We need to manage page URLs to let distinguish between different pages. Each pages should have different url
+        to let it be bookmarkable and to be properly presented in browser history. It is not enough to expose static urls
+        for each page. Application should be able to accept parameters passed via url means only. Lynx provides all that
+        as a feature called <strong>page navigarion</strong> or simply <strong>routing</strong>.
     </p>
+
 	<h2>1. URL structure</h2>
+
 	<p>
 		Lynx uses hash bang URL notation. It means that application extends URL with certain anchor-like
 		string with a structure usually providing clues on what view should be presented to user.
@@ -18,6 +24,7 @@
 		</pre>
 		It loads <strong>index.html</strong> which has logic of switching page snippets. Page mapped to <strong>/home</strong> path would be presented.
 	</p>
+
 	<p>
 		Next example is more complicated. In this situation snippet path includes not only definition of view (it is <strong>/result</strong>) but also some information regarding content.
 <pre class="prettyprint linenums">
@@ -25,7 +32,7 @@ http://svr.wk.com/index.html#/result/id/1213321231/1
                   __________/   ___________________/
                   html page     anchor defining page snippet
 </pre>
-		
+
 		<dl class="dl-vertical">
         <dt>/id/1213321231</dt>
         <dd>show results of search which id="1213321231"</dd>
@@ -36,10 +43,11 @@ http://svr.wk.com/index.html#/result/id/1213321231/1
 		</dl>
 		Lynx routing implementation provides solution to pass to page parameters directly from url string.
         Above presented url structure is only an example. You may use any other URL schema most suitable for your needs. All you need is to design proper URL structure and then define it in web application configuration.
-	</p>	
+	</p>
+
 	<h2>2. URL to model binding</h2>
 	<p>
-		We will extend <strong>app.js</strong> file where application configuration is located. We will use bindings between url and models used by your application, we will map certain events to page and will define couple of url structures for one page. 
+		We will extend <strong>app.js</strong> file where application configuration is located. We will use bindings between url and models used by your application, we will map certain events to page and will define couple of url structures for one page.
 	</p>
     <div class="tabbable fullscreenable higlightable">
         <div class="tab-pane" title="app.js">
@@ -87,15 +95,15 @@ http://svr.wk.com/index.html#/result/id/1213321231/1
         </div>
     </div>
 	<p>
-		
+
 	</p>
 	<p>
-		You may see there <strong>routes</strong> configuration array. This is a collection of routs definitions accepted by result page. Each route path can be parametrized just like main <strong>path</strong> of the page configuration. Values of those parameters are available for <strong>eval</strong> expression. 
+		You may see there <strong>routes</strong> configuration array. This is a collection of routs definitions accepted by result page. Each route path can be parametrized just like main <strong>path</strong> of the page configuration. Values of those parameters are available for <strong>eval</strong> expression.
 	</p>
 	<p>
 		Now user may use e.g. <strong>http://svr.wk.com/index.html#/result/id/ere-343</strong> which will cause application view switch to result page and initialization of search ere-343 to be performed. Since route <strong>/resutls/id/{id}</strong>gets matched, the page will be switched, and <strong>eval</strong> expression is evaluated.
 	</p>
-	
+
 	<h2>5. Use $search model in pages</h2>
 	<p>
 		It is enough now to use in your application $search model. It will cause logic execution but at the same time will be reflected in page url. Have look at following code snippet. Notice, how $search is initialized in res.html, how it is used in pagination section. It is also use to present search results.

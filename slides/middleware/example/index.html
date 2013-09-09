@@ -1,0 +1,13 @@
+<div ng-controller="VelvetPlayCtrl" class="playwithvelvet">
+    <form class=form ng-submit="result = doGet()">
+        <button type="submit">
+            GET
+        </button>
+        <input placeholder="user" type="text" ng-model="user">
+        <input placeholder="password" type="password" ng-model="pswd">
+        <input placeholder="query, eg. Search?query=tax" type="text" ng-model="query" >
+    </form>
+    <div class="result">
+        <pre>{{ result.data | json }}</pre>
+    </div>
+</div>
