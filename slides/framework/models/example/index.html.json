@@ -1,6 +1,6 @@
 {
     "annotate" : {
-        "ServiceExampleCtrl" : "Conteroller instance creation on element scope.",
+        "ServiceExampleCtrl" : "Controller instance creation on element scope.",
         "doLogin" : "performing login action",
         "doSearch" : "performing search action"
     },
