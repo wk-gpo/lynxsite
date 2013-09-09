@@ -1,4 +1,4 @@
-<div>
+<div lx-destroy="$root.docLoaded = false">
 
     <div class="pageRow">
         <div class="left">
@@ -13,5 +13,6 @@
     </div>
 
     <div ng-include="'content/common/footer.html'"></div>
+    <lx-eval exp="$root.docLoaded = true"></lx-eval>
 
 </div>

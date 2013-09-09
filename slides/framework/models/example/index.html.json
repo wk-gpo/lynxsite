@@ -22,6 +22,6 @@
     },
     "replace" : {
     },
-    "fold": [[2,7, true],[8,14],[15,20],[21,24]],
+    "fold": [[2,5, true],[6,18,true],[19,25,true],[26,29,true]],
     "toolbar": true
 }

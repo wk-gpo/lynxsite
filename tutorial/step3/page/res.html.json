@@ -6,8 +6,6 @@
     "annotate" : {
         "component/form.html" :
             "including the search form on search result page",
-//        "&lt;" : "simple 'previous page' switch; use &lt; in your page instead",
-//        "&gt;" : "simple 'next page' switch; use &gt; in your page instead",
         "#/document" : "for navigate to document view page we simple set hash in url, everything else will be made by lynx routing, application will switch to proper page"
 
     },
