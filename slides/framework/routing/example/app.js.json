@@ -1,0 +1,52 @@
+{
+    "links" : {
+        "lynx" : {"line" : 1, "value" :"#/api/wk.lynx.core/lynx"},
+        "module" : {"line" : 1 , "value": "#/api/wk.lynx.core/lynx/-#module"},
+        "moduleName" : {"line" : 2 , "value": "#/api/wk.lynx.core/lynx.config/lynx.config.Configuration#moduleName"},
+        "pages" : "#/api/wk.lynx.core/lynx.config/lynx.config.Configuration#pages",
+        "defaultPath" : "#/api/wk.lynx.core/lynx.config/lynx.config.Configuration#defaultPath",
+        "globals" : "#/api/wk.lynx.core/lynx.config/lynx.config.Configuration#globals",
+        "velvetConfig" : "#/api/wk.lynx.core/lynx.config/lynx.config.Configuration",
+        "AuthModel": "#/api/wk.lynx.core/lynx.models.%41uthModel",
+        "wk.lynx.ui" : "#/api/wk.lynx.ui/any/-",
+        "name" : "#/api/wk.lynx.core/lynx.config/lynx.config.PageDefinition#name",
+        "path" : "#/api/wk.lynx.core/lynx.config/lynx.config.PageDefinition#path",
+        "view" : "#/api/wk.lynx.core/lynx.config/lynx.config.PageDefinition#view",
+        "alias" : "#/api/wk.lynx.core/lynx.config/lynx.config.ValueDefinition#alias",
+        "factory" : "#/api/wk.lynx.core/lynx.config/lynx.config.ValueDefinition#factory",
+        "host" : "#/api/wk.lynx.velvet/velvet.config.Configuration#host",
+        "apikey" : "#/api/wk.lynx.velvet/velvet.config.Configuration#apikey",
+        "productId" : "#/api/wk.lynx.velvet/velvet.config.Configuration#productId",
+        "page/home.html" : {"tab" : 3},
+        "page/res.html" : {"tab" : 4},
+        "page/doc.html" : {"tab" : 5},
+        "SearchModel": "#/api/wk.lynx.core/lynx.models.Search%4Dodel",
+        "DocumentModel": "#/api/wk.lynx.core/lynx.models.Document%4Dodel",
+        "eventBinding": "#/api/wk.lynx.core/lynx.config/lynx.config.PageDefinition#eventBinding",
+        "routes" : "#/api/wk.lynx.core/lynx.config/lynx.config.PageDefinition#routes",
+        "model" : "#/api/wk.lynx.core/lynx.config/lynx.config.EventBinding#model",
+        "event" : "#/api/wk.lynx.core/lynx.config/lynx.config.EventBinding#event",
+        "eval" : "#/api/wk.lynx.core/lynx.config/lynx.config.RouteDefinition#eval",
+
+        "getSearch" : "#/api/wk.lynx.core/lynx.models.SearchModel#getSearch",
+        "getParams" : "#/api/wk.lynx.velvet/velvet.vo.Search#getParams",
+        "pageNo" : { "first": true, "value": "#/api/wk.lynx.velvet/velvet.vo.SearchParams#pageNo"},
+        "searchByPhrase"  : "#/api/wk.lynx.core/lynx.models.SearchModel#searchByPhrase",
+        "searchById"  : "#/api/wk.lynx.core/lynx.models.SearchModel#searchById",
+
+        "getDocument" : "#/api/wk.lynx.core/lynx.models.Document%4Dodel#getDocument",
+        "openDocumentById" : "#/api/wk.lynx.core/lynx.models.Document%4Dodel#openDocumentById",
+        "openDocument" : "#/api/wk.lynx.core/lynx.models.Document%4Dodel#openDocument"
+
+
+
+    },
+    "annotate" : {
+        "path": {"line" : 26, "value" : "please notice the path for data binded pages is changed, now the path is contains some model bindings, if binded data will change the url in application will be automatically change also, this is for kipping the state of app in the url, such parametrized page can be bookmarked or shared"},
+        "eventBinding": "this is collection of bindings to model events, if specified event will occur application will automatically switch the page, you do not have to care about page flow programmatically in application, all what you need to do is call some method on model, e.g. if you want to perform the search on search model you have to call <code>searchByPhrase</code> method, this method fires <code>searchByPhrase</code> event, if your page is binded to this event on this model, your page will be immediately displayed",
+        "routes": "this is a collection of routs definitions, each route path can be parametrized, and the value of this parameters will be available for <code>eval</code> expression, if route will be matched, the page will be switched, and <code>eval</code> expression will be evaluated"
+    },
+    "fold" : [[4,7,true], [9,11, true], [13, 34,true]],
+    "hide" : [],
+    "toolbar" : true
+}

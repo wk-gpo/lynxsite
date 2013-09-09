@@ -1,0 +1,24 @@
+<div dynamic-app="modelsExample">
+    <div class="info">
+        This is example of usage the lynx models.<br/>To perform
+        any action on OSA/Velvet, you have to authenticate first.
+    </div>
+    <div ng-show="!$auth.authenticated"
+        ng-init="$auth.rememberUserName = true">
+        <input placeholder="user" type="text"
+            ng-model="$auth.userName">
+        <input placeholder="password" type="password"
+            ng-model="$auth.userPassword">
+        <span ng-show="$auth.authentionFailed">
+            Wrong password or user name.
+        </span>
+        <button ng-click="$auth.login()">
+            login
+        </button>
+    </div>
+
+    <div ng-show="$auth.authenticated" class="result">
+        Authenticated to application.
+        <button ng-click="$auth.logout()">logout</button>
+    </div>
+</div>
