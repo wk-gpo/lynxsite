@@ -21,12 +21,15 @@
         </li>
         <li ng-repeat="item in $api.content.allAugments.reverse()">
             <a href="javascript:void(0);" ng-click="openLink(item);">
-                <i class="icon-circle-arrow-up"></i>{{ item }}
+                <i class="icon-circle-arrow-up"></i>
+                {{ item }}
             </a>
         </li>
         <li>
-            <a href="javascript:void(0);" ng-click="openLink($api.content.longname, $api.content.kind, $api.content.module);">
-                <i class="icon-circle-arrow-up"></i>{{ $api.content.longname }}
+            <a href="javascript:void(0);"
+                ng-click="openLink($api.content.longname, $api.content.kind, $api.content.module);">
+                <i class="icon-circle-arrow-up"></i>
+                {{ $api.content.longname }}
             </a>
         </li>
     </ul>
@@ -35,45 +38,175 @@
         <h2>
             Overview
         </h2>
-        <p class="description" ng-bind-html-unsafe="$api.content.description" ></p>
+        <p class="description" ng-bind-html-unsafe="$api.content.description"></p>
     </div>
-
 
 
     <ng-switch on="$api.content.kind">
         <ng-include ng-switch-when="module" src="'content/api/module.html'" autoscroll></ng-include>
         <div ng-switch-default>
+            <div lx-if="$api.content.members.namespace.lenght > 0"></div>
             <div lx-if="$api.content.kind == 'class'" class="constructor">
                 <h2>
                     Constructor
                 </h2>
-                <p>
+                <p class=signature>
                     <span class="access">{{ $api.content.access }}</span>
-                    <span class="name">{{ $api.content.longname }}</span> (
+                    <span class="name">{{ $api.content.longname }}</span>
+                    (
                     <span lx-if="$api.content.params.length > 0">
                         <br/>
                         <span class="param" ng-repeat="param in $api.content.params">
-                            <span class="name">{{ param.name }}</span> :
-                            <a class="type" href="javascript:void(0)" ng-click="$api.open(param.type.names[0])">{{ param.type.names[0] }}</a>
-                            <span ng-show="$index < $api.content.params.length - 1">, <br/></span>
+                            <span class="name">{{ param.name }}</span>
+                            :
+                            <a class="type" href="javascript:void(0)" ng-click="$api.open(param.type.names[0])">{{
+                                param.type.names[0] }}
+                            </a>
+                            <span ng-show="$index < $api.content.params.length - 1">,
+                                <br/>
+                            </span>
                         </span>
-                    </span>);
+                    </span>
+                    );
                 </p>
             </div>
+            <div lx-if="$api.content.members.namespace.length > 0" class="namespaces">
+                <h2>
+                    Namespaces
+                </h2>
+                <ul>
+                    <li ng-repeat="item in $api.content.members.namespace">
+                        <a href="javascript:void(0);" ng-click="openLink(item);">
+                            {{ item.name }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div lx-if="$api.content.members.class.length > 0" class="classes">
+                <h2>
+                    Classes
+                </h2>
+                <ul>
+                    <li ng-repeat="item in $api.content.members.class">
+                        <a href="javascript:void(0);" ng-click="openLink(item);">
+                            {{ item.name }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div lx-if="$api.content.members.directive.length > 0" class="directives">
+                <h2>
+                    Directives
+                </h2>
+                <ul>
+                    <li ng-repeat="item in $api.content.members.directive">
+                        <a href="javascript:void(0);" ng-click="openLink(item);">
+                            {{ item.name }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div lx-if="$api.content.members.filter.length > 0" class="filters">
+                <h2>
+                    Filters
+                </h2>
+                <ul>
+                    <li ng-repeat="item in $api.content.members.filter">
+                        <a href="javascript:void(0);" ng-click="openLink(item);">
+                            {{ item.name }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
             <div lx-if="$api.content.members.function.length > 0" class="functions">
                 <h2>
                     Functions
                 </h2>
-                <p>
-                   <div ng-repeat="fn in $api.content.members.function" class="function">
-                        <span id="{{ fn.name }}" class="name">{{ fn.name }}</span>
-                        <pre>{{ fn | json }}</pre>
-                   </div>
+                <div ng-repeat="fn in $api.content.members.function" class="function">
+                    <span class="pointer" id="{{ fn.name }}"></span>
+                    <p class=signature>
+                        <span class="name">{{ fn.access }}</span>
+                        <a class="type" href="javascript:void(0)" ng-click="$api.open(fn.returns[0].type.names[0])">
+                            {{ fn.returns[0].type.names[0] }}
+                        </a>
+                        <span class="name">{{ fn.name }}(
+                            <span lx-if="fn.params.length > 0">
+                                <br/>
+                                <span class="param" ng-repeat="param in fn.params">
+                                    <span class="name">{{ param.name }}</span>
+                                    :
+                                    <a class="type" href="javascript:void(0)" ng-click="$api.open(param.type.names[0])">
+                                        {{ param.type.names[0] }}
+                                    </a>
+                                    <span ng-show="!$last">,
+                                        <br/>
+                                    </span>
+                                </span>
+                            </span>
+                            );
+                        </span>
+                    <p>
+                    <p> {{ fn.description }}</p>
+                    <h4 lx-if="fn.params.length > 0">Parameters</h4>
+                    <ul lx-if="fn.params.length > 0">
+                        <li ng-repeat="param in fn.params">
+                            {{ param.name }}
+                            <span lx-if="param.optional"> (optional)</span>
+                            <span lx-if="param.description"> -</span>
+                            {{ param.description }}
+                        </li>
+                    </ul>
+                    <h4>Returns</h4>
+                    <ul>
+                        <li>
+                            <a class="type" href="javascript:void(0)" ng-click="$api.open(fn.returns[0].type.names[0])">
+                                {{ fn.returns[0].type.names[0] }}
+                            </a>
+                            <span lx-if="fn.returns[0].description"> -</span>
+                            {{ fn.returns[0].description }}
+                        </li>
+                    </ul>
+                    <!-- <h5>Source</h5>
+                     <p></p>
+                     <pre>{{ fn | json }}</pre>-->
+                </div>
                 </p>
+            </div>
+            <div lx-if="$api.content.kind == 'directive' || $api.content.kind == 'filter'" class="directive">
+                <h3 lx-if="$api.content.usages.length > 0">Usage</h3>
+                <div ng-repeat="usage in $api.content.usages">
+                    <p>
+                        {{ usage.caption }}
+                    </p>
+                    <pre ng-bind-html-unsafe="usage.code" class="prettyprint linenums"></pre>
+                </div>
+                <h4 lx-if="$api.content.params.length > 0">Parameters</h4>
+                <ul lx-if="$api.content.params.length > 0">
+                    <li ng-repeat="param in $api.content.params">
+                        {{ param.name }} :
+                        <a class="type" href="javascript:void(0)" ng-click="$param.type.names[0]">
+                            {{ param.type.names[0] }}
+                        </a>
+                        <span lx-if="param.optional"> (optional)</span>
+                        <span lx-if="param.description"> -</span>
+                        {{ param.description }}
+                    </li>
+                </ul>
+                <h3 lx-if="$api.content.examples.length > 0">Example</h3>
+                <div ng-repeat="example in $api.content.examples">
+                    <p>
+                        {{ example.caption }}
+                    </p>
+                    <pre ng-bind-html-unsafe="example.code" class="prettyprint linenums"></pre>
+                    <h4 lx-if="example.run">Demo</h4>
+                    <div lx-if="example.run" class="well" compile="example.code | unescapehtml"></div>
+                </div>
             </div>
         </div>
     </ng-switch>
 
-    <pre>{{ $api.content | json }}</pre>
+    <h1 lx-if="false">Json content</h1>
+    <pre lx-if="false">{{ $api.content | json }}</pre>
 
 </div>

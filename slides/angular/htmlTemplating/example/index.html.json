@@ -6,6 +6,10 @@
     "replace" : {
         "content/slides/angular/htmlTemplating/example/message.html" : "message.html"
     },
+    "annotate": {
+        "ng-include" : "by using inclusion mechanism we are able to simply partition the application to small, easy to maitain HTML snippets"
+    },
+    "hili": [[6,6]],
     "fold": [[2,5, true]],
     "toolbar": true
 }

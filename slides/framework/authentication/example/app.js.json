@@ -18,6 +18,6 @@
         "doSearch" : ""
     },
     "hide": [[2,2]],
-    "fold": [[4,7,true],[8,11,true]],
+    "fold": [[3,6,true],[7,10]],
     "toolbar": true
 }
