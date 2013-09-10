@@ -1,0 +1,22 @@
+<div>
+    <div class="info">
+        This is example of usage of sharedCtx between multiple windows.
+        Open few windows, and increse courter to see the croos window
+        state synchronization.
+    </div>
+    <div ng-init="sharedData = {counter:0}">
+        <button
+            ng-click="$openWindow('content/slides/framework/crosswindow/example/child.html',
+            {name: '_blank'}, sharedData);">
+            open child window
+        </button>
+        <button
+            ng-click="sharedData.counter = sharedData.counter + 1;
+                sharedData.$digest();">
+            +1
+        </button>
+    </div>
+    <div class="result">
+        {{ sharedData.counter }}
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="topF agenda">
+    <h1>
+        maintenece & quality - javascript code
+    </h1>
+    <div class="example">
+        <div class="tabbable higlightable editable foldable">
+            <div class="tab-pane" title="index.html">
+                <pre class="linenums" pp-url="'content/slides/maintenece/code/example.js'"></pre>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <ul>
+        <li>
+            <h2>compiled and obfuscated, whit type checking, class-like notation</h2>
+            <div class="pointCommentary">
+                Lynx is using Google Clousure Compiler in Advanced Optymalization mode.
+                This give as static type checking, and mode code validation. We also introduce simple
+                solution for class-like notation.
+            </div>
+        </li>
+        <li>
+            <h2>runable without compilation for simple debbuging</h2>
+            <div class="pointCommentary">
+                Lynx application on developers env can be runned in DEBUG mode where application is loaded
+                from sources, this give as simle debbuging. In DEBUG mode also external libraries are loaded from
+                source.
+            </div>
+        </li>
+        <li>
+            <h2>documented</h2>
+            <div class="pointCommentary">
+                By using jsdoc we generating the documentation direcly form source code. JSDoc and Google Clousure Compiler
+                is using the same annotations.
+            </div>
+        </li>
+        <li>
+            <h2>well styled whit build time validation</h2>
+            <div class="pointCommentary">
+                Lynx code is also validated by our own tool very similar to Java Checkstyle.
+            </div>
+        </li>
+        <li>
+            <h2>testable whit simple coverage measure</h2>
+            <div class="pointCommentary">
+                For testing we are using the Karma test runner and Jasmine.
+                Karma give as also coverage report generation.
+            </div>
+        </li>
+        <li>
+            <h2>modularized and organized in namespaces</h2>
+            <div class="pointCommentary">
+                Lynx code is splited in to few modules, but we are also strongly using namespaces for well redable
+                code organization. Durring compilation namespaces are removed, so there is no any overload from
+                performance perspective.
+            </div>
+        </li>
+        <li>
+            <h2>well understable by IDE, with autocomplete</h2>
+            <div class="pointCommentary">
+                During framework development we are using the JetBrains WebStorm IDE. Webstorm is well supporting the
+                JsDoc/Clousure Compiler annotations. This give as autocompleition and code validation direct in
+                IDE.
+            </div>
+
+        </li>
+
+    </ul>
+</div>

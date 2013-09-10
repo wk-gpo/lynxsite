@@ -1,0 +1,3 @@
+lynx.module({
+    moduleName: "crossWindowExample"
+});

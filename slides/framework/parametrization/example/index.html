@@ -1,0 +1,20 @@
+<div dynamic-app="paramsExample">
+    <div class="info">
+        This is example of usage $properties service.<br/>
+        PropertyA is a static value, PropertyB is a value in
+        local browser storage. Change value in field and reload
+        the page to see the effect.
+    </div>
+    <div ng-init="value = $properties.get('propertyB')">
+        <input type="text" ng-model="value"
+            ng-change="$properties.set('propertyB', value)">
+    </div>
+    <div class="result">
+        <div>
+            Value of propertyA: {{ $properties.get('propertyA') }}
+        </div>
+        <div>
+            Value of propertyB: {{ $properties.get('propertyB') }}
+        </div>
+    </div>
+</div>
