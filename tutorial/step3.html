@@ -4,40 +4,72 @@
         <h1>tutorial</h1>
         <h3>creating application configuration</h3>
     </div>
-	<p>
-		You received prototype form UX team. As you played a little bit with it you already get an idea what user expects from that application. You need to establish structure of your project. You will use prototype as starting point in that effort.
-	</p>
-    <h2>1. Add necessary libraries</h2>
-    <p>
-		Of course, the very first library to be used is <strong>lynx.js</strong> - that's the main reason you read that tutorial, isn't is? But lynx.js is not the only library you need. Lynx need three following libraries: jquery.js, angular.js and store.js. Library <strong>angular.js</strong> is basis of lynx.js and it requires <strong>jquery.js</strong>. The last one <strong>store.js</strong> will enable Local Storage use in web application.
-		<div class="alert alert-info">
-		   <div>
-				<strong>Notice</strong> that code samples have hints available. Press <i class="icon-h-sign"></i> button to see all tokens with hints assigned. Move mouse cursor over the token to see hint text. In some case you may also click on token and you will be redirected to page with additional info (e.g. API doc, library site ...). 
-			</div>
-		</div>
-	</p>
-    <div class="tabbable higlightable">
+
+    <p class="major">
+        You received prototype form UX team. As you played a little bit with it you already get an idea what user
+        expects from that application. You need to establish structure of your project. You will use prototype as
+        starting point in that effort.
+    </p>
+
+    <h2 class="minor">1. Add necessary libraries</h2>
+
+    <p class="minor">
+        Of course, the very first library to be used is
+        <strong>lynx.js</strong>
+        - that's the main reason you read that tutorial, isn't is? But lynx.js is not the only library you need. Lynx
+        need three following libraries: jquery.js, angular.js and store.js. Library
+        <strong>angular.js</strong>
+        is basis of lynx.js and it requires
+        <strong>jquery.js</strong>
+        . The last one
+        <strong>store.js</strong>
+        will enable Local Storage use in web application.
+    </p>
+
+    <div class="alert alert-info">
+        <div>
+            <strong>Notice</strong>
+            that code samples have hints available. Press
+            <i class="icon-h-sign"></i>
+            button to see all tokens with hints assigned. Move mouse cursor over the token to see hint text. In some
+            case you may also click on token and you will be redirected to page with additional info (e.g. API doc,
+            library site ...).
+        </div>
+    </div>
+
+    <div class="tabbable higlightable minor">
         <div class="tab-pane active" title="index.html">
             <pre class="linenums onlyHighlight" pp-url="'content/tutorial/step3/snippet/1/index.html'"></pre>
         </div>
     </div>
-	
-    <h2>2. Modularize application</h2>
-	<p>
-		As developer you know that modularization of project is good both for design time (e.g. reuse of code) and run time (e.g. lazy loading of application elements). We will divide prototype into reusable parts - called snippets.
-	</p>
-	<p>
+
+
+    <h2 class="minor">2. Modularize application</h2>
+
+    <p>
+        As developer you know that modularization of project is good both for design time (e.g. reuse of code) and run
+        time (e.g. lazy loading of application elements). We will divide prototype into reusable parts - called
+        snippets.
+    </p>
+
+    <p class="minor">
         As you can see in following code view area following snippets has been extracted:
-		<dl class="dl-vertical">
+    </p>
+
+    <dl class="dl-vertical minor">
         <dt>login page</dt>
-        <dd>It will be used in case user authentication is needed. It may be displayed instead of any other application page.</dd>
+        <dd>It will be used in case user authentication is needed. It may be displayed instead of any other application
+            page.
+        </dd>
         <dt>home, result list &amp; document view pages</dt>
-        <dd>Regular application pages as user may see them. Those pages are used by routing mechanism of lynx which we will discuss a little bit later</dd>
+        <dd>Regular application pages as user may see them. Those pages are used by routing mechanism of lynx which we
+            will discuss a little bit later
+        </dd>
         <dt>reusable components</dt>
         <dd>In our case we found search bar form as to be used on both home and result pages.</dd>
     </dl>
-	</p>
-    <div class="tabbable fullscreenable higlightable">
+
+    <div class="tabbable fullscreenable higlightable minor">
         <div class="tab-pane active" title="index.html">
             <pre class="linenums" pp-url="'content/tutorial/step3/snippet/2/index.html'"></pre>
         </div>
@@ -57,51 +89,96 @@
             <pre class="linenums" pp-url="'content/tutorial/step3/component/form.html'"></pre>
         </div>
     </div>
-	<h2>3. Wire-up components in configuration</h2>
+
+
+    <h2 class="minor">3. Wire-up components in configuration</h2>
     <p>
-		Lynx application should be properly initialized. You will use to that purpose configuration file which we will name here <strong>app.js</strong>. That javascript file needs to be loaded in <strong>index.html</strong> file. You can see on snippet below that it has definitions of application pages. All page routing magic is done by Lynx functionality based on that information.
-	</p>
-    <div class="tabbable fullscreenable higlightable">
+        Lynx application should be properly initialized. You will use to that purpose configuration file which we will
+        name here
+        <strong>app.js</strong>
+        . That javascript file needs to be loaded in
+        <strong>index.html</strong>
+        file. You can see on snippet below that it has definitions of application pages. All page routing magic is done
+        by Lynx functionality based on that information.
+    </p>
+    <div class="tabbable fullscreenable higlightable minor">
         <div class="tab-pane active" title="index.html">
             <pre class="linenums" pp-url="'content/tutorial/step3/snippet/3/index.html'"></pre>
         </div>
         <div class="tab-pane" title="app.js">
             <pre class="linenums" pp-url="'content/tutorial/step3/snippet/3/app.js'"></pre>
         </div>
-	</div>
-	<p>
-		Configuration you see in <strong>app.js</strong> is a very basic example but we do not need anything more for now. You can see there is <strong>lynx.module</strong> function called which configures lynx application. It creates <strong>angular.Module</strong> object and configures it according to configuration object provided.
-	</p>
-	<p>
-		Configuration parameter <strong>moduleName</strong> identifies <strong>angular.Module</strong> lynx creates. You may use that value to find modules by <strong>angular.module()</strong> function - just use <strong>moduleName</strong> as parameter.
-	</p>
-	<p>
-		Page structure is constituted in <strong>pages</strong> parameter. Each object of that array represent one of the pages your application supports. For every page you define:
-		<dl class="dl-vertical">
+    </div>
+    <p class="minor">
+        Configuration you see in
+        <strong>app.js</strong>
+        is a very basic example but we do not need anything more for now. You can see there is
+        <strong>lynx.module</strong>
+        function called which configures lynx application. It creates
+        <strong>angular.Module</strong>
+        object and configures it according to configuration object provided.
+    </p>
+    <p class="minor">
+        Configuration parameter
+        <strong>moduleName</strong>
+        identifies
+        <strong>angular.Module</strong>
+        lynx creates. You may use that value to find modules by
+        <strong>angular.module()</strong>
+        function - just use
+        <strong>moduleName</strong>
+        as parameter.
+    </p>
+    <p class="minor">
+        Page structure is constituted in
+        <strong>pages</strong>
+        parameter. Each object of that array represent one of the pages your application supports. For every page you
+        define:
+    </p>
+
+    <dl class="dl-vertical minor">
         <dt>name</dt>
         <dd>defines internally used page name; it will not appear on URLs</dd>
         <dt>path</dt>
         <dd>defines structure of anchor which would be used in URL for certain page snippet after page loads</dd>
         <dt>view</dt>
-        <dd>defines relative path base on web application root folder; it points to html snippet file containing page that should be loaded if application is routed to <strong>path</strong> defined above</dd>
-	</p>
-	<p>
-		Application flow is based on switching between defined pages. Routing is based on url hash value. Read more about page Lynx routing in <a href="../dist/app/docs.html#/guide/routing">documentation</a>.
-	</p>
-	<p>
-		You should define <strong>defaultPath</strong> which is used by Lynx application in case routing procedure may not find any other page to display. It should be set to <strong>path</strong> value of one of your defined pages - usually home page.
-	</p>
-	<div class="alert alert-info">
-	   <div>
-			<strong>Notice</strong> that login page is not defined in application pages. It should be presented for every url if authentication is required. Login page should not interfere routing of Lynx application.  
-		</div>
-	</div>
-    <h2>4. Add page routing to index.html</h2>
-	<p>
-		Have a look to see how <strong>index.html</strong> is changed to use routing between application pages. You will also see basic structure of <strong>login page</strong> presentation for every url. It is based on state of user authentication.
-	</p>
+        <dd>defines relative path base on web application root folder; it points to html snippet file containing page
+            that should be loaded if application is routed to
+            <strong>path</strong>
+            defined above
+        </dd>
+    </dl>
+    <p class="minor">
+        Application flow is based on switching between defined pages. Routing is based on url hash value. Read more
+        about page Lynx routing in
+        <a href="../dist/app/docs.html#/guide/routing">documentation</a>
+        .
+    </p>
+    <p class="minor">
+        You should define
+        <strong>defaultPath</strong>
+        which is used by Lynx application in case routing procedure may not find any other page to display. It should be
+        set to
+        <strong>path</strong>
+        value of one of your defined pages - usually home page.
+    </p>
+    <div class="alert alert-info">
+        <div>
+            <strong>Notice</strong>
+            that login page is not defined in application pages. It should be presented for every url if authentication
+            is required. Login page should not interfere routing of Lynx application.
+        </div>
+    </div>
+    <h2 class="minor">4. Add page routing to index.html</h2>
+    <p class="minor">
+        Have a look to see how
+        <strong>index.html</strong>
+        is changed to use routing between application pages. You will also see basic structure of
+        <strong>login page</strong>
+        presentation for every url. It is based on state of user authentication.
+    </p>
 
-    <div class="tabbable previewable fullscreenable higlightable">
+    <div class="tabbable previewable fullscreenable higlightable foldable">
         <div class="tab-pane active" title="index.html">
             <pre class="linenums" pp-url="'content/tutorial/step3/index.html'"></pre>
         </div>
@@ -130,15 +207,26 @@
         </div>
     </div>
 
-    <p>
-        Now we have up&amp;running lynx based application. It is modularized and use Lynx routing mechanism as we defined it in configuration and used in links used in html pages. As one of effects of modularization is lazy-loading of page assets. It gets into clients environment just before it is first time requested - not earlier.
+    <p class="minor">
+        Now we have up&amp;running lynx based application. It is modularized and use Lynx routing mechanism as we
+        defined it in configuration and used in links used in html pages. As one of effects of modularization is
+        lazy-loading of page assets. It gets into clients environment just before it is first time requested - not
+        earlier.
     </p>
 
     <div class="alert alert-warn">
         <div>
-            Switch code view area to preview mode. Press <i class="icon-external-link"></i> icon to open the application on separate browser window. Now you can change url.<br/>
-			Type url with one of the paths defined in <strong>app.js</strong> (e.g. #/results). Application will automatically open results page. Type url not defined in your application (e.g. #/otherPage) and application will redirect to default page defined in <strong>app.js</strong>.
-		</div>
+            Switch code view area to preview mode. Press
+            <i class="icon-external-link"></i>
+            icon to open the application on separate browser window. Now you can change url.
+            <br/>
+            Type url with one of the paths defined in
+            <strong>app.js</strong>
+            (e.g. #/results). Application will automatically open results page. Type url not defined in your application
+            (e.g. #/otherPage) and application will redirect to default page defined in
+            <strong>app.js</strong>
+            .
+        </div>
     </div>
 
     <button class="next" ng-click="$tutorial.setStep(4)">

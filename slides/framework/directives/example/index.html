@@ -16,26 +16,26 @@
             login
         </button>
     </div>
-    <form ng-show="$auth.authenticated" ng-submit="$search.searchByPhrase(query)">
-        <input type="text" ng-model="query" placeholder="query"
-            lx-focus="inputFocus = true;"
-            lx-click-outside="inputFocus = false;">
-        <button type="submit">
-            search
-        </button>
-        <button ng-click="$auth.logout()">logout</button>
-        <div lx-autocomplete class="suggestions"
-            input=".markupExapmle input[ng-model='query']"
-            model="query"
-            visible="inputFocus && query.length > 1"
-            options="item.Id for item in $search.getSuggestions(query, 5)">
-            <span
-                ng-bind-html-unsafe="item.Id|highlight:query:false">
-            </span>
-        </div>
-    </form>
-    <div ng-show="$auth.authenticated && $search.getSearch()" class="result">
-        First document title:
-        {{ $search.getSearch().getResult().getItems()[0].Title }}
-    </div>
+     <form lx-if="$auth.authenticated" ng-submit="$search.searchByPhrase(query)">
+          <input type="text" ng-model="query" placeholder="query"
+              lx-focus="inputFocus = true;"
+              lx-click-outside="inputFocus = false;">
+          <button type="submit">
+              search
+          </button>
+          <button ng-click="$auth.logout()">logout</button>
+          <div lx-autocomplete class="suggestions"
+               input=".markupExapmle input[ng-model='query']"
+               model="query"
+               visible="inputFocus && query.length > 1"
+               options="item.Id for item in $search.getSuggestions(query, 5)">
+               <span
+                   ng-bind-html-unsafe="item.Id|highlight:query:false">
+               </span>
+           </div>
+      </form>
+      <div ng-show="$auth.authenticated && $search.getSearch()" class="result">
+          First document title:
+          {{ $search.getSearch().getResult().getItems()[0].Title }}
+      </div>
 </div>

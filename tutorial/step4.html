@@ -4,69 +4,110 @@
         <h1>tutorial</h1>
         <h3>adding authentication</h3>
     </div>
-	<p>
-		Lynx authorization is based on Velvet authorization services. Lynx provides convenience objects which encapsulate Velvet authentication service. So to enable authentication services you need first to configure Velvet in your application and second - use authentication functionality on your pages.
+    <p>
+        Lynx authorization is based on Velvet authorization services. Lynx provides convenience objects which
+        encapsulate Velvet authentication service. So to enable authentication services you need first to configure
+        Velvet in your application and second - use authentication functionality on your pages.
     </p>
-    <h2>1. Velvet config</h2>
-	<p>
-		Applications build with Lynx are base on back-end system functionality provided by Velvet library. It is crucial to point your application to proper Velvet instance. Set that in your application configuration object in <strong>velvetConfig</strong> property as follows: 
-		<dl class="dl-vertical">
+    <h2 class="minor">1. Velvet config</h2>
+    <p class="minor">
+        Applications build with Lynx are base on back-end system functionality provided by Velvet library. It is crucial
+        to point your application to proper Velvet instance. Set that in your application configuration object in
+        <strong>velvetConfig</strong>
+        property as follows:
+    </p>
+
+    <dl class="dl-vertical minor">
         <dt>host</dt>
-        <dd>provides url on which the velvet instance is exposed; every http request to Velvet will be directed to that url</dd>
+        <dd>provides url on which the velvet instance is exposed; every http request to Velvet will be directed to that
+            url
+        </dd>
         <dt>apikey</dt>
         <dd>purpose of that value is to authorize client application to use certain velvet instance</dd>
         <dt>productId</dt>
-        <dd>it is Carbon Product ID to be used in communication with Velvet; although authentication does not rely  on Carbon Product setting, CPID is very important for other services provided by Velvet and thus it needs to be set just after authentication and before application exposes rest of its functionality; <strong>productId</strong> value would be used in all requests to Velvet in this tutorial</dd>
-	</p>
+        <dd>it is Carbon Product ID to be used in communication with Velvet; although authentication does not rely on
+            Carbon Product setting, CPID is very important for other services provided by Velvet and thus it needs to be
+            set just after authentication and before application exposes rest of its functionality;
+            <strong>productId</strong>
+            value would be used in all requests to Velvet in this tutorial
+        </dd>
+    </dl>
     <div class="alert alert-info">
         <div>
-            Please contact us if you do not have access to any Velvet instance that could be used for test purposes. We will arrange it for you. You will get URL address and credentials to use during your work.
-		</div>
+            Please contact us if you do not have access to any Velvet instance that could be used for test purposes. We
+            will arrange it for you. You will get URL address and credentials to use during your work.
+        </div>
     </div>
-    <div class="tabbable higlightable">
+    <div class="tabbable higlightable minor">
         <div class="tab-pane active" title="app.js">
             <pre class="linenums onlyHighlight" pp-url="'content/tutorial/step4/snippet/1/app.js'"></pre>
-        </div>	
+        </div>
     </div>
-    <h2>2. Authentication Model</h2>
-	<p>
-		Having Velvet configured, our application is ready to utilize authentication model implemented in Lynx. We will use <strong>lynx.models.AuthModel</strong> object which encapsulate all velvet authentication. You just need to add <strong>globals</strong> parameter to application configuration as it is shown in following code snippet.
-	</p>
-    <div class="tabbable higlightable">
+    <h2 class="minor">2. Authentication Model</h2>
+    <p>
+        Having Velvet configured, our application is ready to utilize authentication model implemented in Lynx. We will
+        use
+        <strong>lynx.models.AuthModel</strong>
+        object which encapsulate all velvet authentication. You just need to add
+        <strong>globals</strong>
+        parameter to application configuration as it is shown in following code snippet.
+    </p>
+    <div class="tabbable higlightable minor">
         <div class="tab-pane active" title="app.js">
             <pre class="linenums onlyHighlight" pp-url="'content/tutorial/step4/snippet/2/app.js'"></pre>
-        </div>	
+        </div>
     </div>
-	<p>
-		You may choose authentication provider by setting <strong>authMode</strong> velvet configuration property. If it is missing, BASIC authentication is assumed. Value of that property may be set to any exposed as <strong>velvet.service.Auth</strong> constants:
-		<dl class="dl-vertical">
+    <p class="minor">
+        You may choose authentication provider by setting
+        <strong>authMode</strong>
+        velvet configuration property. If it is missing, BASIC authentication is assumed. Value of that property may be
+        set to any exposed as
+        <strong>velvet.service.Auth</strong>
+        constants:
+    </p>
+    <dl class="dl-vertical minor">
         <dt>AUTH_BASIC</dt>
-        <dd>Basic authentication uses username and password as user credentials. It is provided in http Authorization header. Username and password are transmitted as Base64 encoded text. This Base64 encoded string is used later on as authentication token by your app.</dd>
+        <dd>Basic authentication uses username and password as user credentials. It is provided in http Authorization
+            header. Username and password are transmitted as Base64 encoded text. This Base64 encoded string is used
+            later on as authentication token by your app.
+        </dd>
         <dt>AUTH_RC4_TOKEN</dt>
-        <dd>This mode of authentication is also based on username / password credentials. On very first authentication http request it uses same way of providing credentials as Basic authentication. Backend system generates security token based on RC4 encryption algorithm.</dd>
-		</dl>
-	</p>
+        <dd>This mode of authentication is also based on username / password credentials. On very first authentication
+            http request it uses same way of providing credentials as Basic authentication. Backend system generates
+            security token based on RC4 encryption algorithm.
+        </dd>
+    </dl>
     <div class="alert alert-info">
         <div>
-            Currently Atlas Ticket authentication is not supported by Velvet platform. There is ongoing work to extend Velvet with AT support.
-		</div>
+            Currently Atlas Ticket authentication is not supported by Velvet platform. There is ongoing work to extend
+            Velvet with AT support.
+        </div>
     </div>
-    
-    <h2>3. Application changes</h2>
-	<p>
-		Now you should use <strong>$auth</strong> model properties instead of models we used in previous steps.
-		We will use three properties in our application:
-		<dl class="dl-vertical">
-        <dt>authenticated</dt>
-        <dd>determines whether user is authenticated; that property is used in index.html to switch between login page ($auth.authenticated == false) or standard application logic</dd>
-        <dt>pending</dt>
-        <dd>determines whether authentication is in progress; property let us properly change UI while login is processed (e.g. presenting loading indicator)</dd>
-		<dt>authenticationFailed</dt>
-        <dd>determines whether last authentication failed; it is used on log.html page to show error message if user authentication will fail</dd>
-		</dl>
-	</p>
 
-    <div class="tabbable previewable fullscreenable higlightable">
+    <h2 class="minor">3. Application changes</h2>
+    <p class="minor">
+        Now you should use
+        <strong>$auth</strong>
+        model properties instead of models we used in previous steps.
+        We will use three properties in our application:
+    </p>
+
+    <dl class="dl-vertical minor">
+        <dt>authenticated</dt>
+        <dd>determines whether user is authenticated; that property is used in index.html to switch between login page
+            ($auth.authenticated == false) or standard application logic
+        </dd>
+        <dt>pending</dt>
+        <dd>determines whether authentication is in progress; property let us properly change UI while login is
+            processed (e.g. presenting loading indicator)
+        </dd>
+        <dt>authenticationFailed</dt>
+        <dd>determines whether last authentication failed; it is used on log.html page to show error message if user
+            authentication will fail
+        </dd>
+    </dl>
+
+    <div class="tabbable previewable fullscreenable higlightable foldable">
         <div class="tab-pane active" title="index.html">
             <pre class="linenums" pp-url="'content/tutorial/step4/index.html'"></pre>
         </div>
@@ -84,8 +125,8 @@
         </div>
     </div>
 
-    <p>
-       Now, you have web application with authentication functionality backed by Velvet services.
+    <p class="minor">
+        Now, you have web application with authentication functionality backed by Velvet services.
     </p>
 
     <button class="next" ng-click="$tutorial.setStep(5)">

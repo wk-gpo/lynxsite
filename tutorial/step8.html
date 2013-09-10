@@ -4,40 +4,66 @@
         <h1>tutorial</h1>
         <h3>e2e tests</h3>
     </div>
-	<p>
-		End-to-End Testing is a methodology used to assure that application flow works as designed top to the bottom.
-        It allows to recognize any system dependencies which make problems while application is run in form of final assembly.<br/>
-        For web application <abbr title="End-to-End" class="initialism">E2E</abbr> testing it is crucial to use for test UI presented via web browser.
-        Lynx project environment provides solutions for e2e testing automation. It is base on Angular Scenario Runner which simulates user interactions with UI. It is described in <a href="http://docs.angularjs.org/guide/dev_guide.e2e-testing" target="_blank">E2E Testing</a> article.
-	</p>
-    <h3>Page Object Pattern</h3>
     <p>
-		Page Object Pattern (POP) represents application pages as set of objects each of them encapsulating
-        related page functionality and data. Read more about overall idea of PageObject
-        <a href="http://code.google.com/p/selenium/wiki/PageObjects">here</a>.
+        End-to-End Testing is a methodology used to assure that application flow works as designed top to the bottom.
+        It allows to recognize any system dependencies which make problems while application is run in form of final
+        assembly.
+        <br/>
+        For web application
+        <abbr title="End-to-End" class="initialism">E2E</abbr>
+        testing it is crucial to use for test UI presented via web browser.
+        Lynx project environment provides solutions for e2e testing automation. It is base on Angular Scenario Runner
+        which simulates user interactions with UI. It is described in
+        <a href="http://docs.angularjs.org/guide/dev_guide.e2e-testing" target="_blank">E2E Testing</a>
+        article.
     </p>
-    <p>
-		We decided to use <abbr title="Page Object Patern" class="initialism">POP</abbr> due to following reasons
-		<dl class="dl-vertical">
+    <h3 class="minor">Page Object Pattern</h3>
+    <p class="minor">
+        Page Object Pattern (POP) represents application pages as set of objects each of them encapsulating
+        related page functionality and data. Read more about overall idea of PageObject
+        <a href="http://code.google.com/p/selenium/wiki/PageObjects">here</a>
+        .
+    </p>
+    <p class="minor">
+        We decided to use
+        <abbr title="Page Object Patern" class="initialism">POP</abbr>
+        due to following reasons
+    </p>
+    <dl class="dl-vertical minor">
         <dt>reduction of code duplication</dt>
         <dd>
-			all implementation details directly related to page data&functions are aggregated in one <abbr title="Page Object Patern" class="initialism">POP</abbr> object
-		</dd>
+            all implementation details directly related to page data&functions are aggregated in one
+            <abbr title="Page Object Patern" class="initialism">POP</abbr>
+            object
+        </dd>
         <dt>test readability improvement</dt>
         <dd>
-			only important information is visible in test implementation
-		</dd>
+            only important information is visible in test implementation
+        </dd>
         <dt>it improves test maintainability</dt>
         <dd>
-			change to web application page does not directly affects tests but only one <abbr title="Page Object Patern" class="initialism">POP</abbr> object related to that page
-		</dd>
-		</dl>
+            change to web application page does not directly affects tests but only one
+            <abbr title="Page Object Patern" class="initialism">POP</abbr>
+            object related to that page
+        </dd>
+    </dl>
+    <p class="minor">
+        Following two files have all
+        <abbr title="Page Object Patern" class="initialism">POP</abbr>
+        objects defined necessary for our application. In
+        <strong>pages.js</strong>
+        all object for application pages are gathered. For each control defined on page proper getter function is
+        defined. See e.g.
+        <strong>LoginPage.getUserNameInput</strong>
+        which implements logic of accessing user name field (just field - not field value) and is the only place in our
+        test code which has direct relation with application page controls.
+        <br/>
+        Objects also have defined functions for pages functionality. Again, login page purpose is to authenticate user
+        hence
+        <strong>LoginPage.doLogin</strong>
+        function is introduced. It implement all logic required to log user in.
     </p>
-	<p>
-		Following two files have all <abbr title="Page Object Patern" class="initialism">POP</abbr> objects defined necessary for our application. In <strong>pages.js</strong> all object for application pages are gathered. For each control defined on page proper getter function is defined. See e.g. <strong>LoginPage.getUserNameInput</strong> which implements logic of accessing user name field (just field - not field value) and is the only place in our test code which has direct relation with application page controls.<br/>
-		Objects also have defined functions for pages functionality. Again, login page purpose is to authenticate user hence <strong>LoginPage.doLogin</strong> function is introduced. It implement all logic required to log user in.
-	</p>
-    <div class="tabbable fullscreenable higlightable">
+    <div class="tabbable fullscreenable higlightable minor">
         <div class="tab-pane" title="pages.js">
             <pre class="linenums onlyHighlight" pp-url="'content/tutorial/step8/test/pages.js'"></pre>
         </div>
@@ -45,33 +71,70 @@
             <pre class="linenums onlyHighlight" pp-url="'content/tutorial/step8/test/components.js'"></pre>
         </div>
     </div>
-	<p>
-		Unfold <strong>HomePage</strong> and you will see one more interesting convention we propose to use. Constructor function includes some testing logic (see <strong>expect</strong> function). It verifies state of application when page is presented. That test will be evaluated in your test. And you will not need to put those test instructions again and again in multiple tests. That make your tests more readable and maintainable.
-	</p>
-	<h2>Test scenario</h2>
-	<p>
-		As we mentioned before, in depth information on test <abbr title="Domain Specific Language" class="initialism">DSL</abbr> could be found in <a href="http://docs.angularjs.org/guide/dev_guide.e2e-testing" target="_blank">E2E Testing</a> article. We will focus here on one important issue you should realize before writing tests. Your application runs asynchronously and in many cases use promise object.
-		<blockquote>
-		In computer science, future, promise, and delay refer to constructs used for synchronizing in some concurrent programming languages. They describe an object that acts as a proxy for a result that is initially unknown, usually because the computation of its value is yet incomplete.
-		<small><cite title="Futures and promises">Futures and promises</cite>, <a href="http://en.wikipedia.org/wiki/Futures_and_promises" target="_blank">Wikipedia</a></small>
-		</blockquote>
-	</p>
-		Promise object is later on - again asynchronously - filled with proper data. Test does not need any special code to synchronize its execution with promise object update. Test scenarios are paused until data will return. So, although application is asynchronous you will write tests as if for linearly evaluated code.
-	</p>
-	<p>
-		We use in our test convention for <strong>describe</strong> and <strong>it</strong> names. Name of <strong>describe</strong> block should include object or element under test. Name of <strong>it</strong> block should provide clues on what is expected result of test. It make tests more readable. Test runners will also use those texts in tests reports. This convention will make it easier to find out what is actual problem.
-	</p>
-    <div class="tabbable fullscreenable higlightable">
+    <p class="minor">
+        Unfold
+        <strong>HomePage</strong>
+        and you will see one more interesting convention we propose to use. Constructor function includes some testing
+        logic (see
+        <strong>expect</strong>
+        function). It verifies state of application when page is presented. That test will be evaluated in your test.
+        And you will not need to put those test instructions again and again in multiple tests. That make your tests
+        more readable and maintainable.
+    </p>
+    <h2 class="minor">Test scenario</h2>
+    <p class="minor">
+        As we mentioned before, in depth information on test
+        <abbr title="Domain Specific Language" class="initialism">DSL</abbr>
+        could be found in
+        <a href="http://docs.angularjs.org/guide/dev_guide.e2e-testing" target="_blank">E2E Testing</a>
+        article. We will focus here on one important issue you should realize before writing tests. Your application
+        runs asynchronously and in many cases use promise object.
+
+    </p>
+    <blockquote class="minor">
+        In computer science, future, promise, and delay refer to constructs used for synchronizing in some concurrent
+        programming languages. They describe an object that acts as a proxy for a result that is initially unknown,
+        usually because the computation of its value is yet incomplete.
+        <small>
+            <cite title="Futures and promises">Futures and promises</cite>
+            ,
+            <a href="http://en.wikipedia.org/wiki/Futures_and_promises" target="_blank">Wikipedia</a>
+        </small>
+    </blockquote>
+
+    <p class="minor">
+    Promise object is later on - again asynchronously - filled with proper data. Test does not need any special code to
+    synchronize its execution with promise object update. Test scenarios are paused until data will return. So, although
+    application is asynchronous you will write tests as if for linearly evaluated code.
+    </p>
+
+    <p class="minor">
+        We use in our test convention for
+        <strong>describe</strong>
+        and
+        <strong>it</strong>
+        names. Name of
+        <strong>describe</strong>
+        block should include object or element under test. Name of
+        <strong>it</strong>
+        block should provide clues on what is expected result of test. It make tests more readable. Test runners will
+        also use those texts in tests reports. This convention will make it easier to find out what is actual problem.
+    </p>
+
+    <div class="tabbable fullscreenable higlightable minor">
         <div class="tab-pane" title="scenarios.js">
             <pre class="linenums onlyHighlight" pp-url="'content/tutorial/step8/test/scenarios.js'"></pre>
         </div>
     </div>
 
-	<h2>Run tests</h2>
-	<p>
-		Switch to preview and run test scenario. For your convenience tests will be occasionally paused. Click on <em>resume</em> to move it further.
-	</p>
-    <div class="tabbable previewable fullscreenable higlightable">
+    <h2 class="minor">Run tests</h2>
+    <p class="minor">
+        Switch to preview and run test scenario. For your convenience tests will be occasionally paused. Click on
+        <em>resume</em>
+        to move it further.
+    </p>
+
+    <div class="tabbable previewable fullscreenable higlightable foldable">
 
         <div class="tab-pane active" title="runner.html">
             <pre class="linenums"
