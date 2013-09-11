@@ -2,6 +2,12 @@
     "links" : {
     },
     "annotate" : {
+        "ResultsPage": "this page should be presented as result of search function call",
+        "SearchForm": {"first": true, "value": "object representing search component and its functionality"},
+        "getGoButton": {"first": true, "value":"function encapsulating access to submit button of search form"},
+        "getSearchInput": {"first": true, "value":"function encapsulating access to search input field - here you should enter search queries"},
+        "doSearch": "launch search functionality for given search query",
+        "SearchResultsRow": {"first": true, "value": "object representing result row which is used on  results page"}
     },
     "fold" : [[1,18],[20,33,true]],
     "hide" : [],

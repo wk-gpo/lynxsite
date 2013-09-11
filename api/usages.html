@@ -1,0 +1,11 @@
+<div lx-if="doclet.usages.length > 0" class="usages">
+    <div class="title">Usages</div>
+    <div class="section">
+        <div ng-repeat="usage in doclet.usages" class="usage">
+            <div class="title" >
+                Usage {{ usage.caption }}
+            </div>
+            <pre pp-json="usage" class="prettyprint linenums"></pre>
+        </div>
+    </div>
+</div>

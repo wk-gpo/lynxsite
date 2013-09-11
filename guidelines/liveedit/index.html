@@ -1,0 +1,53 @@
+<div>
+    <div class="pageTitle">
+        <h1>live edit</h1>
+    </div>
+
+<p>WebStorm/Idea have really nice plugin for live editing of web page with auto refreshing page markup on editing.
+    But this plugin do not work well with Angular, especially with <code>ng-includes</code>.
+</p>
+<p>Lynx provides very similar solution which works well with <code>Sass</code>. There is small class <code>ResourcesUpdater</code> which
+    decorates Angular <code>ng-include</code> directive (so you do not have to provide any changes in application),
+    and collecting all css links. After page load and after turning on by F9 key <code>ResourcesUpdater</code>
+    verifies the last modified date of each include/css (HEAD request).
+    If some of them is changed from last time, resource gets reloaded.
+</p>
+<p>Keep in mind that <code>ng-include</code> always creates new scope. After refreshing this scope will be cleared.
+    So if you have some included popup on some included area on some included page, and in editor you will
+    change the popup html snippet, only popup will be refreshed, if you will change the page html snippet,
+    whole page be refreshed and popup will be closed (if state of popup visibility was in page scope like
+    we do in Cheetah).
+</p>
+<p>ResourcesUpdater is working only in <code>?debug</code> mode.
+
+</p>
+
+
+
+
+<h3>Installing/Running</h3>
+<ol>
+    <li>Please update from TFS:
+    <ol style="list-style: lower-alpha;">
+        <li>Base\Core\Client\modules\core\js\lynx\dev</li>
+        <li>Base\Core\Client\modules\core\js\LynxModule.js</li>
+        <li>Base\Tools\NodeWebServer\web-server.js</li>
+    </ol>
+    </li>
+    <li>Please turn off the Live Edit in WebStorm/Idea (View>Live Edit)</li>
+    <li>Please set auto save in Webstorm/Idea preferences (File>Settings>General>Save file if application is idle for "1" sec. - yes)</li>
+    <li>Please open application in ?debug mode</li>
+    <li>Please type F9 to start or stop auto file checking</li>
+</ol>
+
+<h3>Configuration</h3>
+<ul>
+    <li><code>window["RU_REFRESH_LINKS"]</code> - do refresh css stylesheet (default true)</li>
+    <li><code>window["RU_REFRESH_INCLUDES"]</code> - do refresh ng-includes (default true)</li>
+    <li><code>window["RU_USE_HTTP"]</code> - do use the Angular $http service (experimental, unstable, default false) </li>
+    <li><code>window["RU_TIMEOUT"]</code> - time gap between file checking in ms (default 500,
+        0 - do the checking only once on every F9 key).</li>
+</ul>
+
+
+</div>

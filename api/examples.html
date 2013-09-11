@@ -1,0 +1,12 @@
+<div lx-if="$api.content.examples.length > 0" class="examples">
+    <div class="title" >Examples</div>
+    <div class="section">
+        <div ng-repeat="example in $api.content.examples" class="example" ng-class="{true:'withrun'}[example.run]">
+            <div class="title" >
+                Example {{ example.caption }}
+            </div>
+            <pre pp-json="example" class="prettyprint linenums"></pre>
+            <div lx-if="example.run" class="run" compile="example.code | unescapehtml"></div>
+        </div>
+    </div>
+</div>

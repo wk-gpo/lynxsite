@@ -2,7 +2,13 @@
     "links" : {
     },
     "annotate" : {
-        "pause()" : {"first": true, "value": "pause() used for demonstration purposes; you will rather not use it in real test scenarios"}
+        "describe": {"first": true, "value": "defines set of tests validations"},
+        "it": {"first": true, "value": "defines test in current set; note that the name provided here will be used for description of test results in conjunction with parent element name e.g. description of this test will be build as follows: 'tutorial app'+'should automatically...'"},
+        "beforeEach": {"first": true, "value": "logic that should be launched before every test; typically initialization code is put here"},
+        "afterEach": {"first": true, "value": "logic that will be launched after each test; put you clean-up-code here"},
+        "pause" : {"first": true, "value": "pause() used for demonstration purposes; you will rather not use it in real test scenarios"},
+		"doLogin": "this is a functionality under test; see that it uses Page Objects to describe test scenario",
+		"expect": "provides developer expectations with regards to results of tests"
     },
     "fold" : [[17,24],[26,34,true],[40,42,true],[44,49,true],[52,57,true],[59,61,true]],
     "hide" : [],

@@ -1,0 +1,123 @@
+<div>
+    <div class="pageTitle">
+        <h1>debugging lynx and lynx applications</h1>
+    </div>
+
+    <h2>Debugging Lynx</h2>
+    <p>
+        If you need to debug Lynx code or code of any other library you are using in your project it is useful to load
+        to your browser source (not compiled) versions of java script code. Lynx project infrastructure simplifies
+        that task for you. It enables you to easily switch between compiled and source versions. <br/>
+        That will need some configuration to be done beforehand. Have in mind that for the purpose of source code loading
+        you have to use web server configured based on Node.js functionality with <code>web-server.js</code> script
+        provided as part of starter app implementation.
+    </p>
+    <h3>Paths to libraries</h3>
+    <p>
+        Of course, you must have on your project both implementations of libraries. You should that in your "Web Server"
+        run configuration in WebStorm. Just add list of paths which should be search for libraries in application
+        parameters field.
+    </p>
+    <img src="img/guide/debuggingLynx_WebStormConfigurationSettings.JPG" height="1081" width="556">
+    <p>
+        Notice that list of paths should be provided as second parameter. So, even though port <code>8000</code> is
+        assign as default you must provide that as first parameter for "Web Server" configuration..<br/>
+        You may provide more then one path there using semicolon as separator e.g.
+        <pre  class="prettyprint linenums">
+        Base/Core/Client/modules;Base/Libs/JsLibs
+        </pre>
+        Paths provided there are relative to your project root.
+    </p>
+    <h3>Source&compiled version of libraries</h3>
+    <p>
+        Web server expects that in provided paths it will find your libraries. Web server will search in those locations
+        <code>module.json</code> definition files of certain libraries. Have a look at definition of <code>wk.lynx</code>
+        library.
+        <pre class="prettyprint linenums">
+        {
+            "name": "wk.lynx",
+            ...
+            "dependencies": {
+                ...
+                "wk.lynx.common": "compile",
+                "wk.lynx.velvet": "compile",
+                "wk.lynx.core": "compile",
+                "wk.lynx.ui": "compile"
+            },
+
+            "scripts": {
+                "prod": [
+                    "../dist/js/lynx.js"
+                ],
+                "externs": [...],
+                "test": {...},
+                "integration": {...}
+            }
+        }
+        </pre>
+        Definition file will be scanned for location of scripts (see <code>script</code> in code snippet) in production
+        (<code>prod</code>) or source (<code>src</code>) versions. In example only production version is defined for
+        <code>wk.lynx</code> module. It will be loaded by web server if that version of library is chosen by you.<br/>
+        If you will choose to load sources, web server will try to find <code>src</code> value in <code>script</code>
+        section of module definition. If that's not available, web server will search down through dependencies until
+        sources are find. See following snippet of <code>wk.lynx.ui</code> module definition.
+        <pre class="prettyprint linenums">
+        {
+            "name": "wk.lynx.ui",
+            ...
+            "dependencies": {...},
+
+            "scripts": {
+                "prod": [...],
+                "externs": [...],
+                "src": [
+                    "js/UiModule.js",
+                    "js/lynx/directives/Keyboard.js",
+                    "js/**/*.js"
+                ],
+                "test": {...}
+            }
+        }
+        </pre>
+        Sources defined there will be loaded.
+    </p>
+    <h3>Mark library for source code loading</h3>
+    <p>
+        To inform "Web Server" that certain library may be loaded as source you must adjust library URL in your page
+        code.
+        <pre class="prettyprint linenums">
+        &lt;script src="js/angular.min.js" type="text/javascript"&gt;&lt;/script&gt;
+        &lt;script src="js/lynx.js?module=wk.lynx" type="text/javascript"&gt;&lt;/script&gt;
+        </pre>
+        Library <code>angular.min.js</code> loads as defined in <code>script</code> element. Library <code>lynx.js</code>
+        will be loaded as <code>js/lynx.js</code> if you need compiled version. But if you will decide to load sources
+        "Web Server" will search libraries paths to find <code>wk.lynx</code> module definition in
+        <code>module.json</code> file.
+        It is configured by parameter <code>module=wk.lynx</code> provided in Lynx library URL.
+    </p>
+    <p>
+        You may load sources not only for Lynx library but for any other library. Just make sure you have sources of those
+        libraries and you properly defined search path to enable "Web Server" to find that code.
+        <pre class="prettyprint linenums">
+        &lt;script src="js/jquery.js?module=jquery" type="text/javascript"&gt;&lt;/script&gt;
+        &lt;script src="js/store.js?module=store" type="text/javascript"&gt;&lt;/script&gt;
+        &lt;script src="js/angular.min.js?module=angularjs" type="text/javascript"&gt;&lt;/script&gt;
+        &lt;script src="js/lynx.js?module=wk.lynx" type="text/javascript"&gt;&lt;/script&gt;
+        </pre>
+    </p>
+    <h3>Choose version of libraries to be loaded</h3>
+    <p>
+        Now you just need to know how to decide which versions of libraries would be loaded when you run your app.
+        Well, it's very simple. Just use <code>debug</code> parameter in your app URL and "Web Server" will load
+        sources instead of compiled versions of libraries.
+        <pre class="prettyprint linenums">
+          http://..../index.html?debug
+          http://..../docs.html?debug#/api/index
+        </pre>
+        Omit <code>debug</code> parameter to switch back to compiled versions (do not forget clear browser cache).
+        <pre class="prettyprint linenums">
+          http://..../index.html
+          http://..../docs.html#/api/index
+        </pre>
+    </p>
+</div>

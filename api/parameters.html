@@ -1,0 +1,21 @@
+<div class="parameters" lx-if="doclet.params.length > 0">
+    <div class="title">
+        Parameters
+    </div>
+
+    <div class="section">
+        <table>
+            <tr ng-repeat="param in doclet.params">
+                <td>{{ param.name }}</td>
+                <td>
+                    <a class="type" href="javascript:void(0)" ng-click="$api.open(param.type.names[0])"
+                        lx-if="param.type.names[0]">
+                        {{ param.type.names[0] }}
+                    </a>
+                    <span lx-if="param.optional" class="optiona"> (optional)</span>
+                </td>
+                <td ng-bind-html-unsafe="param.description"></td>
+            </tr>
+        </table>
+    </div>
+</div>

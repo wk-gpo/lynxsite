@@ -1,0 +1,431 @@
+<div>
+
+    <div class="pageTitle">
+        <h1>application parametrization</h1>
+    </div>
+
+<h2>Application Parametrization</h2>
+<p>Haven't you spent a lot of your programming effort on application parametrization?
+    How to read preferences of your app? How to get CRA values? How to support browser local store?
+    How to read property from app properties?
+    How to organize fallback between certain sources if one of them is missing certain property?<br/>
+    Wouldn't it be nice to be able to code all that like in following snippet?
+</p>
+<pre class="prettyprint linenums" ng-set-text="index.html-01"></pre>
+<script type="text/ng-template" id="index.html-01">
+<div>
+    <p>Cra prop value:
+        {{$properties.get('com.wolterskluwer.lynx#AppOne:Postsearch.Taxonomy.PracticeTools')}}
+    </p>
+    <p>Session property: {{$properties.get('mySessionProperty')}}</p>
+    <p>Preferences property: {{$properties.get('perPage')}}</p>
+    <form>
+        <br>
+        Enter perPage preference value:
+        <input type="text" ng-model="itemsPerPage"/>
+        <button ng-click="$properties.set('perPage', itemsPerPage)">set value</button>
+    </form>
+</div>
+</script>
+<p>Well, if you use Lynx in your app you can do it right away. The concept is named Data Providers.
+    It is available through global object <code>$properties</code>. Of course you will need some configuration
+    before you would be able to access properties. In this document you will see how easy it is to use data providers
+    in your app.
+</p>
+
+<h3> <code>$properties</code> object</h3>
+    <p>Main object which you will use - <code>$properties</code> - is implemented by
+        <a href="docs.html#/api/wk.lynx.core/lynx.config.AppProperties">AppProperties</a> object. It encapsulate
+        all actual data provider objects you initiate in your app (see next paragraph for description of each available
+        provider). All data providers are ordered in Lynx so any operation on <code>$properties</code>
+        actually scans data providers one by one in defined order (we will get back to ordering issue later).</p>
+    <p>
+        To access application properties use following functions of <code>$properties</code> object:
+    <ul>
+    <li><code>get(name)</code><br/>
+        Returns value of property <code>name</code> from first data provider that has <code>name</code>
+        property defined.<br/>
+        In case property <code>name</code> is not found at any of defined data providers an exception is thrown. Some problems with configuration of
+        underlying property source (e.g. Velvet config which is required for access of user preferences) may also
+        cause an exception.
+    </li>
+    <li><code>set(name, value)</code><br/>
+        Sets new <code>value</code> for property <code>name</code>. Similarly to
+        <code>get</code> function, it changes value on first data provider which exposed that property.<br/>
+        An exception is thrown if property <code>name</code> is not found at any of data providers.<br/>
+        Since some data providers does not allow to use <code>set</code> function, an exception may also be thrown
+        in case first data provider that exposes <code>name</code> property is read-only.
+    </li>
+    </ul>
+</p>
+
+
+<h3>Available data providers</h3>
+<p>Object <code>$provider</code> encapsulates data provider you initiated in your application. Lynx provides ready to
+    use implementation of data providers capable of accessing properties from different sources. Following list
+    presents implemented data providers:
+    <ul>
+    <li><b>SessionDataProvider</b><br/>
+        It is used to manage properties stored in browser cache. You can set and get values of properties. Keep in mind
+        that it may be cleared by user action (e.g. with Ctrl+F5).
+        <a href="docs.html#/api/wk.lynx.core/lynx.config.SessionDataProvider"><code>SessionDataProvider</code></a> is
+        available in Lynx app under <code>$sessionDataProvider</code> name.
+    </li>
+    <li><b>PreferencesDataProvider</b><br/>
+        Let's you access preferences stored down in GARE. You may e.g. map <code>userprefs.search.options.perpage</code>
+        to application property named <code>perPage</code>.
+        <a href="docs.html#/api/wk.lynx.core/lynx.config.PreferencesDataProvider"><code>PreferencesDataProvider</code></a> is
+        available in Lynx app under <code>$preferencesDataProvider</code> name.
+    </li>
+    <li><b>CraDataProvider</b><br/>
+        This data provider make it easy to get CRA data your application will use. It defers form other providers a little bit
+        since it does not allow changing parameters values.
+        <a href="docs.html#/api/wk.lynx.core/lynx.config.CraDataProvider"><code>CraDataProvider</code></a> is
+        available in Lynx app under <code>$craDataProvider</code> name.
+    </li>
+    <li><b>StoreDataProvider</b><br/>
+        It exposes local storage of your application as defined by HTML5 <a href="http://dev.w3.org/html5/webstorage/">Web Storage</a>
+        specification. It is also referred as Local Storage or DOM Storage.
+        <a href="docs.html#/api/wk.lynx.core/lynx.config.StoreDataProvider"><code>StoreDataProvider</code></a> is
+        available in Lynx app under <code>$storeDataProvider</code> name.
+    </li>
+    <li><b>StaticDataProvider</b><br/>
+        Static properties considers rather as constants could be provided by this data provider. It allows to read value of
+        any property defined for that data provider during its initialization. You cannot change values of properties
+        exposed via this data provider.
+        <a href="docs.html#/api/wk.lynx.core/lynx.config.StaticDataProvider"><code>StaticDataProvider</code></a> is
+        available in Lynx app under <code>$staticDataProvider</code> name.
+    </li>
+    </ul>
+</p>
+<br/>
+<p>Table summarizes information regarding data providers in Lynx. By each data provider you will find information regarding
+    support for <code>get</code> and <code>set</code> functions.
+</p>
+<table class="params">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>get()</th>
+            <th class="last">set()</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>1.</code></td>
+            <td class="tdName"><code>$sessionDataProvider</code></td>
+            <td class="type">
+                <span class="param-type"><a href="docs.html#/api/wk.lynx.core/lynx.config.SessionDataProvider">SessionDataProvider</a></span>
+            </td>
+            <td class="description">yes</td>
+            <td class="description last">yes</td>
+        </tr>
+        <tr>
+            <td><code>2.</code></td>
+            <td class="tdName"><code>$preferencesDataProvider</code></td>
+            <td class="type">
+                <span class="param-type"><a href="docs.html#/api/wk.lynx.core/lynx.config.PreferencesDataProvider">PreferencesDataProvider</a></span>
+            </td>
+            <td class="description">yes</td>
+            <td class="description last">yes</td>
+        </tr>
+        <tr>
+            <td><code>3.</code></td>
+            <td class="tdName"><code>$craDataProvider</code></td>
+            <td class="type">
+                <span class="param-type"><a href="docs.html#/api/wk.lynx.core/lynx.config.CraDataProvider">CraDataProvider</a></span>
+            </td>
+            <td class="description">yes</td>
+            <td class="description last">no</td>
+        </tr>
+        <tr>
+            <td><code>4.</code></td>
+            <td class="tdName"><code>$storeDataProvider</code></td>
+            <td class="type">
+                <span class="param-type"><a href="docs.html#/api/wk.lynx.core/lynx.config.StoreDataProvider">StoreDataProvider</a></span>
+            </td>
+            <td class="description">yes</td>
+            <td class="description last">yes</td>
+        </tr>
+        <tr>
+            <td><code>5.</code></td>
+            <td class="tdName"><code>$staticDataProvider</code></td>
+            <td class="type">
+                <span class="param-type"><a href="docs.html#/api/wk.lynx.core/lynx.config.StaticDataProvider">StaticDataProvider</a></span>
+            </td>
+            <td class="description">yes</td>
+            <td class="description last">no</td>
+        </tr>
+    </tbody>
+</table>
+<br/>
+<p>Names of data providers are part of Lynx interface. Later in this document you will learn how to configure data
+    providers. You will see that some configuration requires to define those object in context of your application.
+    In such situation you need to keep data provider names as it is presented on table above without any modifications.
+</p>
+
+<h3>Data providers order</h3>
+<p>As it was mentioned already, <code>get</code> and <code>set</code> functions processing of <code>$properties</code>
+    relies on data providers order. There are two possible ways of setting that in your application:
+    <ul>
+    <li>keep default<br/>
+        In that case all you have to do is just initialize every data provider you need. Object
+        <code>$properties</code> will preserve default data providers order as presented in above table
+    </li>
+    <li>define data providers order<br/>
+        To do that you need to use function <code>$properties.setProvidersPriority</code>. As parameter you should
+        provide array of data provider names. Elements order in that array defines order of data providers.
+        <pre class="prettyprint linenums">
+            $properties.setProvidersPriority([
+                        "$storeDataProvider",
+                        "$sessionDataProvider",
+                        "$craDataProvider",
+                        "$preferencesDataProvider",
+                        "$staticDataProvider"
+            ]);
+        </pre>
+        Instruction above causes <code>$storeDataProvider</code> to be the very first data provider accessed on
+        <code>get</code>/<code>set</code> functions processing.<br/>
+        All of data providers used in <code>setProvidersPriority</code> should be initialized beforehand. If it is
+        not the case, Lynx throws exception. All of initialized data providers should be used in <code>setProvidersPriority</code> array. Omitting data
+        provider will cause Lynx not to include that particular data provider in search algorithm. Nevertheless,
+        no exception will be thrown.
+    </li>
+    </ul>
+</p>
+
+
+<h3>Initialization</h3>
+<p>To make the initialization of data provider infrastructure you need to do following steps:
+<ul>
+<li>Create your application Lynx module<br/>
+    You do this in javascript by <a href="docs.html#/guide/lynxConfiguration">configuring Lynx module</a>.
+    Following code creates your application. It is an angular module available for name <code>wk.example</code>.
+    <pre class="prettyprint linenums" ng-set-text="app.js-01"></pre>
+    <script type="text/ng-template" id="app.js-01">
+    (function (global) {
+        ...
+        velvet.configure({
+            host:  ...,
+            apikey:...,
+            debug: false
+        });
+
+        var appExample = lynx.module(
+        {
+            moduleName: "wk.example",
+            globals: [
+                { alias: "$auth", factory:lynx.models.AuthModel.factory }
+            ]
+        });
+
+    })(window);
+    </script>
+
+</li>
+<li>Initialize data providers you want to use<br/>
+    You just need to initialize your data provider and add it to your application's <code>scope</code>.
+    Example shows how to do that for <code>$staticDataProvider</code>. You need to provide property/value map
+    a configuration parameter. After initialization all properties used in initialization map would be registered
+    in that data provider (e.g. property <code>perPage</code> will have value <code>40</code>).
+
+    <pre class="prettyprint linenums" ng-set-text="staticDataProvider.js-01"></pre>
+    <script type="text/ng-template" id="staticDataProvider.js-01">
+        angular.module("wk.example").run(
+            ["$staticDataProvider", function ($staticDataProvider) {
+                $staticDataProvider.init({
+                    "perPage": "40",
+                    "storePref1": "defaultStoreValue1",
+                    "storePref2": "defaultStoreValue2",
+                    "sessionPref1": "defaultSessionValue1",
+                    "sessionPref2": "defaultSessionValue2"
+                })
+            }]);
+    </script>
+    You may find it useful to keep such code in separate file (e.g. staticConfig.js) per each data provider
+    you configure. Further information regarding structure of initialization parameter for each of supported data
+    providers will be discussed later in this document.
+</li>
+<li>Optionally redefine data providers order<br/>
+    As it was mentioned earlier, it requires use of <code>$properties.setProvidersPriority</code> function. Similarly
+    to data provider configuration, it is done by adding redefined object to your application's <code>scope</code>.
+    <pre class="prettyprint linenums" ng-set-text="appProperties.js-01"></pre>
+    <script type="text/ng-template" id="appProperties.js-01">
+        angular.module("wk.example").run(
+            ["$properties", function($properties) {
+                $properties.setProvidersPriority([
+                    "$storeDataProvider",
+                    "$sessionDataProvider",
+                    "$craDataProvider",
+                    "$preferencesDataProvider",
+                    "$staticDataProvider"
+                ]);
+            }]);
+    </script>
+</li>
+<li>Use javascript in html<br/>
+    First of all, if you actually used separate files for data providers configuration you need to load them in proper
+    order. Initialization of you application module should be done at very beginning so load that file before
+    any other file of data provider configuration. See file <code>app.js</code> on code snippet below.
+    <pre class="prettyprint linenums">
+        &lt;html&gt;
+            &lt;head&gt;
+                ...
+                &lt;script src="js/app.js"&gt;&lt;/script&gt;
+
+                &lt;script src="js/craConfig.js"&gt;&lt;/script&gt;
+                &lt;script src="js/prefConfig.js"&gt;&lt;/script&gt;
+                &lt;script src="js/sessionConfig.js"&gt;&lt;&lt;/script&gt;
+                &lt;script src="js/staticConfig.js"&gt;&lt;/script&gt;
+                &lt;script src="js/storeConfig.js"&gt;&lt;/script&gt;
+
+                &lt;script src="js/appPropertiesConfig.js"&gt;&lt;/script&gt;
+            &lt;/head&gt;
+            &lt;body&gt; ... &lt;/body&gt;
+        &lt;/html&gt;
+    </pre>
+    <script type="text/ng-template" id="index.html-02">
+    </script>
+    Now you may initialize data providers by loading certain scripts (e.g. <code>craConfig.js</code> in above snippet).
+    At the end load script which will change providers order (see <code>appPropertiesConfig.js</code>).<br/>
+    If you will keep all configuration in one file still remember first to initialize you app, then to initialize
+    data providers and at the end if needed to alter sequence of data providers.
+
+    Of course you need to load any other libraries need by Lynx application so at least <code>jquery.js</code>,
+<code>angular.js</code>, <code>store.js</code> and Lynx library itself <code>lynx.js</code>.
+</li>
+</ul>
+<h3>Data Providers initialization parameter</h3>
+<p>Initialization of Data Provider in general means assignment certain property names to provider. Only those property
+names are available. Some data providers may need additional specific configuration which are also done at initialization.
+Read information in following subparagraphs to get more understanding on initialization requirement of Lynx Data Providers</p>
+
+
+
+<h4>SessionDataProvider</h4>
+<p>To configure <code>SessionDataProvider</code> you need to provide array of property names you want to assign for
+that provider. You may not provide default values for properties at initialization.
+</p>
+<pre class="prettyprint linenums" ng-set-text="sessionDataProvider.js-01"></pre>
+<script type="text/ng-template" id="sessionDataProvider.js-01">
+    angular.module("wk.example").run(
+        ["$sessionDataProvider", function ($sessionDataProvider) {
+            $sessionDataProvider.init(["sessionPref1", "sessionPref2"]);
+        }]);
+</script>
+
+
+<h4>PreferencesDataProvider</h4>
+<p>This data provider exposes user preferences to your application. Since that information is stored in backend
+    system <code>PreferencesDataProvider</code> depends on information if user is logged in. For that purpose
+    config must include <code>authenticated</code> value which is used internally to postpone part of initialization
+    process until communication with backend system is available. <code>PreferenceDataProvider</code> will watch for
+    <code>authenticated</code> value to finalize initialization when it will be turn to  <code>true</code>.
+    You may simply map <code>authenticated</code> to <code>$auth.authenticated</code> as it is presented on snippet
+    below. You may also use other angular expression which evaluates to <code>true</code> when communication
+    with backend system is available.
+</p>
+<pre class="prettyprint linenums" ng-set-text="preferencesDataProvider.js-01"></pre>
+<script type="text/ng-template" id="preferencesDataProvider.js-01">
+angular.module("wk.example").run(
+    ["$preferencesDataProvider", function ($preferencesDataProvider) {
+        $preferencesDataProvider.init({
+            "map": {
+                "perPage": "userprefs.search.options.perpage"
+            },
+            "authenticated": "$auth.authenticated"
+        })
+    }]);
+</script>
+<p>The other element of configuration object is <code>map</code> where you provide mappings between your application
+    properties (e.g. <code>perPage</code>) and user preferences names (e.g. <code>userprefs.search.options.perpage</code>).
+    Values for all preferences defined in <code>map</code> are read from backend system just on user login. Values
+    are cached by <code>PreferencesDataProvider</code>.<br/>
+    As a result of <code>set</code> function call for property provided by <code>PreferencesDataProvider</code> it
+    causes store of value in backend system and update it in local cache.
+</p>
+
+<h4>CraDataProvider</h4>
+<p>This data provider also depends on external source of properties values. Configuration object requires following
+    parameters:
+    <ul>
+    <li><code>productId</code><br/>
+        Unlike <code>PreferencesDataProvider</code>, <code>CraDataProvider</code> does not relies on user
+        authentication. Instead you need to provide default <code>productId</code> of CRA.
+        You may still overwrite that value by <code>cpid</code> parameter provided in URL (e.g.
+        <code>page.html?cpid=CRA_ID</code>). If present in URL it will take precedence before
+        <code>productId</code> value.
+    </li>
+    <li><code>craFilters</code><br/>
+        An array of filter object that should be used accessing CRA list. <code>CraDataProvider</code> will
+        read CRAs based on filters provided.
+    </li>
+    <li><code>map</code><br/>
+        Here you provide mappings between your application properties (e.g. <code>postFilter1</code>) and CRA names
+        (e.g. <code>com.wolterskluwer.lynx#AppOne:Postsearch.Taxonomy.Jurisdiction</code>).
+        Although this provider may read more values then defined in <code>map</code> (see <code>craFilters</code>)
+        only those defined in <code>map</code> are accessible to your app logic.<br/>
+        One more specific issue regarding searching of CRA values is that you may access it both by internal
+        application property name (<code>postFilter1</code>) and by CRA name
+        (<code>com.wolterskluwer.lynx#AppOne:Postsearch.Taxonomy.Jurisdiction</code>). The purpose of that is minimize
+        work you need to do exposing substantial number of CRAs to your application.
+    </li>
+    </ul>
+    Additionally you may use optional parameters:
+    <ul>
+        <li><code>useCache</code><br/>
+            If set to <code>true</code> it will try to get cached value of read CRAs for productId. It will validate
+            if cache is up to date by comparision of cache last update time and <code>cacheExpirationTime</code> property
+            value. If cache is present but is expired, data will be loaded from backend system and stored in cache.
+        </li>
+        <li><code>cacheExpirationTime</code><br/>
+            Defines in milliseconds cache expiration. Defaults to <code>86400000</code>. It is used in conjunction with
+            <code>useCache</code>.
+        </li>
+    </ul>
+</p>
+<p>Have a look at example configuration of <code>CraDataProvider</code> below.</p>
+<pre class="prettyprint linenums" ng-set-text="craDataProvider.js-01"></pre>
+<script type="text/ng-template" id="craDataProvider.js-01">
+angular.module("wk.example").run(
+    ["$craDataProvider", function($craDataProvider) {
+        $craDataProvider.init({
+            "craFilters": [
+                { "fullId": "com.wolterskluwer.lynx#AppOne:Default*" },
+                { "fullId": "com.wolterskluwer.lynx#AppOne:Postsearch.Taxonomy*" }
+            ],
+
+            "map": {
+                "postFilter1": "com.wolterskluwer.lynx#AppOne:Postsearch.Taxonomy.Jurisdiction",
+                "postFilter2": "com.wolterskluwer.lynx#AppOne:Postsearch.Taxonomy.DateNavigator",
+                "postFilter3": "com.wolterskluwer.lynx#AppOne:Postsearch.Taxonomy.KluwerTaxonomy"
+            },
+
+            "productId": "WKUS-Legal-Skadden",
+            "useCache": false,
+            "cacheExpirationTime": 3600000
+        })
+    }]);
+</script>
+
+
+
+
+<h4>StoreDataProvider</h4>
+<p>As configuration parameter you need to provide array of property names you want to assign for
+that provider. You may not provide default values for properties at initialization.
+All properties would be actually read or set on browser Web Store.
+<pre class="prettyprint linenums" ng-set-text="storeDataProvider.js-01"></pre>
+<script type="text/ng-template" id="storeDataProvider.js-01">
+angular.module("wk.example").run(
+    ["$storeDataProvider", function ($storeDataProvider) {
+        $storeDataProvider.init(["storePref1", "storePref2"]);
+    }]);
+</script>
+
+<h4>StaticDataProvider</h4>
+This data provider requires as initialization parameter a map of property/name values. See snippet below.
+<pre class="prettyprint linenums" ng-set-text="staticDataProvider.js-01"></pre>
+</div>

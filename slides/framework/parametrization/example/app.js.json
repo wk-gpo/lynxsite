@@ -1,0 +1,20 @@
+{
+    "replace" : {
+        "content/slides/angular/directives/example/message.html" : "message.html"
+    },
+    "links" : {
+        "module": "#/api/wk.lynx.core/lynx.core.Application",
+        "moduleName": "#/api/wk.lynx.core/lynx.config.Configuration#moduleName",
+        "$staticDataProvider": "#/api/wk.lynx.core/lynx.config/lynx.config.StaticDataProvider",
+        "$storeDataProvider": "#/api/wk.lynx.core/lynx.config/lynx.config.StoreDataProvider"
+
+    },
+    "annotate": {
+        "module" : "this will initiate Lynx application; you need to provide to it configuration <code>lynx.config.Configuration</code> object",
+        "moduleName" : "then name of application" ,
+        "$staticDataProvider": {"line":8, "value":"initialization of <code>lynx.config.providers.StaticDataProvider</code>"},
+        "$storeDataProvider": {"line":16, "value": "initialization of <code>lynx.config.providers.StoreDataProvider</code>"}
+    },
+    "fold": [[1,4,true],[6,12],[14,17]],
+    "toolbar": true
+}

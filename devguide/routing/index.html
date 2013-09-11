@@ -1,0 +1,277 @@
+<div>
+
+    <div class="pageTitle">
+        <h1>routing</h1>
+    </div>
+
+<p>Lynx base application is generally speaking a single page app. Although you may use different pages if you
+    need, default way of navigation is based on certain html file which is able to switch its content
+    based on user actions.<br/>
+    What is important in such kind of applications is to manage page URLs to let distinguish between different page
+    content event though it is presented via the same html page. It is important both for:
+    <ul>
+    <li>user as he/she would be able to bookmark certain application page or see human readable browser history and</li>
+    <li>web app programmer since that makes it easier to open proper page view on user request or to initialize
+        page navigation
+    </li>
+    </ul>
+    Lynx provides solution to all of above mentioned purposes.
+</p>
+
+<h3>URL structure</h3>
+<p>Lynx uses hash bang URL notation for that purpose. It means that application extends URL with certain anchor-like
+    string with a structure usually providing clues on what view should be presented to user.
+    Have a look on following example:
+    <pre class="prettyprint linenums">
+    http://svr.wk.com/index.html#/home
+    </pre>
+    It loads <code>index.html</code> which has logic of switching page snippets. As snippet to present it would use
+    that one mapped to <code>/home</code> path.<br/>
+    See next example
+    <pre class="prettyprint linenums">
+    http://svr.wk.com/index.html#/result/id/1213321231/pageNo/1/pageSize/30
+                     __________/            _____________________________/
+                      html page              anchor defining page snippet
+    </pre>
+    In this situation snippet path includes not only definition of view (it's <code>/result</code>) but also some
+    information regarding content:
+    <ul>
+        <li><code>/id/1213321231</code> - show results of search which id="1213321231"</li>
+        <li><code>/pageNo/1</code> - show first page of results (do not load all result records)</li>
+        <li><code>/pageSize/30</code> - show 30 results per page</li>
+    </ul>
+    You may use any other URL schema most suitable for your needs. Also you may easily map between URL and model values.
+    All you need is to design proper URL structure and then provide it's as your lynx module parametrization.
+</p>
+
+<h3>Lynx module parameters</h3>
+<p>As you may already found, Lynx base application is initialized with configuration map of following structure:
+</p>
+<pre class="prettyprint linenums" ng-set-text="app.js-01"></pre>
+<script type="text/ng-template" id="app.js-01">
+    (function (global) {
+    ...
+    var loginExample = lynx.module({
+        moduleName: ...,
+        globals: ...,
+        pages: ...,
+        defaultPath: ...
+    });
+</script>
+<p>Page navigation is defined in <code>pages</code> array which we will familiarize with in following paragraphs.
+   Discussion on other configuration elements may be found in <a href="docs.html#/guide/lynxConfiguration">Lynx
+   Module Configuration</a> document.
+</p>
+<p>To use page navigation in your app you should include following element in proper html page:
+<pre class="prettyprint linenums" ng-set-text="index.html"></pre>
+<script type="text/ng-template" id="index.html">
+<div ng-include="page.view"></div>
+</script>
+It is base on angular's <code>ng-include</code> directive and model <code>page.view</code> provided by Lynx based
+application. Page that include that element would be base page of application e.g. that page would be present in all
+application URLs.
+</p>
+
+
+<p>So, let's have a look on the main elements of <code>pages</code> configuration.
+</p>
+<pre class="prettyprint linenums" ng-set-text="app.js-02"></pre>
+<script type="text/ng-template" id="app.js-02">
+    pages:[
+    {   name: "homePage",
+        path: "/home",
+        view: "html/page/home.html"
+    },
+    {   name: "resultsPage",
+        path: "/results/id/{$search.getSearch().Id}/pageNo/{$search.getSearch().getParams().pageNo}/pageSize/{$search.getSearch().getParams().perPage}",
+        view: "html/page/results.html",
+        ...
+    },
+    ...
+    ]
+</script>
+<p>Every page definition has at least three parameters <code>name</code>, <code>path</code> and <code>view</code> which
+    purpose is as follows:
+    <ul>
+    <li><code>name</code> defines internally used page name; it will not appear on URLs</li>
+    <li><code>path</code> defines structure of anchor which would be used in URL for certain page snippet after page loads</li>
+    <li><code>view</code> defines relative path from web app root folder to file containing page snippet html</li>
+    </ul>
+</p>
+<p>As you can see <code>homePage</code> has got only those three main params. It defines that for following URL
+<pre class="prettyprint linenums">
+http://svr.wk.com/index.html#/home
+</pre>
+code snippet from <code>&lt;WEB_APP_ROOT&gt;/html/page/home.html</code> will be loaded by lynx app. If user enters
+into browser address field that url your application will load proper snippet. You can use the same URL in you app e.g.
+in &lt;a&gt; elements which should switch application view to home page.
+</p>
+
+
+
+<h3>URL to data binding</h3>
+<p>More interesting is example for <code>resultsPage</code>.
+    <pre class="prettyprint linenums" ng-set-text="app.js-03"></pre>
+    <script type="text/ng-template" id="app.js-03">
+    path: "/results/id/{$search.getSearch().Id}/pageNo/{$search.getSearch().getParams().pageNo}/pageSize/{$search.getSearch().getParams().perPage}"
+    </script>
+    As you may noticed, the <code>path</code> configuration
+    includes angular expressions which binds fragment of URL to models. You can use binding to any model you need.
+    The example above is based on Lynx provided <code><a href="docs.html#/api/wk.lynx.core/lynx.models.SearchModel">SearchModel</a></code>
+    which is by convention mapped to <code>$search</code> variable in
+    your application <code>$rootScope</code>. <br/>
+    Such definition will automatically provide parameters from URL to model your application uses e.g. following
+    URL typed in by user:
+    <pre class="prettyprint linenums" ng-set-text="app.js-04"></pre>
+    <script type="text/ng-template" id="app.js-04">
+    http://svr.wk.com/index.html#/results/id/a3-7cb0-4687-808b/pageNo/2/pageSize/50
+    </script>
+    will map following values to your model:
+    <ul>
+        <li><code>$search.getSearch().Id = a3-7cb0-4687-808b</code></li>
+        <li><code>$search.getSearch().getParams().pageNo = 2</code></li>
+        <li><code>$search.getSearch().getParams().perPage = 50</code></li>
+    </ul>
+    which could be used by your application to present second page of search with certain id. View would include 50
+    result elements on it. If you would like to go further and understand how to do implement such functionality
+    please go to <a href="docs.html#/guide/search">Search</a> document. For purpose of this elaboration it is
+    important to learn that such binding is available and could be used to provide parameters to your app.
+</p>
+<p>Data binding between URL and model works also in opposite direction. If your app will switch to certain page
+    and your model will have all parameters used in <code>path</code> defined for that page, Lynx will automatically
+    update URL presented by browser with properly resolved binding expressions. That means that if you will initiate
+    search on your model with following parameters:
+    <ul>
+        <li><code>$search.getSearch().getParams().pageNo = 1</code></li>
+        <li><code>$search.getSearch().getParams().perPage = 30</code></li>
+    </ul>
+    and search operation will return results with <code>$search.getSearch().Id</code> set to e.g. <code>ere-343</code>
+    Lynx will update URL in browser to:
+    <pre class="prettyprint linenums" ng-set-text="app.js-05"></pre>
+    <script type="text/ng-template" id="app.js-05">
+        http://svr.wk.com/index.html#/results/id/ere-343/pageNo/1/pageSize/30
+    </script>
+    You do not need to any actions to make that URL update happen. It's a Lynx feature ready to use.<br/>
+    If you would like to see example code go to <a href="docs.html#/guide/search">Search</a> document and code examples
+    provided there.
+</p>
+<p>One important information regarding binding from model to URL. Lynx process of switching between pages works
+    in following steps:
+    <ul>
+    <li>first Lynx switches page content (loads file defined by <code>view</code> element) which initiates any logic
+        provided there
+    </li>
+    <li>when all model values used by <code>path</code> elements are available it updated URL in browser
+    </li>
+    </ul>
+    It works that way since binded models usually stores information which is provided by back end systems (e.g.
+    search id). Until communication with back end system is not finalized the URL would include some unbound models.
+    If such incomplete URL is set in browser, it would get to browser history braking possible further navigation.<br/>
+    That is helpful but has got some side effect you need to be aware of. If by any reason at least one of
+    models used in path binding stays undefined, Lynx will not update URL of page at all even though actual processing
+    would finish. So, if you will experience that your app does not updated URLs, have a look if all models used
+    in bindings got updated properly.
+</p>
+
+<h3>Events assignment</h3>
+<p>Lynx let's to assign certain event which appear during application processing to page views. Let's assume that
+    in certain processing point application calls following instruction:
+    <pre class="prettyprint linenums">
+    $search.trigger('searchById');
+    </pre>
+    Lynx provides you with ready solution to easily bind page to any event. It would initiate switch to certain
+    page with no need of coding. What you need it just to provide <code>eventBinding</code> section in
+    <code>pages</code> Lynx app configuration parameter.
+</p>
+<pre class="prettyprint linenums" ng-set-text="app.js-06"></pre>
+<script type="text/ng-template" id="app.js-06">
+    pages:[
+    ...
+    {   name: "resultsPage",
+        path: ...,
+        view: ...,
+        eventBinding: [
+            {model: "$search", event: "searchById"},
+            {model: "$search", event: "searchByPhrase"}
+        ],
+    ...
+    ]
+</script>
+<p>In above snippet of lynx configuration two events on <code>$search</code> model has been bound to <code>resultsPage</code>.
+    If any part of you app will call <code>$search.trigger('searchByPhrase')</code> Lynx will automatically
+    switch page to <code>resultsPage</code>. No coding needed.
+</p>
+
+
+<h3>URL schemas initiate page</h3>
+<p>Functionality presented up until now allows to define URL schema which are used e.g. to map between
+    URL typed by user and application page. Lynx provides additional functionality to add more flexibility to that use
+    case. Let's go back for a moment to path schema defined for <code>resultsPage</code>.
+    <pre class="prettyprint linenums" ng-set-text="app.js-03"></pre>
+    It's quite complex. User may use it as browser bookmark but it would be quite inconvenient for user to type it
+    in. You may find it useful to let your application switch to certain page even if user uses a little bit shorter URL.
+    Have a look on following configuration snippet.
+</p>
+<pre class="prettyprint linenums" ng-set-text="app.js-07"></pre>
+<script type="text/ng-template" id="app.js-07">
+    pages:[
+    ...
+    {   name: "resultsPage",
+        path: ...,
+        view: ...,
+        eventBinding: [...],
+        routes: [
+        {   path: "/results"
+        },
+        {   path: "/results/{query}",
+            methods: [
+                {model: "$search",
+                method: "searchByPhrase",
+                params: ["{query}"] }
+            ]
+        },
+        {   path: "/results/id/{searchId}",
+            methods: [
+                {model: "$search",
+                method: "searchById",
+                params: ["{searchId}"]}
+            ]
+        },
+        {   path: "/results/id/{searchId}/pageNo/{pageNo}/pageSize/{pageSize}",
+            methods: [
+                {model: "$search",
+                method: "searchById",
+                params: ["{searchId}", "{pageNo}", "{pageSize}"]}
+            ]
+        }
+        ],
+        ...
+    },
+    ...
+    ]
+</script>
+<p>You may see there <code>routes</code> configuration array. It defines URL schemas that could be used for
+    certain page. User may now use any of URL structures definded in <code>path</code> elements within <code>routes</code>
+    array.<br/>
+    Keep in mind that if <code>routes</code> array is present in page configuration, default
+    route for <code>path</code> value will be overwritten. Only <code>path</code> elements from <code>route</code>
+    array will be accepted by your application. Thus one of <code>path</code> schemas provided in <code>routes</code>
+    array must be fully compatible with URL structure provided in main  <code>path</code> element in page definition.
+    In example above the last member of <code>route</code> array fulfills that requirement.
+</p>
+<p>Each page definition may include information on actions that should be undertaken on page request. It is defined
+    in <code>methods</code> array.
+<pre class="prettyprint linenums" ng-set-text="app.js-08"></pre>
+<script type="text/ng-template" id="app.js-08">
+        {   path: "/results/{query}",
+            methods: [
+                {model: "$search", method: "searchByPhrase", params: ["{query}"]}
+            ]
+        }
+</script>
+As you see on above example, for given URL schema function <code>searchByPhrase</code> would be called on
+<code>$search</code> and url part bind by <code>query</code> model would be provided as parameter.<br/>
+You should not to use here your model variables. The variables defined in angular expressions in here are
+used only to bind URL section to model function call as parameters.
+</p>
+</div>

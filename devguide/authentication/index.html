@@ -1,0 +1,73 @@
+<div>
+    <div class="pageTitle">
+        <h1>authentication</h1>
+    </div>
+
+    <p>This article presents some information regarding implementation of authentication algorithms provided by
+        Lynx. It is based on algorithms of Velvet. Read <a href="docs.html#/guide/velvetConfig">Velvet config</a> for
+        details how to configure your app to use certain auth algorithym.
+    </p>
+    <p>Regardless of user authentication mode configured, Lynx provides some utilities for "remember user" and
+        "user auto login" functions of web application. It utilizes cookie (auth token is stored in cookie) and
+        local storage (authentication data are stored in local storage).
+    </p>
+
+    <h3>Basic authentication</h3>
+    <p>Basic authentication uses username and password as user credentials. It is provided in http
+        <code>Authorization</code> header. Username and password are transmitted as Base64 encoded text (for more details read
+        <a href="http://en.wikipedia.org/wiki/Basic_access_authentication#Client_side">wikipedia</a> article).
+        This Base64 encoded string is used later on as authentication token by your app.<br/>
+        Due to that fact it's the least secure method of authorization - Base64 encoded string is not only transmitted
+        via net but also is stored in client's environment.
+    </p>
+    <p>
+        Although Velvet provides <code>identity-v1</code> service for authentication purposes there is no dedicated
+        method exposed for Basic authentication. Method <code>Ping</code> is used - it is method available in each Velvet
+        service devised in first place for keep-alive periodic requests.
+    </p>
+    <p>To set up Basic authentication use <a href="docs.html#/api/wk.lynx.velvet/velvet.service.Auth#AUTH_BASIC">AUTH_BASIC</a>
+        switch.
+    </p>
+    <h3>RC4 Token authentication</h3>
+    <p>This mode of authentication is also based on username / password credentials. On very first authentication http
+        request it uses same way of providing credentials as Basic authentication. Backend system generates security token which
+        is provided back to user. The token is created based on RC4 encryption algorithm.<br/>
+        That value is later on used as token by any future http request and more over that is token
+        which get stored in user local environment. So, RC4 Token authentication is more secure then Basic authentication.
+    </p>
+    <p>Velvet provided special method for that type of authenitcation <code>identity-v1/AccessToken?type='Twill-RC4-Token'</code>.
+    </p>
+    <p>To set up RC4 Token authentication use
+        <a href="docs.html#/api/wk.lynx.velvet/velvet.service.Auth#AUTH_RC4_TOKEN">AUTH_RC4_TOKEN</a> switch.
+    </p>
+
+    <h3>IP / URL Referral authentication (anonymous authentication)</h3>
+    <p><b>TODO: this auth method is not already implemented</b></p>
+    <p>Some organizations would like to provide some predefined user credentials for authentication purposes based on
+        user agent location. For that purpose IP and/or URL Referral are used. Authentication service uses data provided
+        in http headers to select referenced user account. Authentication logic on server site uses that user account
+        for authentication and for that account creates session token which is returned to user agent.
+    </p>
+
+    <h3>Proxy authentication</h3>
+    <p><b>TODO: this auth method is not already implemented</b></p>
+    <p>This authentication method may be considered as special type of anonymous authentication. It does not require user
+        to provide any credentials. Instead, one predefined user account is used.
+        The method may be used to provide access for some publicly available content or in closed environment where
+        users may access your web app only from workstations which assures user identification by other means.
+
+    </p>
+
+    <h3>External Login Page</h3>
+    <p><b>TODO: this auth method is not already implemented</b></p>
+    <p>Some organizations provides one centralized authentication mechanism. It is implemented with redirection to
+        certain external login page which is responsible for user authentication. In case of positive processing user
+        is redirected back to source web application. That redirection URL is extended with Atlas Ticket created for
+        user.<br/>
+        Atlas Ticket is provided to your web application authentication service. It is used as authentication token
+        in any future requests of your application.
+    </p>
+
+
+
+</div>

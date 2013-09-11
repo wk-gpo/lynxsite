@@ -11,6 +11,7 @@
         "ng-hide" :  "http://docs.angularjs.org/api/ng.directive:ngHide",
         "ng-show" :  "http://docs.angularjs.org/api/ng.directive:ngShow",
         "ng-click" :  "http://docs.angularjs.org/api/ng.directive:ngClick",
+        "ng-submit" :  "http://docs.angularjs.org/api/ng.directive:ngSubmit",
         "ServiceExampleCtrl": {"tab": 1},
         "doSearch": {"tab": 1},
         "doLogin": {"tab": 1},

@@ -14,7 +14,7 @@
         "app.js": {"tab": 1},
         "page/log.html": {"tab" : 2},
 
-        "page.view" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=view"
+        "page.view" : "index.html#/api/wk.lynx.core/lynx.config.PageDefinition#view"
 
     },
     "annotate" : {

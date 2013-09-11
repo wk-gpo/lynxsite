@@ -1,3 +1,6 @@
 {
+    "annotate" : {
+        "name": "This time we use <code>name</code> which is defined in scope of directive <code>message</code>"
+    },
     "toolbar": true
 }

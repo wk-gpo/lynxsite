@@ -7,6 +7,9 @@
     "replace" : {
         "content/slides/angular/dataBinding/example/message.html" : "message.html"
     },
+    "annotate" : {
+        "yourName": "This name of model which you will be use; it binds to input text element value"
+    },
     "fold": [[2,5, true]],
     "toolbar": true
 }

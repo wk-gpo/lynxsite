@@ -1,8 +1,9 @@
 {
     "annotate" : {
-        "ServiceExampleCtrl" : "Controller instance creation on element scope.",
-        "doLogin" : "performing login action",
-        "doSearch" : "performing search action"
+        "authenticated": "<code>$auth</code> service model used as guard for authentication. It is set to <code>true</code> if user identity is positively verified",
+        "authentionFailed": "use that model of <code>$auth</code> to parametrize processing in case of authentication failure",
+        "login" : "login action executed by model functionality",
+        "logout" : "logout action executed by model functionality"
     },
     "links" : {
         "ng-controller" : "http://docs.angularjs.org/api/ng.directive:ngController",
@@ -13,8 +14,13 @@
         "ng-click" :  "http://docs.angularjs.org/api/ng.directive:ngClick",
         "ServiceExampleCtrl": {"tab": 1},
         "doSearch": {"tab": 1},
-        "doLogin": {"tab": 1},
-        "search" : {"tab": 1},
+        "login":"#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#login",
+        "logout": "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#logout",
+        "userName" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#userName",
+        "userPassword" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#password",
+        "authenticated" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#authenticated",
+        "authentionFailed" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#authenticationFailed",
+        "rememberUserName" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#rememberUserName",
         "getResult": "#/api/wk.lynx.velvet/velvet.vo/velvet.vo.Search#%67etResult",
         "getItems": "#/api/wk.lynx.velvet/velvet.vo/velvet.vo.SearchResultList#%67etItems",
         "Title": "#/api/wk.lynx.velvet/velvet.vo/velvet.vo.SearchResultListItem#%54itle"

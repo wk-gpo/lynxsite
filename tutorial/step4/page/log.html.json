@@ -7,9 +7,9 @@
         "ng-model": "http://docs.angularjs.org/api/ng.directive:ngModel",
         "component/form.html": {"tab" : 6},
 
-        "login" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=login",
-        "authentionFailed" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=authentionFailed",
-        "pending" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=pending",
+        "login" : "index.html#/api/wk.lynx.core/lynx.models.AuthModel#login",
+        "authentionFailed" : "index.html#/api/wk.lynx.core/lynx.models.AuthModel#authentionFailed",
+        "pending" : "index.html#/api/wk.lynx.core/lynx.models.AuthModel#pending",
 
         "$auth" : {"tab" : 1}
 

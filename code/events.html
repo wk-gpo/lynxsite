@@ -1,0 +1,32 @@
+<div>
+
+    <div class="pageTitle">
+        <h1>events documenting</h1>
+    </div>
+
+    <p>
+        Events should be commented in there own ("floating") comments containing @event tag followed by event name in
+        format &lt;class_name&gt;#&lt;event_name&gt;. Class name should be fully qualified, including namespace. Keeping
+        this format is crucial for proper documentation generation.
+    </p>
+    <p>
+        Functions firing events should be marked with @fires tag followed by event name, without class name. See example
+        below:
+        <pre class="prettyprint linenums">
+            /**
+             * @expose
+             * @event lynx.models.AuthModel#login
+             */
+
+            /**
+             * Executes the login action.
+             *
+             * @expose
+             * @fires login
+             */
+            lynx.models.AuthModel.prototype.login = function () {
+                this.getCtrl().login();
+            };
+        </pre>
+    </p>
+</div>

@@ -1,10 +1,10 @@
 {
     "links" : {
-        "$preferencesDataProvider" : {"first" : true, "value" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PreferencesDataProvider"},
-		"init" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PreferencesDataProvider?scrollTo=init",
-		"map" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PreferencesConfigDefinition?scrollTo=map",
-		"$auth.authenticated" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=authenticated",
-		"authenticated" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PreferencesConfigDefinition?scrollTo=authenticated"
+        "$preferencesDataProvider" : {"first" : true, "value" : "index.html#/api/wk.lynx.core/lynx.config.PreferencesDataProvider"},
+		"init" : "index.html#/api/wk.lynx.core/lynx.config.PreferencesDataProvider#init",
+		"map" : "index.html#/api/wk.lynx.core/lynx.config.PreferencesConfigDefinition#map",
+		"$auth.authenticated" : "index.html#/api/wk.lynx.core/lynx.models.AuthModel#authenticated",
+		"authenticated" : "index.html#/api/wk.lynx.core/lynx.config.PreferencesConfigDefinition#authenticated"
     },
     "annotate" : {
         "perPage": "this is name of parameter which will be exposed to Lynx application",

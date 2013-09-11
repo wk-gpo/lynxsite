@@ -1,0 +1,32 @@
+<div>
+
+    <div class="pageTitle">
+        <h1>links in documentation</h1>
+    </div>
+
+    <h3>@lynxsitelink tag</h3>
+
+    <p>Normal JSDoc mechanism for putting links to other resources in "See" section (@see and @link) will not work for
+    documents in lynxsite. It assumes that link target is either another generated page or external URL</p>
+
+    <p>Another mechanism had to be put in place that knows LynxSite url structure. All URL's in LynxSite are in the form
+    ...docs.html#&lt;actual location&gt;. For eg. &lt;actual location&gt; for this page is "/codedoc/links". When one
+    needs to put link to LynxSite document in generated docs, one should put comment tag in the form
+    @lynxsitelink &lt;link label&gt;|&lt;actual location&gt; See example below, it will create link labeled
+    "Authorisation" leading to "/func/authorization" page. </p>
+    <pre class="prettyprint linenums">
+    /**
+     * Authentication model implementation.<br/>
+     * To get instance of this model please add entry to models declaration and use lynx.controllers.AuthCtrl:<br/><br/>
+     * ...
+     * @constructor
+     * @extends {lynx.models.BaseModel}
+     * @lynxsitelink Authorisation|/func/authorization
+     */
+lynx.models.AuthModel = function () {
+};{
+...
+    </pre>
+
+    <p>@lynxsitedoc tag overrides any @see tags.</p>
+</div>

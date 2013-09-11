@@ -1,0 +1,109 @@
+<div>
+    <div class="pageTitle">
+        <h1>velvet configuration</h1>
+    </div>
+
+<h3>Velvet config</h3>
+<p>Applications build with Lynx are base on back-end system functionality provided by Velvet library.
+    It is crucial to point your application to proper Velvet instance. To do that you need to provide configuration
+    in you app's configuration. See snippet below:
+</p>
+<pre class="prettyprint linenums">
+(function (global) {
+    ...
+    var velvetConfig = {
+        host: "http://...",
+        apikey: "...",
+        productId: "WKUS-YOUR-PRODUCT-ID",
+        authMode: ... ,
+        debug: false
+    };
+    ...
+    var yourApp = lynx.module({
+        moduleName: "yourAppName",
+        velvetConfig: velvetConfig,
+        ...
+    });
+})(window);
+</pre>
+<p>Object <code>velvetConfig</code> is used to initialize
+    <a href="docs.html#/api/wk.lynx.velvet/velvet.config.Configuration">velvet.config.Configuration</a>.
+    It is configuration of Velvet instance setting host URI, apikey and productId - requried parameters.
+    The forth parameter - debug - could be used to set debug mode for communication with Velvet.
+    Parameters used in example are following purpose:
+<ul>
+    <li><code>host {string}</code> - Velvet instance host address. Please remember to provide protocol prefix
+        (http:// or https://) and port if different from :80.
+    </li>
+    <li><code>apikey {string}</code> - API Key which should be provided to you from Velvet instance manager</li>
+    <li><code>productId {string}</code> - Product Id to be used by infrastructure
+    </li>
+    <li><code>authMode {string}</code> - enables you to choose authorization algorithm; it's optional</li>
+    <li><code>debug {boolean}</code> - Is debug or production services in use.</li>
+</ul>
+    For description of all configuration parameters go to
+    <a href="docs.html#/api/wk.lynx.velvet/velvet.config.Configuration">velvet.config.Configuration</a> API
+    documentation.
+</p>
+<h3>Authentication modes</h3>
+<p>Using <code>authMode</code> parameter you may choose which authentication algorithms your application will use.
+    Currently only <code>Basic</code> and <code>RC4 Token</code> algorithms are available. Details of authentication
+    algorithms are described in <a href="docs.html#/guide/authenticationDetails">Authentication details</a> article.
+    If you will not define <code>authMode</code>, Lynx will by default assume <code>Basic</code> authentication
+    for your application.<br/>
+    To configur that parameter use constants defined in
+    <a href="docs.html#/api/wk.lynx.velvet/velvet.service.Auth">velvet.service.Auth</a> object:
+    <ul>
+    <li><a href="docs.html#/api/wk.lynx.velvet/velvet.service.Auth#AUTH_BASIC">AUTH_BASIC</a> - for basic mode authentication</li>
+    <li><a href="docs.html#/api/wk.lynx.velvet/velvet.service.Auth#AUTH_RC4_TOKEN">AUTH_RC4_TOKEN</a> - for RC4 Token mode authentication</li>
+    </ul>
+    The following example will configure your app to use RC4 Token authentication algorithm
+<pre class="prettyprint linenums">
+    ...
+    var velvetConfig = {
+        ...
+        authMode: velvet.service.Auth.AUTH_RC4_TOKEN,
+        ...
+    };
+    ...
+</pre>
+
+</p>
+
+<h3>More flexibility setting parameters</h3>
+<p>
+    It is usefull in development phase to use different Velvet host instance then the one used in production.
+    You can do that simply by evaluating value of <code>velvet.configure.host</code>. The following snippet presents
+    shows the way to use certain URI while working in development mode and URI based on app's current domain in
+    production mode. <br/>
+    <b>Product Id</b> may also need some more flexibility. You may e.g. read it from URL parameter or set to default
+    value.
+</p>
+<pre class="prettyprint linenums">
+(function (global) {
+    ...
+    var hostDomain = "http://...";
+    if (document.domain !== "localhost") {
+        hostDomain = "http://velvet." + document.domain;
+    }
+    var productId = utils.url.getParamByName("cpid") || "WKUS-YOUR-PRODUCT-ID";
+
+    var velvetConfig = {
+        host:hostDomain,
+        apikey:"...",
+        productId: productId,
+        debug:false
+    };
+    ...
+    var yourApp = lynx.module({
+        moduleName: "yourAppName",
+        velvetConfig: velvetConfig,
+        ...
+    });
+})(window);
+</pre>
+
+
+
+
+</div>

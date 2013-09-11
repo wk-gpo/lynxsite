@@ -1,0 +1,355 @@
+<div>
+    <div class="pageTitle">
+        <h1>authentication</h1>
+    </div>
+
+
+<h3>Velvet config</h3>
+<p>Lynx authorization is based on Velvet authorization services. It is implemented in
+    <a href="docs.html#/api/wk.lynx.velvet/velvet.service.Auth">velvet.service.Auth</a> object. You do not need to
+    use that class directly since Lynx provides convenience objects which encapsulate Velvet service.
+    But you do need to provide Velvet configuration to be used by Lynx app. For further information
+    go to <a href="docs.html#/guide/velvetConfig">Velvet Configuration</a> topic.
+</p>
+
+
+<h3>AuthModel</h3>
+<p>Once you have provided Velvet configuration your app is ready to use authorization. Lynx provided for that purpose
+    service <a href="docs.html#/api/wk.lynx.core/lynx.models.AuthModel">AuthModel</a>.
+</p>
+<p>It is easy to add that model do you app. Just add entry to models declaration of your app. See following snippet of
+    app js file (it's the same file where velvet configuration is set).
+</p>
+<pre class="prettyprint linenums">
+(function (global) {
+    ...
+    var velvetConfig = { ... };
+    ...
+    var loginExample = lynx.module({
+        ...
+        globals: [
+            ...
+            {alias:"$auth", factory:lynx.models.AuthModel.factory },
+            ...
+        ],
+        ...
+    });
+    ...
+})(window);
+</pre>
+<p>By convention, <code>AuthModel</code> is mapped to <code>$auth</code> alias but you may use any other name in you application.
+    Once you configured <code>AuthModel</code> you may access the model by <code>$rootScope.$auth</code> and you may use model in
+    angular expressions.  </p>
+<p>Before we go further with authorization example let's have a look on <code>AuthModel</code> parameters:</p>
+<ul>
+    <li><code>userName {string}</code> - current user name; that is the property user login should be provided to from
+        login form.</li>
+    <li><code>userPassword {string}</code> - current user password - naturally, that should also be provided by user via login form.
+        It is cleared after authentication.</li>
+    <li><code>pending {boolean}</code> - determines whether authentication is in progress. This property let's you properly
+        change UI while login is processed (e.g. presenting loading indicator). </li>
+    <li><code>authenticated {boolean}</code> - determines whether user is authenticated - that's the property which we will use
+        to show login form (in case $auth.authenticated == false) or app page.</li>
+    <li><code>authenticationFailed {boolean}</code> - determines whether last authentication failed. Read-only.</li>
+    <li><code>autologin {boolean}</code> - determines whether to auto login on next login</li>
+    <li><code>rememberPassword {boolean}</code> - determines whether to remember the password on current machine</li>
+    <li><code>rememberUserName {boolean}</code> - determines whether to remember the user name on current machine</li>
+    <li><code>userEmail {string}</code> - current user email.</li>
+</ul>
+
+
+<h3>Authorization on HTML page</h3>
+<p>Let's go back to login example. You now have all infrastructure up and ready. Now you have to use it on your page.
+    Naturally, you should use switch functionally depending on <code>$auth.authenticated</code> property value. In case
+    user is not logged in login page should be presented. Otherwise, regular app page could be viewed (whatever
+    'regular page' means in your app ;)
+</p>
+<pre class="prettyprint linenums" ng-set-text="loginExample.html-01"></pre>
+<script type="text/ng-template" id="loginExample.html-01">
+    <div ng-switch="$auth.authenticated">
+        <div ng-switch-when="false"> ... </div>
+        <div ng-switch-when="true"> ... </div>
+    </div>
+</script>
+
+<p>As you can see, authorization model is used as <code>ng-switch</code> expression. If user is not logged in app will present
+    login form. Example login form you could use is present on following html snippet.
+
+</p>
+<pre class="prettyprint linenums" ng-set-text="loginExample.html-02"></pre>
+<script type="text/ng-template" id="loginExample.html-02">
+    <div ng-switch-when="false">
+        <div class="loginForm">
+            <h1>Log In</h1>
+            <div>
+                <!-- login fields: username, password -->
+                <div class="loginLabel">User</div>
+                <input type="text" ng-model="$root.$auth.userName"/>
+                <div class="loginLabel">Password</div>
+                <input type="password" ng-model="$root.$auth.userPassword"/>
+            </div>
+            <!-- triggering login on button click -->
+            <div class="loginWidgetFooter">
+                <input type="button" class="button" value="Log In"
+                    ng-click="$root.$auth.login()"/>
+            </div>
+        </div>
+    </div>
+</script>
+<p>Now your application provides login form and after positive login can switch view to app pages.
+    But your application should also properly inform user in case of any kind of login problem.
+    As you may already guessed, parameter <code>$auth.authentionFailed</code> is provided for that purpose.
+    See the following snippet
+</p>
+<pre class="prettyprint linenums" ng-set-text="loginExample.html-04"></pre>
+<script type="text/ng-template" id="loginExample.html-04">
+    <div ng-switch-when="false">
+        <div class="loginForm">
+            <h1>Log In</h1>
+            <div>
+                <!-- login fields: username, password -->
+                ...
+                <!-- login error message -->
+                <div class="error" ng-show="$root.$auth.authentionFailed">
+                    Login Failed.
+                </div>
+            </div>
+            <!-- triggering login on button click -->
+            ...
+        </div>
+    </div>
+</script>
+
+
+
+<p>You can also use autologin user and/or remembering username functionality of <code>AuthModel</code>.
+    Just use its two next options: <code>$auth.autologin</code> and <code>$auth.rememberUserName</code>.
+    It's a piece of cake. You do not need any work with cookies - Lynx will do it for you.
+</p>
+<pre class="prettyprint linenums" ng-set-text="loginExample.html-03"></pre>
+<script type="text/ng-template" id="loginExample.html-03">
+    <div ng-switch-when="false">
+        <div class="loginForm">
+            <h1>Log In</h1>
+            <div>
+                <!-- login fields: username, password -->
+                ...
+                <!-- login options -->
+                <div class="loginOptionsLine">
+                    <span>
+                        <input type="checkbox" ng-model="$root.$auth.rememberUserName">
+                        <label>Remember my ID on this computer</label>
+                    </span>
+                </div>
+                <div class="loginOptionsLine">
+                    <span>
+                        <input type="checkbox" ng-model="$root.$auth.autologin">
+                        <label> Log me in automatically</label>
+                    </span>
+                </div>
+                <!-- login error message -->
+                ...
+            </div>
+            <!-- triggering login on button click -->
+            ...
+        </div>
+    </div>
+</script>
+
+
+
+
+
+<h3>Example sources</h3>
+<p>See how could be written application with all above mentioned functionality. Notice that CSS are just put here
+    to mak the example a little bit nicer. Change then to fit your design. You may also download
+    <a href="download/LoginExample.zip">LoginExample.zip</a>
+</p>
+
+<div class="app-source" app_source="loginExample.html loginExample.js loginExample.css"
+    annotate="loginExample.annotation" style="clear: both;">
+</div>
+
+<div class="login-example">
+    <script type="text/ng-template" id="loginExample.html">
+        <div  ng-class="{true:' loggedIn', false: ' loginPage'}[$auth.authenticated];"
+            ng-switch="$auth.authenticated">
+            <div ng-switch-when="false">
+                <div class="loginForm">
+                    <h1>Log In</h1>
+                    <div>
+                        <!-- login fields: username, password -->
+                        <div class="loginLabel">User</div>
+                        <input type="text" tabIndex="1" size="50"
+                            ng-model="$root.$auth.userName"/>
+                        <div class="loginLabel">Password</div>
+                        <input type="password" tabIndex="2" size="50"
+                            ng-model="$root.$auth.userPassword"/>
+                        <!-- login options -->
+                        <div class="loginOptionsLine">
+                            <span>
+                                <input type="checkbox"
+                                    ng-model="$root.$auth.rememberUserName">
+                                <label>Remember my ID on this computer</label>
+                            </span>
+                        </div>
+                        <div class="loginOptionsLine">
+                            <span>
+                                <input type="checkbox"
+                                    ng-model="$root.$auth.autologin">
+                                <label> Log me in automatically</label>
+                            </span>
+                        </div>
+                        <!-- login error message -->
+                        <div class="error"
+                            ng-show="$root.$auth.authentionFailed">
+                            Login Failed.
+                        </div>
+                    </div>
+                    <!-- triggering login on button click -->
+                    <div class="loginWidgetFooter">
+                        <input type="button"class="button" value="Log In"
+                            ng-click="$root.$auth.login()"/>
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-when="true" id="mainContent">
+                You are logged in.
+                <input type="button" class="button" value="Log out"
+                    ng-click="$root.$auth.logout()"/>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="loginExample.js">
+        (function (global) {
+
+        global.loginExample = global.loginExample || {};
+        global.loginExample.ctrl = global.loginExample.ctrl || {};
+
+        var hostDomain = "http://velvet.cheetah.tal.dev.lynxapp.net";
+        if (document.domain !== "localhost") {
+        hostDomain = "http://velvet." + document.domain;
+        }
+
+        velvet.configure({
+        host:hostDomain,
+        apikey:"5D2000D799874109A65DD0C984102DCC",
+        debug:false
+        });
+
+        // Application custom data
+        var appData = {
+        };
+
+        var loginExample = lynx.module(
+        {
+        moduleName:"wk.loginExample",
+        globals:[
+        { alias:"$auth", factory:lynx.models.AuthModel.factory },
+        { "alias": "$appData", "value": appData}
+        ],
+        pages:[
+        {
+        name:"homePage",
+        path:"/home",
+        view:"html/page/home.html"
+        }
+        ],
+        defaultPath:"/home"
+        });
+
+        /**
+        *
+        * @param {angular.Scope} $scope
+        * @param {velvet.service.Search} $velvetSearch
+        * @param {velvet.service.Content} $velvetContent
+        * @param {angular.$location} $location
+        * @param {velvet.config.Content} $velvetConfig
+        */
+        function initialize($scope, $velvetSearch, $velvetContent, $location, $velvetConfig) {
+        $scope.$location = $location;
+        $scope.$velvetConfig = $velvetConfig;
+
+        // Watch for authentication
+        $scope.$watch("$auth.authenticated", function (newVal, oldVal, scope) {
+        if (!newVal) {
+        scope.$auth.userName = 'allpubsuser@wk.com';
+        }
+        });
+        }
+
+        initialize["$inject"] = ["$rootScope", "$velvetSearch", "$velvetContent", "$location", "$velvetConfig"];
+
+        // Function call on application initialization
+        loginExample.run(initialize);
+        })(window);
+    </script>
+    <script type="text/ng-template" id="loginExample.css">
+        .loginPage .loginForm {
+        position: absolute;
+        width: 300px;
+        margin-left: -150px;
+        left: 50%;
+        font-family: serif;
+        }
+
+        .loginPage .loginFormHeader {
+        height: 50px;
+        }
+
+        .loginPage h1 {
+        font: normal 2em Bliss;
+        }
+
+
+        .loginPage .loginForm input[type=text],
+        .loginPage .loginForm input[type=password] {
+        display: block;
+        width: 300px;
+        margin-bottom: 15px;
+        }
+        .loginPage .loginForm .loginLabel {
+        margin-bottom: 5px;
+        }
+
+
+        .loginPage .loginForm .error {
+        color:red;
+        font-weight:bold;
+        margin-bottom:15px;
+        }
+
+        .loginPage .loginForm .loginOptionsLine{
+        margin-bottom:15px;
+        }
+        .loginPage .loginForm .loginOptionsLine label {
+        font-weight:normal;
+        }
+
+        .button {
+        text-align: center;
+        font-weight: bold;
+        padding: 2px 6px 3px;
+        border: 2px outset buttonface;
+        cursor: pointer;
+        }
+    </script>
+    <script type="text/ng-template" id="loginExample.annotation">
+        {
+        "loginExample.html": {
+        "{true:' loggedIn', false: ' loginPage'}[$auth.authenticated]": "Yet another possible use of <code>$auth.authenticated</code>. Here class of root element is set to <code>loggedIn</code> or <code>loginPage</code> regarding of authorization status.",
+        "$root.$auth.logout()": "And this is how you may implement logout on regular app page. Use whatever html element you like but call <code>$auth.logout()</code> on user action."
+        },
+        "loginExample.js": {
+        "configure": "Configuration of Velvet instance which should be used by application. Authorization is one of functionalities provided by Velvet services.",
+        "lynx": "That's like you create your application module based on Lynx lib.",
+        "$auth": "To use authorization you need to define <code>AuthModel</code> in your application.",
+        "$watch": "If you need to do some logic depending on authorization state you may put it in <code>$watch</code> defined for <code>$auth.authenticated</code>."
+        }
+        }
+    </script>
+</div>
+
+</div>
+
+

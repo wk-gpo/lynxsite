@@ -1,0 +1,92 @@
+<div>
+
+    <div class="pageTitle">
+        <h1>members documenting</h1>
+    </div>
+
+    <h3>Member type</h3>
+    <p>Members of object should be annotated to define member. You should always use
+        <code><a href="http://usejsdoc.org/tags-type.html">@type</a></code> annotation to
+        show member's type. See examples below.
+    <pre class="prettyprint linenums">
+       /**
+        * @type {number}
+        */
+        lynx.core.State.prototype.counter = 0;
+
+       /**
+        * @type {boolean}
+        */
+        lynx.core.State.prototype.ready = true;
+    </pre>
+    <h3>Private member</h3>
+    It's not enough to show type of member. You should always provide annotation for access specification. To define
+    private member use <code><a href="http://usejsdoc.org/tags-private.html">@private</a></code> annotation.
+    <pre class="prettyprint linenums">
+       /**
+        * @private
+        * @type {number}
+        */
+        lynx.core.State.prototype.counter = 0;
+    </pre>
+    Please, be very careful with other annotations of private members. For example following set of annotations may
+    cause problem in generated API documentation.
+    <pre class="prettyprint linenums">
+lynx.core.State = function ($rootScope) {
+    /** @type {*} */
+    this.$rootScope = $rootScope;
+    ...
+};
+{
+    /**
+     * @private
+     * @type {number}
+     */
+    lynx.core.State.prototype.$rootScope = null;
+    ...
+}
+    </pre>
+    Member <code>$rootScope</code> is annotated as private which means it should not be present in
+    API Documentation. Due to other annotation provided for assignment in constructor it is included in documentation.<br/>
+    So, never put type annotations in your code for <code>this.xxx</code> assignments. Type specification at
+    member definition is enough for closure compiler.
+    <pre class="prettyprint linenums">
+lynx.core.State = function ($rootScope) {
+    this.$rootScope = $rootScope;
+    ...
+};
+{
+    /**
+     * @private
+     * @type {number}
+     */
+    lynx.core.State.prototype.$rootScope = null;
+    ...
+}
+    </pre>
+
+    </p>
+
+    <h3>Public members</h3>
+    <p>
+    Markup for public member uses both:
+        <ul>
+        <li><code><a href="http://usejsdoc.org/tags-public.html">@public</a></code> which makes the member to appear in
+            generated API documentation
+        </li>
+        <li><code><a href="https://developers.google.com/closure/compiler/docs/js-for-compiler?hl=de#tag-expose">@expose</a></code>
+            which notifies closure compiler not to change member name during code compilation
+        </li>
+        </ul>
+
+    <pre class="prettyprint linenums">
+       /**
+        * @public
+        * @expose
+        * @type {boolean}
+        */
+        lynx.core.State.prototype.ready = true;
+    </pre>
+
+    </p>
+</div>

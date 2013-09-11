@@ -1,0 +1,89 @@
+<div>
+    <div class="pageTitle">
+        <h1>functions documenting</h1>
+    </div>
+
+    <h3>Private / public functions</h3>
+    <p>Functions are annotated with <code><a href="http://usejsdoc.org/tags-private.html">@private</a></code> or
+        <code><a href="http://usejsdoc.org/tags-public.html">@public</a></code> /
+        <code><a href="https://developers.google.com/closure/compiler/docs/js-for-compiler?hl=de#tag-expose">@expose</a></code>
+        similarly to members.
+        <pre class="prettyprint linenums">
+           /**
+            * @private
+            * ...
+            */
+            lynx.core.State.prototype.internalGet = function() {...};
+
+           /**
+            * @public
+            * @expose
+            * ...
+            */
+            lynx.core.State.prototype.get = function() {...};
+        </pre>
+    </p>
+    <h3>Function parameters & returned value</h3>
+    <p>
+    In case of functions you need to use two other annotations:
+        <ul>
+            <li><code><a href="http://usejsdoc.org/tags-param.html">@arg</a></code> which defines parameters of function
+                and may be missing if function does not require any parameters. Do not use JSDoc's @param tag as it iterfers
+                with Closure Compiler
+            </li>
+            <li><code><a href="http://usejsdoc.org/tags-return.html">@return</a></code> to specify return type of function;
+                you should always define that annotation
+            </li>
+        </ul>
+        See example below:
+        <pre class="prettyprint linenums">
+    /**
+     * @public
+     * @expose
+     * @arg {Array.&lt;string&gt;} providers  list of data provider names in order you need to configure
+     * @return {void}
+     */
+    lynx.config.AppProperties.prototype.setProvidersPriority = function (providers) { ... }
+        </pre>
+    </p>
+    <h3>Documenting example use of function</h3>
+    <p>You may also use also use <code><a href="http://usejsdoc.org/tags-example.html">@example</a></code>
+        annotation if you need to show some example of function use. All lines between <code>@example</code> and
+        any other annotation will be used as code snippet in generated API doc.
+        <pre class="prettyprint linenums">
+    /**
+     * @public
+     * @expose
+     * @arg {Array.&lt;string&gt;} providers  list of data provider names in order you need to configure
+     * @return {void}
+     * @example
+     * $properties.setProvidersPriority([
+     *                  "$storeDataProvider",
+     *                  "$sessionDataProvider",
+     *                  "$craDataProvider",
+     *                  "$preferencesDataProvider",
+     *                  "$staticDataProvider"
+     *                  ]);
+     */
+    lynx.config.AppProperties.prototype.setProvidersPriority = function (providers) { ... }
+        </pre>
+
+
+
+    </p>
+    <h3>Suppressing public function in API Doc</h3>
+    <p>In some cases although function is public it should not be present in API documentation. For that purpose
+        <code>@internal</code> annotation has been provided. It makes the function available for intermodule calls
+        but suppresses generation of API doc.
+        <pre class="prettyprint linenums">
+    /**
+     * @internal
+     * @expose
+     * @arg {lynx.config.BaseDataProvider} configProvider
+     * @return {void}
+     */
+    lynx.config.AppProperties.prototype.register = function (configProvider) { ... }
+        </pre>
+        Function <code>register</code> would be exposed to other modules but will not be present in API doc.
+    </p>
+</div>

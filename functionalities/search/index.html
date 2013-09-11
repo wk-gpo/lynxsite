@@ -1,0 +1,715 @@
+<div>
+    <div class="pageTitle">
+        <h1>search</h1>
+    </div>
+
+<h3>Velvet config</h3>
+<p>Lynx authorization is based on Velvet authorization services. It is implemented in
+    <a href="docs.html#/api/wk.lynx.velvet/velvet.service.Search">velvet.service.Search</a> object. You do not need to
+    use that class directly since Lynx provides convenience objects which encapsulate Velvet service.
+    You need to provide Velvet configuration to be used by Lynx app. For further information
+    go to <a href="docs.html#/guide/velvetConfig">Velvet Configuration</a> topic.
+</p>
+
+<h3>SearchModel</h3>
+<p>Search functionality is provided by Lynx service <a href="docs.html#/api/wk.lynx.core/lynx.models.SearchModel">SearchModel</a>.
+</p>
+<p>To add the model to your app make sure models declaration of your app includes following declaration:
+</p>
+<script type="text/ng-template" id="searchExample.js-01">
+(function (global) {
+    ...
+    var velvetConfig = { ... };
+    ...
+    var loginExample = lynx.module({
+        ...
+        globals: [
+            ...
+            {alias:"$search", factory:lynx.models.SearchModel.factory},
+            ...
+        ],
+        ...
+    },
+    ["wk.lynx.ui"]);
+    ...
+})(window);
+</script>
+<pre class="prettyprint linenums" ng-set-text="searchExample.js-01"></pre>
+
+<p>Such defined model could be accessed by <code>$rootScope.$search</code> in any angular expresion you need
+    to use in your app. <br/>
+    Notice that additional parameter is provided to <code>lynx.module</code> function call. It is an array of modules
+    your application depends on. Two modules are available by default: wk.lynx.core and wk.lynx.velvet. The latter one
+    is required by all core functions thus it is loaded automatically. All other modules need to be provided
+    in configuration as it is presented for wk.lynx.ui in above example.
+</p>
+<h4>Search flavours</h4>
+<p>Search provides multiple ways of processing:
+    <ul>
+    <li><code>searchByPhrase</code> - Commonly used as first search option given to app user. It allows to search
+        all documents in repository taking as a criteria to user provided phrase. Of course, repository means Velvet
+    </li>
+    <li><code>searchById</code> - Each performed search get its unique identifier. That value may be used to perform
+        the same search again without need to remember search query used in first call.
+    </li>
+    <li><code>searchWithinResults</code> - That allows to narrow list of documents which has been found by previous
+        search. User provides additional criterions which are applied to.
+    </li>
+    <li><code>searchSelectedContent</code> - Operation used to perform search within certain content. It could be
+        used for document areas selected by user e.g. on browse tree.
+    </li>
+    <li><code>searchByCitation</code> - That search allows to find document that includes certain citation and all other
+        documents that refer to that citation. If you have available citation link (e.g. in document available data)
+        you may use <code>resolveCitationLink</code> to citation which is provided by backend system.
+    </li>
+    <li><code>narrowSearch</code> - Let's narrow resulting element list by selection of certain node on results filter
+        set.
+    </li>
+    </ul>
+</p>
+<h4>Search results - paging / sortOrder</h4>
+<p>Since searches may return many entries search API exposes list of returned entries via paging mechanisms. Entries which are
+    results of search are grouped on pages, every page encompass certain number of entries. Search function returns only
+    one page per call. User may navigate through pages by calling search function with required page number.<br/>
+    To enable that processing every search function or event has following properties:
+    <ul>
+    <li><code>pageNo</code> - number of page which should be presented; for first page <code>pageNo==1</code> and
+        that value is assumed if <code>pageNo</code> is not provided.
+    </li>
+    <li><code>perPage</code> - number of elements that should be returned on every page; if it's not set SearchModel set
+        uses value defined in <a href="docs.html#guide/velvetConfig">Velvet configuration</a> in <code>defaultTop</code>
+        parameter. And if that is not set either, it defaults to Velvet defined value.
+    </li>
+    <li><code>sortOrder</code> - every change of required order influence set of result entries returned in certain pages;
+        if that is not provided system will default do search order assumed by backend service.
+    </li>
+    </ul>
+
+</p>
+
+
+<h3>Search form</h3>
+<p>Let's start with basic search user may perform with specific phrases. Application probably will show search
+control similar as presented on picture below.</p>
+<img class="diagram" src="img/guide/search01.png" width="436" height="60">
+<p><br/>It enables one or multiple phrases to be entered as search criteria. Search will be performed on "Go" button click.
+    Following code snippet presents example definition of such search form.
+</p>
+<pre class="prettyprint linenums" ng-set-text="searchExample.html-01"></pre>
+<script type="text/ng-template" id="searchExample.html-01">
+    <div class="searchForm">
+        <div class="input">
+            <input type="text" ng-model="$search.params.query"
+                placeholder="Search Within All Content">
+
+            <button ng-click="$search.searchByPhrase($search.params.query)">
+                <span>Go</span>
+            </button>
+        </div>
+    </div>
+</script>
+<p>It defines form with one <code>input</code> element which is related to <code>$search.params.query</code> model.
+    Every text entered into <code>input</code> field is mapped to defined model and could be used by other angular
+    expressions.
+</p>
+<p>See <code>button</code> definition in above snippet. It uses <code>$search.params.query</code> value as a parameter
+    of <code>searchByPhrase</code> function provided by <code>SearchModel</code>. That is all you need to do to prepare
+    search form part.
+</p>
+<p>To make that example a little bit more functional add some more functionality:
+    <ul>
+    <li>add <code>lx-keypress</code> lynx directive to <code>input</code> element - that will map Enter keypress event
+        with the same function call Go button uses.
+    </li>
+    <li>add <code>ng-click</code> and <code>lx-click-outside</code> directives to <code>input</code> element - that will manage
+        focus for search input field if user clicks in or outside the element.
+    </li>
+    <li>add <code>ng-disabled</code> directive to <code>button</code> element - it will make button disabled if no
+        search parameter is provided.
+    </li>
+    </ul>
+    See snippet below.
+</p>
+
+<pre class="prettyprint linenums" ng-set-text="searchExample.html-03"></pre>
+<script type="text/ng-template" id="searchExample.html-03">
+    <div class="searchForm">
+        <div class="input">
+            <input type="text" ng-model="$search.params.query"
+                placeholder="Search By Phrase"
+                lx-keypress="{enter: '$search.searchByPhrase($search.params.query)'}"
+                ng-click="inputFocus = true;" lx-click-outside="inputFocus = false;">
+
+            <button
+                ng-click="$search.searchByPhrase($search.params.query)"
+                ng-disabled="!$search.params.query">
+                <span>Go</span>
+            </button>
+        </div>
+    </div>
+</script>
+<p>Search form may be used on multiple pages in your application. So may consider extracting it to separate file
+    (e.g. searchForm.html) which could be included into any page you need. Use angular <code>ng-include</code>
+    directive for that purpose.
+</p>
+<pre class="prettyprint linenums" ng-set-text="searchExample.html-04"></pre>
+<script type="text/ng-template" id="searchExample.html-04">
+<div ng-include="'html/component/searchForm.html'"/>
+</script>
+
+<h3>Search help popup window</h3>
+<p>Search parameter should be provided simply as a set words or could have a structure with e.g. logical operators.
+    In latter case, user should follow certain query syntax. It's good practice to provide simple help page close
+    to search button.<br/>
+    Have a look at the snippet provided below to see how it may be accomplished. Put that elements close to search
+    button.
+</p>
+
+<pre class="prettyprint linenums" ng-set-text="searchExample.html-05"></pre>
+<script type="text/ng-template" id="searchExample.html-05">
+<div class="help">
+    <a href="javascript:void(0)"
+        title="Search Tips"
+        ng-click="popupModel.open();">Quick help
+    </a>
+</div>
+<lx-popup
+    title="'Search: Quick Tips'"
+    model="popupModel"
+    template="'html/popup/searchTips.html'">
+</lx-popup>
+</script>
+<p>
+    By <code>div</code> user can open popup using model method <code>open()</code>. In this example model is called
+    <code>popupModel</code> but you may use whatever name for that model you like. <br/>
+    Next tag is <code>lx-popup</code> with above named model and file <code>searchTips.html</code> which is template for
+    this popup. Content of template will be included in popup. In tag you also define popup's title.
+</p>
+<p>Follow the next snippet of html which presents how <code>searchTips.html</code> could be organized.
+</p>
+<pre class="prettyprint linenums" ng-set-text="searchTips.html-01"></pre>
+<script type="text/ng-template" id="searchTips.html-01">
+    <div class="reading">
+        Text of search help
+    </div>
+    <div class="buttons">
+        <button ng-click="popupModel.close();">
+            <span>Close</span>
+        </button>
+    </div>
+</script>
+<p>Please notice following points regarding <code>searchTips</code>:
+    <ul>
+    <li><b>closing popup window</b> - Operation is initiated by call method <code>popupModel.close()</code>.
+        That is set in two places:
+        <ul>
+            <li>default on close icon in top right corner
+            </li>
+            <li><code>button/@ng-click</code> initializes same action on button click
+            </li>
+        </ul>
+    </li>
+    <li><b>popup window css</b> - Directive <code>lx-popup</code> generates certain element structure to DOM tree.
+        It assumes that a set of CSS classes are available:
+        <ul>
+            <li><code>curtain</code> - used to cover application page beneath popup window</li>
+            <li><code>popup</code> - used for main element of popup</li>
+            <li><code>header</code> - popup window header</li>
+            <li><code>title</code> - popup window title</li>
+            <li><code>close</code> - used for close icon on top right corner (it may need some graphic file too)
+            </li>
+        </ul>
+        Classes <code>curtain</code>, <code>popup</code>, <code>header</code>, <code>title</code> relates to
+        elements form most outer to most inner in generated DOM tree.
+    </li>
+    </ul>
+
+</p>
+<p>
+    To template you can get over paramters. How to do this ?
+    <ul>
+        <li>use method
+            <code>open()</code>
+            with paramters
+        </li>
+        <li>insert binding expression with paramter name in template file</li>
+    </ul>
+</p>
+<p>Follow this snippet of html which presents how use paramters in <code>open()</code> method</p>
+<pre class="prettyprint linenums" ng-set-text="searchExample.html-06"></pre>
+    <script type="text/ng-template" id="searchExample.html-06">
+        <div class="help">
+            <a href="javascript:void(0)"
+                title="Search Tips"
+                ng-click="popupModel.open({value: 'test'});">Quick help
+            </a>
+        </div>
+        <lx-popup
+            title="'Search: Quick Tips'"
+            model="popupModel"
+            template="'html/popup/searchTips.html'">
+        </lx-popup>
+    </script>
+</pre>
+<p>Follow this snippet of html which presents how <code>searchTips.html</code> could be organized
+    if you want to display paramters.</p>
+<pre class="prettyprint linenums" ng-set-text="searchTips.html-02"></pre>
+<script type="text/ng-template" id="searchTips.html-02">
+    <div class="reading">
+        <span>{{ value }}</span>
+        Text of search help
+    </div>
+    <div class="buttons">
+        <button ng-click="popupModel.close();">
+            <span>Close</span>
+        </button>
+    </div>
+</script>
+
+
+<h3>Search results presentation</h3>
+<p>Results of search will be presented on separate page which will be accessible via certain URL. We will get to page
+    navigation topic later. Results page need some initialization. Since it will present only subset of search results
+    (referred as 'result page') paging parameters - page number, page size, sort - should be set.
+</p>
+<pre class="prettyprint linenums" ng-set-text="results.html-01"></pre>
+<script type="text/ng-template" id="results.html-01">
+    <div class="main"
+        ng-init="$search.params.pageNo = 1;
+                 $search.params.pageSize = 10;
+                 $search.params.sort = $search.params.sort || 'Relevance';">
+        ...
+    </div>
+</script>
+<p>It could be simply mapped to <code>$search.params</code> values. We will use the same values later for page navigation
+   or, to be more precise, in URL template which will be assigned to that page. It is important to use the same values
+   in both places.
+</p>
+<p>Now our page is initialized. It still needs some additional logic to properly react on data arrive event,
+    result page navigations etc. That will bind model properties in case one of them will change.
+</p>
+<pre class="prettyprint linenums" ng-set-text="results.html-02"></pre>
+<script type="text/ng-template" id="results.html-02">
+    <div class="main" ng-init="...">
+        <lx-eval
+            watch="$search.params.pageNo; $search.params.pageSize; $search.search.getResult();"
+            exp="resultSet = $search.search.getResult().getPage($search.params.pageNo,$search.params.pageSize);"/>
+        <lx-eval
+            watch="$search.getSearch().Id"
+            exp="$search.params.id = $search.getSearch().Id;"/>
+        <lx-eval
+            watch="$search.getSearch().Query"
+            exp="$search.params.query = $search.getSearch().Query || $search.params.query"/>
+        ...
+    </div>
+</script>
+
+<p>As you can see Lynx will do all that asynchronous binding processing for you. What you need to do is just state
+    names of model parameters you would like Lynx to watch and any actions that need to be undertaken in case
+    parameter changes. Use <code>lx-eval</code> Lynx directive for that purpose.
+    <ul>
+    <li>first <code>lx-eval</code> directive causes local model <code>resultSet</code> to be refreshed on every change of
+        search parameters.
+    </li>
+    <li>second <code>lx-eval</code> maps search id received from backend system to local model parameter. It will be used
+        in our example for URL template of results page, that it needs to be always in sync with actual search id.
+    </li>
+    <li>last <code>lx-eval</code> directive binds query value used by search form with value returned from backend system.
+        It may seem to be obsolete but imagine that user opens results page using certain URL of meaningful structure.
+        Application will make proper search and will present results page with results. It should present also search
+        query which is available in search object returned by backend system.
+    </li>
+    </ul>
+</p>
+<p>On top of result page put some information regarding search results. See the <code>searchTitleBar</code> element
+    on following snippet. It uses <code>resultSet</code> model which is set whenever data arrived to client (see
+    <code>lx-eval</code> element discussed earlier).
+</p>
+<pre class="prettyprint linenums" ng-set-text="results.html-03"></pre>
+<script type="text/ng-template" id="results.html-03">
+    <div class="main" ng-init="...">
+        ...
+
+        <div ng-include="'html/component/searchForm.html'"></div>
+
+        <div class="searchTitleBar">
+            <div class="searchTitle">
+                <h1 title="Search Results">Search Results</h1>
+            </div>
+            <div class="total">
+                <div ng-show="resultSet.getItems().length > 0">
+                    <div class="terms">
+                        <span class="hits">{{resultSet.getTotalHits()}}</span>
+                        results for
+                        <b>{{$search.getSearch().Query}}</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        ...
+    </div>
+</script>
+<h4>Result set data structure</h4>
+<p>Model <code>resultSet</code> is set to
+    <code>$search.search.getResult().getPage($search.params.pageNo,$search.params.pageSize)</code>
+    which needs to be a little bit elaborated on. As you may see Lynx defined model <code>$search</code>
+    has got parameter <code>search</code> which is of type <a href="docs.html#/api/wk.lynx.velvet/velvet.vo.Search">
+    <code>velvet.vo.Search</code></a>.<br/>
+    That object provides <code>getResults</code> function which returns <a href="docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultList">
+    <code>velvet.vo.SearchResultList</code></a> object or object promise. Search results are truncated to the set of
+    result items according to pagination parameters (page number, size, search sort) - it's accomplished by
+    subsequent call to <code>getPage</code> function.<br/>
+    The <code>resultSet</code> is actually set to <a href="docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultSet">
+    <code>velvet.vo.SearchResultSet</code></a>. We will use two main functions of that object:
+    <ul>
+    <li><b>getTotalHits()</b> which presents overall number of items found for current search query; have a look back to
+        previous code snippet where it's used on search results section
+    </li>
+    <li><b>getItems()</b> which returns an array of <a href="docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem">
+        <code>velvet.vo.SearchResultListItem</code></a></li> objects; we will those object use to access information
+        regarding every result item
+    </ul>
+</p>
+<p>
+    Well, knowing that you should already have some ideas how to present result items. See at the next snippet presenting
+    results section definition.
+</p>
+
+<pre class="prettyprint linenums" ng-set-text="results.html-04"></pre>
+<script type="text/ng-template" id="results.html-04">
+    <div class="main" ng-init="...">
+        ...
+        <div class="matches">
+            <div ng-repeat="item in resultSet.getItems()">
+                <div class="container">
+                    ITEM_TITLE:
+                    <a href="#/read/{{item.DocumentId|escape}}/{{item.Id|escape}}"
+                        class="link"
+                        ng-click="$appData.setPrevPage('read', 'Search Results', $location.url())">
+                        {{item.Title}}
+                    </a> <br/>
+                    ITEM_SUMMARY: <div ng-bind-html-unsafe="item.Summary"></div><br/>
+                    ITEM_DOCUMENTTYPE: {{item.DocumentType}} <br/><br/><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<p>It's pretty straightforward use of <code>velvet.vo.SearchResultListItem</code> within loop on item elements
+    defined by <code>ng-repeat="item in resultSet.getItems()"</code>. You should make some analysis regarding
+    link definition next to "ITEM_TITLE:":
+    <ul>
+    <li><code>a/@href</code> element value may be constructed as you wish; example above shows the structure which
+        includes <code>item</code> identifiers; we will talk about page navigation and URL schemas later in
+        "Wire up application" section
+    </li>
+    <li><code>{{item.DocumentId|escape}}</code></li> is angular syntax for filters; since value of <code>item.DocumentId</code>
+        will be used in URL it must be encoded; Lynx provides <code>escape</code> filter that purpose
+    </li>
+    <li><code>ng-click="$appData.setPrevPage('read', 'Search Results', $location.url())"</code> is used to manage
+        browser history; function <code>setPrevPage</code> is defined in application js file (the same where model declaration
+        is defined) as follows:
+        <pre class="prettyprint linenums" ng-set-text="searchExample.js-02"></pre>
+        <script type="text/ng-template" id="searchExample.js-02">
+            (function (global) {
+                ...
+                var appData = {
+                    backTo: {
+                        read: {
+                            path: '',
+                            name: ''
+                        }
+                    },
+                    setPrevPage: function (page, name, path) {
+                        this.backTo[page].name = name;
+                        this.backTo[page].path = path;
+                    }
+                };
+                ...
+                var loginExample = lynx.module({
+                    ...
+                    globals:[
+                        ...
+                        { "alias": "$appData", "value": appData}
+                    ],
+                    ...
+                },
+                ["wk.lynx.ui"]);
+                ...
+            })(window);
+        </script>
+        It is not a part of Lynx framework but has been implemented solely for search example application.
+    </li>
+    <li><a href="http://docs.angularjs.org/api/ng.$location"><code>$location.url()</code></a> is angular service
+        which gives access to URL in browser address bar.
+    </ul>
+</p>
+<p>The results list need just one final touch to make it perfect ;). Add message which would indicate that search
+    is processing and another message presented in case search returns empty list. It could be done by adding
+    two element to results page.
+</p>
+<pre class="prettyprint linenums" ng-set-text="results.html-05"></pre>
+<script type="text/ng-template" id="results.html-05">
+    <div class="main" ng-init="...">
+        ...
+        <div class="matches">
+            <div ng-show="$dataLoading">
+                Search query in process ...
+            </div>
+            <div class="emptyResults"
+                ng-show="resultSet && resultSet.getTotalHits() == 0">
+                There are no results for selected criteria. Please revise your filters.
+            </div>
+
+            <div ng-repeat="item in resultSet.getItems()">
+                ...
+            </div>
+        </div>
+    </div>
+</script>
+<p>First one is based on Lynx provided variable <code>$dataLoading</code>. It is set to <code>1</code> while Lynx
+    performs communication with backend system and is switched back to <code>0</code> (zero) in other case. Use
+    that variable as angular expression for <code>ng-show</code> and you will get the message for "search in progress"
+    case. BTW: that could be generally used to present loading indicator in your application.
+</p>
+<p>Message for empty results similarly is base on <code>ng-show</code> but expression for that case is based on
+    <code>resultSet</code>.
+</p>
+
+<h4>Pagination & sorting</h4>
+Until now we did not discussed issue of influancing pagination and/or sort . As you recall, pagination has been
+initialized on result page as follows:
+<pre class="prettyprint linenums" ng-set-text="results.html-01"></pre>
+Result list page should let use influence those parameters. Have a look on following snippet showing how to change
+<code>pageSize</code> parameter.
+<pre class="prettyprint linenums" ng-set-text="results.html-06"></pre>
+<script type="text/ng-template" id="results.html-06">
+<div class="filter">
+    <label for="viewOption">Display</label>
+    <select class="styled" id="viewOption" name="viewOption" ng-model="$search.params.pageSize"
+        ng-change="$search.params.pageNo = 1; navigable.navigate();"
+        ng-disabled="resultSet.getTotalHits() < 100">
+        <option value="10">10 Results</option>
+        <option value="50">50 Results</option>
+        <option value="100">100 Results</option>
+    </select>
+</div>
+</script>
+<p>User may choose one of predefined values. You can use whatever html structure you want e.g. you could let use enter
+    any other value. Anyway, you must remember to bind value chosen by user to model you are using for storing page size.
+    In our example we used for that purpose <code>$search.params.pageSize</code>. Binding is done by
+    <code>ng-model</code> directive set for <code>select</code> element. Expression points to mode for page size.<br/>
+    While page size changes you should also change page number to first page. On above example it is done through
+    <code>ng-change</code> angular directive for <code>select</code> element.
+</p>
+<p>Result page should also provide page navigation support. First of all to show which results item page is loaded,
+    secondly to let navigate to next/previous pages.
+</p>
+<p>Following elements of the solution should draw your attention:
+    <ul>
+    <li>Pagination is visible only if it is needed. You may archive this by evaluating <code>resultSet.getTotalHits()</code>.
+        It's done using <code>ng-show</code> directive of main pagination element.
+        <pre class="prettyprint linenums" ng-set-text="results.html-07-a"></pre>
+        <script type="text/ng-template" id="results.html-07-a">
+            <div class="pagination"
+                ng-show="resultSet && resultSet.getTotalHits() > $search.params.pageSize">
+                ...
+            </div>
+        </script>
+    </li>
+    <li>Pagination should present information which part of result set list is presented on current view.
+        You could use page number (e.g. to enable quick navigation to certain page number) or, as
+        it's presented on following snippet result item order number.
+        <pre class="prettyprint linenums" ng-set-text="results.html-07-b"></pre>
+        <script type="text/ng-template" id="results.html-07-b">
+            <div class="pagination" ng-show="...">
+                <div class="range">{{($search.params.pageNo-1)*$search.params.pageSize+1}} -
+                    {{[$search.params.pageNo*$search.params.pageSize, resultSet.getTotalHits()] | min}}
+                </div>
+                ...
+            </div>
+        </script>
+    </li>
+    <li>Buttons for page navigation should let user switch between pages. In our example that means to let user
+        change value of <code>$search.params.pageNo</code>. It is achieved with use of <code>ng-click</code>
+        directive applied to <code>button</code> element.
+        <pre class="prettyprint linenums" ng-set-text="results.html-07-c"></pre>
+        <script type="text/ng-template" id="results.html-07-c">
+            <div class="pagination" ng-show="...">
+                ...
+                <div class="previous">
+                    <button  title=""
+                        ng-class="{true:'inner', false:'inner active'}[$search.params.pageNo <= 1]"
+                        ng-disabled='$search.params.pageNo <= 1'
+                        ng-click='$search.params.pageNo = $search.params.pageNo - 1;'>
+                        <span>prev</span>
+                    </button>
+                </div>
+                <div class="next">
+                    <button title=""
+                        ng-class="{true:'inner', false:'inner active'}[$search.params.pageNo >= (resultSet.getTotalHits() / $search.params.perPage | ceil)]"
+                        ng-disabled='$search.params.pageNo >= (resultSet.getTotalHits() / $search.params.pageSize | ceil)'
+                        ng-click='$search.params.pageNo = $search.params.pageNo + 1;'>
+                        <span>next</span>
+                    </button>
+                </div>
+            </div>
+        </script>
+        Additionally, buttons could be disabled on first and last pages (previous button and next button respectively).
+        You may do that using <code>ng-disabled</code> angular directive with expression just like it is presented
+        on previous snippet. Notice that the same mechanism may be used to change <code>button</code> element class (see
+        <code>ng-class</code> directive definition).
+    </li>
+    </ul>
+</p>
+<p>Putting it all together into one code snippet pagination element would look as follows:</p>
+<pre class="prettyprint linenums" ng-set-text="results.html-07"></pre>
+<script type="text/ng-template" id="results.html-07">
+<div class="pagination" ng-init="navigable=$search.pageNavigation"
+     ng-show="resultSet && resultSet.getTotalHits() > $search.params.pageSize">
+     <div class="range">{{($search.params.pageNo-1)*$search.params.pageSize+1}} -
+         {{[$search.params.pageNo*$search.params.pageSize, resultSet.getTotalHits()] | min}}
+     </div>
+     <div class="previous">
+         <button  title=""
+             ng-class="{true:'inner', false:'inner active'}[$search.params.pageNo <= 1]"
+             ng-disabled='$search.params.pageNo <= 1'
+             ng-click='$search.params.pageNo = $search.params.pageNo - 1;'>
+             <span>prev</span>
+         </button>
+     </div>
+     <div class="next">
+         <button title=""
+             ng-class="{true:'inner', false:'inner active'}[$search.params.pageNo >= (resultSet.getTotalHits() / $search.params.perPage | ceil)]"
+             ng-disabled='$search.params.pageNo >= (resultSet.getTotalHits() / $search.params.pageSize | ceil)'
+             ng-click='$search.params.pageNo = $search.params.pageNo + 1;'>
+             <span>next</span>
+         </button>
+     </div>
+</div>
+</script>
+<p>Sort order manipulation is very similar to <code>pageSize</code> manipulation issue though there is one very important
+    difference. Change of sort should be followed by launching search call. So, for that case we need:
+    <ul>
+    <li>bind <code>ng-model</code> to <code>$search.params.sort</code> (see <code>select</code> element on following
+        snippet)</li>
+    <li>initiate search call if sort changes (see <code>ng-change</code> directive for same <code>select</code>
+        element - this time we could use <code>SearchModel</code>'s <code>searchById</code> function since we
+        know id of current search)</li>
+    </ul>
+</p>
+<pre class="prettyprint linenums" ng-set-text="results.html-08"></pre>
+<script type="text/ng-template" id="results.html-08">
+<div class="sorting" ng-init="$search.params.sort = 'Relevance'">
+    <div class="filter">
+        <label for="sortorder">Sort</label>
+        <select class="styled" id="sortorder" name="sortOrder" ng-model="$search.params.sort"
+            ng-change="$search.searchById($search.getSearch().Id, null, null, $search.params.sort)">
+            <option value="Relevance">Relevance</option>
+            <option value="MostRecent">Most Recent</option>
+        </select>
+    </div>
+</div>
+</script>
+
+
+
+
+
+<h2>Wire up application</h2>
+<p>As for now we discussed how to use Lynx <code>SearchModel</code> on search from which could be presented on
+    any page of you application. You also have seen how to define result page which would be able to present
+    search results.
+</p>
+<p>Missing part of the solution is wiring up pages in such manner that after user submits search request application
+    will show result page. It is done in lynx module configuration. Have a look on following snippet which presents
+    your application js script. The actual wiring is done withing <code>pages</code> array of <code>lynx.module</code>
+    configuration.
+</p>
+<pre class="prettyprint linenums" ng-set-text="searchExample.js-03"></pre>
+<script type="text/ng-template" id="searchExample.js-03">
+(function (global) {
+    ...
+    velvet.configure({ ... })
+    ...
+    var loginExample = lynx.module({
+        ...
+        globals:[...],
+        pages:[
+            {name:"homePage",
+             path:"/home",
+             view:"html/page/home.html"},
+
+            {name: "resultsPage",
+             path: "/results",
+             view: "html/page/results.html"},
+
+            {name: "resultsPage",
+             path: "/results/id/{$search.params.id}/pageNo/{$search.params.pageNo}",
+             view: "html/page/results.html",
+
+             eventBinding: [
+                 {model: "$search", event: "searchByPhrase"},
+                 {model: "$search", event: "searchById"}
+             ],
+
+             routes: [
+                 {path: "/results" },
+                 {path: "/results/{$search.params.query}",
+                  events: [
+                      {model: "$search", event: "searchByPhrase"}
+                  ]},
+                 {path: "/results/id/{$search.params.id}",
+                  events: [
+                      {model: "$search", event: "searchById"}
+                  ]
+                 },
+                 {path: "/results/id/{$search.params.id}/pageNo/{$search.params.pageNo}",
+                  events: [
+                      {model: "$search", event: "searchById"}
+                  ]
+                 }
+             ]
+            }
+        ]
+        defaultPath:"/home"
+    },
+    ["wk.lynx.ui"]);
+    ...
+})(window);
+</script>
+<p>As you can see it's definition of all pages your application provides. Each page has got three self-describing
+    attributes: <code>name</code> - used as internal page name, <code>path</code> - used by application to build
+    url on page load and <code>view</code> - which is path to actual html snippet that should be loaded for
+    given page. To get more information regarding <code>pages</code> configuration array please read
+    <a href="docs.html#/guide/applicationRouting">Application Routing</a>
+    document.<br/>
+    Here let's just notice two main aspects of page routing which makes our search example work:
+    <ul>
+    <li><code>eventBinding</code> element defines events which will cause your app to automatically switch to
+        certain page. In our example it is <code>searchByPhrase</code> used on search submitted by providing new
+        search query and <code>searchById</code> which is used as action for sort order change.
+    </li>
+    <li><code>routes</code> table defines array of <code>path</code> template which cause lynx app to show page
+        if URL coresponding to that template will be entered in browser or used as link. Notice, the binding
+        expressions used in some <code>path</code> and inside <code>events</code> array. The idea behind that is
+        to read information fromURL provided by user and provide it to certain model (here <code>SearchModel</code>
+        as defined by <code>$search</code>) and certain event/function on that model.
+    </li>
+    </ul>
+
+</p>
+
+
+<h2>Download</h2>
+<p>If you would like to play around with above code please download <a href="download/SearchExample.zip">SearchExample.zip</a>.</p>
+
+
+
+
+
+
+
+
+
+</div>

@@ -1,0 +1,19 @@
+{
+    "annotate" : {
+        "lx-if" : "<code>form</code> element will be created only if <code>lx-if</code> expression returns true",
+        "lx-focus": "this directives lets you handle focus event on parent <code>input</code> element",
+        "lx-autocomplete": "it is complex directive representing autocomplete component; other attributes influence components behaviour"
+    },
+    "links" : {
+        "ng-controller" : "http://docs.angularjs.org/api/ng.directive:ngController",
+        "ng-model" : "http://docs.angularjs.org/api/ng.directive:ngModel",
+        "ng-app" :  "http://docs.angularjs.org/api/ng.directive:ngApp",
+        "ng-hide" :  "http://docs.angularjs.org/api/ng.directive:ngHide",
+        "ng-show" :  "http://docs.angularjs.org/api/ng.directive:ngShow",
+        "ng-click" :  "http://docs.angularjs.org/api/ng.directive:ngClick"
+    },
+    "replace" : {
+    },
+    "fold": [[2,6, true],[7,18],[19,21]],
+    "toolbar": true
+}

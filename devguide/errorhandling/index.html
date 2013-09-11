@@ -1,0 +1,102 @@
+<div xmlns="http://www.w3.org/1999/html">
+
+    <div class="pageTitle">
+        <h1>error handling</h1>
+    </div>
+
+<p>
+    Lynx based application is a fully client side app so the javascript error handling is a very important area to cover
+    to provide the ability to trace the errors and present it nicely to a user if we decide it's needed.
+    This is why Lynx framework provides a service tracing the Velvet, angular and javascript native
+    errors in a single place.
+    You just need to initiate <a href="docs.html#/api/wk.lynx.core/lynx.service.ErrorHandler">ErrorHandler</a> -
+    <code>$errorHandler</code> and configure it in the way it's required for the application.
+</p>
+<h3>Simple init</h3>
+<p>
+    If you want to enable Lynx <code>$errorHandler</code> without any customization then just call init on the service.
+</p>
+<pre class="prettyprint linenums" ng-set-text="index.html-01"></pre>
+<script type="text/ng-template" id="index.html-01">
+    angular.module("your.app.module").run(["$errorHandler", function($errorHandler) {
+       $errorHandler.init();
+    }]);
+</script>
+</div>
+<h3>Configuration</h3>
+<p>
+    If you want to enable Lynx <code>$errorHandler</code> with custom configuration call init on the service adding
+    the configuration parameter. See
+    <a href="docs.html#/api/wk.lynx.core/lynx.config.ErrorHandlerConfig">ErrorHandlerConfig</a> for more details about
+    configuration attributes.
+</p>
+<pre class="prettyprint linenums" ng-set-text="index.html-02"></pre>
+<script type="text/ng-template" id="index.html-02">
+    angular.module("your.app.module").run(["$errorHandler", function($errorHandler) {
+      $errorHandler.init({"skipNativeErrors": true});
+    }]);
+</script>
+</div>
+<h3>Custom handlers</h3>
+<p>
+    If you want to enable Lynx <code>$errorHandler</code> with custom handler call init on the service adding
+    the handler parameter. See
+    <a href="docs.html#/api/wk.lynx.core/lynx.service?scrollTo=CustomErrorHandler#CustomErrorHandler">CustomErrorHandler</a> for more details about
+    handler interface.
+</p>
+<pre class="prettyprint linenums" ng-set-text="index.html-03"></pre>
+<script type="text/ng-template" id="index.html-03">
+    angular.module("your.app.module").run(["$errorHandler", function($errorHandler) {
+        $errorHandler.init(null, function(error, cause) {
+        // display popup
+        // can create a logic dependent on the error type
+        // log error using own service
+        });
+    }]);
+</script>
+</div>
+
+<h3>Example configuration integrated with external error logger service</h3>
+<p>
+    This is an example of the full error handler configuration taken from Cheetah application. The error handler was
+    integrated with external error logger service - <a href="http://www.muscula.com/">Muscula</a>.
+    The example uses <a href="docs.html#/api/wk.lynx.ui/lynx.ui.common.lx-popup">popup directive</a> to display error
+    notification.
+</p>
+<pre class="prettyprint linenums" ng-set-text="index.html-04"></pre>
+<script type="text/ng-template" id="index.html-04">
+    angular.module("your.app.module").run(["$errorHandler", "$rootScope", function($errorHandler, $rootScope) {
+        window["Muscula"] = { "settings":{
+           "logId":"{muscula-log-id}", "suppressErrors": false, "branding": 'none', "tryCatch": false
+        }};
+
+        var m = document.createElement('script'); m.type = 'text/javascript'; m.async = true;
+        m.src = (window.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//musculahq.appspot.com/Muscula2beta.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(m, s);
+
+        window["Muscula"]["run"]=function(c){
+            eval(c);
+            // init Lynx error handling after muscula to override window.onerror
+            $errorHandler.init({"skipNativeErrors": false}, [function(error, cause) {
+                try {
+                    if (!(error instanceof lynx.NativeError)) {
+                        $rootScope["popups"]["error"].open({"error": error, "cause": cause});
+                    }
+                    // muscula uses stack property to display additional error data
+                    if (error instanceof velvet.Error && error.responseData) {
+                        error["stack"] = error["stack"] || "";
+                        error["stack"] += error.requestUrl + " [" + error.responseStatus + "] -> " + JSON.stringify(error.responseData);
+                    }
+                    if (cause) {
+                        error["stack"] = "Cause: " + cause + " -> " + error["stack"];
+                    }
+
+                    window["Muscula"]["errors"].push(error);
+                } catch (e) {}
+            }]);
+        };
+        window["Muscula"]["errors"]=[];
+    }]);
+</script>
+</div>

@@ -1,0 +1,46 @@
+<div class="function">
+    <span class="pointer" id="{{ doclet.name| functionName }}"></span>
+
+    <div class=signature>
+        <span class="assess">{{ doclet.access }}</span>
+        <span class="static" ng-show="doclet.scope == 'static' && doclet.kind != 'class'">static</span>
+
+        <span class="name">{{ doclet.name | functionName }}</span> (
+        <span lx-if="doclet.params.length > 0" class="params">
+            <span class="param" ng-repeat="param in doclet.params">
+                <span class="name">{{ param.name }}</span>
+                :
+                <a class="type" href="javascript:void(0)" ng-click="$api.open(param.type.names[0])">
+                    {{ param.type.names[0] }}
+                </a>
+                <span ng-show="!$last">,</span>
+            </span>
+        </span>
+        )
+        <a class="type" href="javascript:void(0)" ng-click="$api.open(doclet.returns[0].type.names[0])" lx-if="doclet.kind != 'class'">
+            :{{ doclet.returns[0].type.names[0] }}
+        </a>
+        <div lx-if="doclet.inherits" class="inherits">
+            inhrited from <a class="type" href="javascript:void(0)" ng-click="$api.open(doclet.inherits)">
+            {{ doclet.inherits }}
+        </a>
+        </div>
+    </div>
+
+    <div class="description" ng-bind-html-unsafe="doclet.description" lx-if="doclet.kind != 'class'"></div>
+
+    <div ng-include="'content/api/usages.html'" lx-if="doclet.kind != 'class'"></div>
+
+    <div ng-include="'content/api/parameters.html'"></div>
+
+    <div ng-include="'content/api/examples.html'" lx-if="doclet.kind != 'class'"></div>
+
+    <div class="return" lx-if="doclet.returns[0] && doclet.kind != 'class'">
+        Return
+        <a class="type" href="javascript:void(0)" ng-click="$api.open(doclet.returns[0].type.names[0])">
+            {{ doclet.returns[0].type.names[0] }}
+        </a>
+
+        {{ doclet.returns[0].description }}
+    </div>
+</div>

@@ -10,17 +10,17 @@
         "$search": {"tab" : 1},
         "$document" : {"tab" : 1},
 
-        "getSearch" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.SearchModel?scrollTo=getSearch",
-        "getResult" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.Search?scrollTo=getResult",
-        "TotalResults" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultList?scrollTo=TotalResults",
-        "Query" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.Search?scrollTo=Query",
-        "getPage" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultList?scrollTo=getPage",
-        "getItems" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultSet?scrollTo=getItems",
-        "Index" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=Index",
-        "Title" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=Title",
-        "Summary" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=Summary",
-        "DocumentId" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=DocumentId",
-        "openDocumentById" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem?scrollTo=openDocumentById"
+        "getSearch" : "index.html#/api/wk.lynx.core/lynx.models.SearchModel#getSearch",
+        "getResult" : "index.html#/api/wk.lynx.velvet/velvet.vo.Search#getResult",
+        "TotalResults" : "index.html#/api/wk.lynx.velvet/velvet.vo.SearchResultList#TotalResults",
+        "Query" : "index.html#/api/wk.lynx.velvet/velvet.vo.Search#Query",
+        "getPage" : "index.html#/api/wk.lynx.velvet/velvet.vo.SearchResultList#getPage",
+        "getItems" : "index.html#/api/wk.lynx.velvet/velvet.vo.SearchResultSet#getItems",
+        "Index" : "index.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem#Index",
+        "Title" : "index.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem#Title",
+        "Summary" : "index.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem#Summary",
+        "DocumentId" : "index.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem#DocumentId",
+        "openDocumentById" : "index.html#/api/wk.lynx.velvet/velvet.vo.SearchResultListItem#openDocumentById"
     },
     "annotate" : {
         "hits" : "here we want to display total hit count, so we need to bind to current <code>velvet.vo.Search</code> object in <cod>lynx.models.SearchModel</cod>",

@@ -1,0 +1,46 @@
+<div>
+
+    <div class="pageTitle">
+        <h1>directives & filters documenting </h1>
+    </div>
+
+    <p>
+        In order to differentiate between directives, filters and regular functions one should use @lynxdoc JSDoc tag.
+        This tag should have value "directive" for directives, and "filter" for filter. It's essential for proper
+        documentation generation that comment also contains @name and @memberOf tags. @memberOf tag contains
+        namespace where respective directive or filter is defined. See example below:
+    </p>
+    <pre class="prettyprint linenums">
+    /**
+    * @directive lx-blur
+    * @memberOf lynx.directives
+    * @lynxdoc directive
+    * @description
+    *
+    * Factory function of &lt;br/&gt;&lt;br/&gt;
+    * &lt;h3&gt;lx-blur&lt;/h3&gt;
+    * &lt;span class="type-signature"&gt;attribute directive&lt;/span&gt;
+    * &lt;br/&gt;&lt;br/&gt;
+    *     &lt;i&gt;
+    *         &lt;any &lt;b&gt;lx-blur&lt;/b&gt;="{expression}" /&gt;
+    *     &lt;/i&gt;
+    * &lt;br/&gt;&lt;br/&gt;
+    *
+    * This is directive for handling blur event on an element.
+    *
+    * &lt;p&gt;
+    *     &lt;b&gt;Parameters:&lt;/b&gt;
+    *     &lt;ul&gt;
+    *         &lt;li&gt;{expression} - expression will be evaluated when blur event occurs on element&lt;/li&gt;
+    *     &lt;/ul&gt;
+    * &lt;/p&gt;
+    *
+    * @example
+    * &lt;input type="text" &lt;b&gt;lx-blur&lt;/b&gt;="out = 'blur on element'" /&gt;
+    * {{out}}
+    */
+    </pre>
+    <p>
+        Comment shouldn't contain tags changing doclet kind, for example @method, @function, @namespace, @member
+    </p>
+</div>

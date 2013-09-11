@@ -3,19 +3,28 @@
         "content/slides/angular/directives/example/message.html" : "message.html"
     },
     "links" : {
+        "module": "#/api/wk.lynx.core/lynx.core.Application",
+        "moduleName": "#/api/wk.lynx.core/lynx.config.Configuration#moduleName",
+        "velvetConfig": "#/api/wk.lynx.core/lynx.config.Configuration#velvetConfig",
+        "globals": "#/api/wk.lynx.core/lynx.config.Configuration#globals",
+        "AuthModel": "#/api/wk.lynx.core/lynx.models.AuthModel",
+        "SearchModel": "#/api/wk.lynx.core/lynx.models.SearchModel",
         "angular.Scope" : "http://docs.angularjs.org/api/ng.$rootScope.Scope",
-        "host" : "",
-        "velvet.service.Search" : "" ,
-        "velvet.service.Auth" : "",
-        "authenticate" : "",
-        "searchByPhrase" : "",
-        "apikey" : ""
+        "host" : "#/api/wk.lynx.velvet/velvet.config/velvet.config.Configuration#host",
+        "velvet.service.Search" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Search" ,
+        "velvet.service.Auth" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth",
+        "authenticate" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#authenticate",
+        "authenticated" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#authenticated",
+        "searchByPhrase" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Search#searchByPhrase",
+        "apikey" : "#/api/wk.lynx.velvet/velvet.config/velvet.config.Configuration#apikey"
     },
     "annotate": {
-        "ServiceExampleCtrl" : "",
-        "configure" : "",
-        "doLogin" : "" ,
-        "doSearch" : ""
+        "module" : "this will initiate Lynx application; you need to provide to it configuration <code>lynx.config.Configuration</code> object",
+        "moduleName" : "then name of application" ,
+        "velvetConfig" : "configuration of velvet ",
+        "globals": "all globally available services should be defined here",
+        "$auth": "<code>lynx.models.AuthModel</code> object will be exposed in this application under <code>$auth</code> global name" ,
+        "factory": {"first": true, "value":"function responsible for creation of service"}
     },
     "hide": [[2,2]],
     "fold": [[3,6,true],[7,10]],

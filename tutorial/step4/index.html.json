@@ -15,9 +15,9 @@
         "$auth": {"tab": 1},
         "page/log.html": {"tab" : 2},
 
-        "page.view" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=view",
-        "logout" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=logout",
-        "authenticated" : {"line":21, "value":"../dist/app/docs.html#/api/wk.lynx.core/lynx.models.AuthModel?scrollTo=authenticated"}
+        "page.view" : "index.html#/api/wk.lynx.core/lynx.config.PageDefinition#view",
+        "logout" : "index.html#/api/wk.lynx.core/lynx.models.AuthModel#logout",
+        "authenticated" : {"line":21, "value":"index.html#/api/wk.lynx.core/lynx.models.AuthModel#authenticated"}
 
     },
     "annotate" : {

@@ -2,7 +2,7 @@
     "links" : {
         "ng-submit" : "http://docs.angularjs.org/api/ng.directive:ngSubmit",
         "ng-model": "http://docs.angularjs.org/api/ng.directive:ngModel",
-        "searchByPhrase" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.SearchModel?scrollTo=searchByPhrase",
+        "searchByPhrase" : "index.html#/api/wk.lynx.core/lynx.models.SearchModel#searchByPhrase",
         "$search" : {"tab" : 1}
     },
     "toolbar" : true

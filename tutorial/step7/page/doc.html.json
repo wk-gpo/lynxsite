@@ -1,8 +1,8 @@
 {
     "links" : {
         "ng-include" : "http://docs.angularjs.org/api/ng.directive:ngInclude",
-        "lx-if" : "../dist/app/docs.html#/api/wk.lynx.ui/lynx.directives.%6Cx-if",
-        "getDocumentStreamUrl" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.models.DocumentModell?scrollTo=getDocumentStreamUrl",
+        "lx-if" : "index.html#/api/wk.lynx.ui/lynx.directives.%6Cx-if",
+        "getDocumentStreamUrl" : "index.html#/api/wk.lynx.core/lynx.models.DocumentModell#getDocumentStreamUrl",
         "ga-mobile" : "../dist/app/docs.html#/func/documentView",
         "$document" : {"tab": 1}
     },

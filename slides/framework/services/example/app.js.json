@@ -4,18 +4,18 @@
     },
     "links" : {
         "angular.Scope" : "http://docs.angularjs.org/api/ng.$rootScope.Scope",
-        "host" : "",
-        "velvet.service.Search" : "" ,
-        "velvet.service.Auth" : "",
-        "authenticate" : "",
-        "searchByPhrase" : "",
-        "apikey" : ""
+        "host" : "#/api/wk.lynx.velvet/velvet.config/velvet.config.Configuration#host",
+        "velvet.service.Search" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Search" ,
+        "velvet.service.Auth" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth",
+        "authenticate" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#authenticate",
+        "searchByPhrase" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Search#searchByPhrase",
+        "apikey" : "#/api/wk.lynx.velvet/velvet.config/velvet.config.Configuration#apikey"
     },
     "annotate": {
-        "ServiceExampleCtrl" : "",
-        "configure" : "",
-        "doLogin" : "" ,
-        "doSearch" : ""
+        "ServiceExampleCtrl" : "angularJs controller which encompass logic used in this example",
+        "configure" : "configuration of velvet connection parameters",
+        "doLogin" : "login action logic",
+        "doSearch" : "search action logic"
     },
     "fold": [[2,6,true],[12,25,true]],
     "toolbar": true

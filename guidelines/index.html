@@ -1,0 +1,24 @@
+<div lx-destroy="$root.docLoaded = false"
+    ng-init="labels = {liveedit : 'live edit'}">
+
+    <div class="pageRow">
+        <div class="left">
+            <ul class="pageMenu">
+                <li ng-repeat="item in ['common', 'debugging', 'liveedit']"
+                    ng-class="{true: 'active'}[$page.guidelines.page == item]">
+                    <a href="#/guidelines/{{item}}">
+                        {{ labels[item] || item }}
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="right content">
+            <div ng-include="'content/guidelines/'+ $page.guidelines.page +'/index.html'"></div>
+        </div>
+    </div>
+
+    <div ng-include="'content/common/footer.html'"></div>
+    <lx-eval exp="$root.docLoaded = true"></lx-eval>
+
+</div>

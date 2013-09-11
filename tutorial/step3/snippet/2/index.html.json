@@ -6,7 +6,7 @@
         "ng-include" : "http://docs.angularjs.org/api/ng.directive:ngInclude",
         "ng-click" : "http://docs.angularjs.org/api/ng.directive:ngClick",
         "page/log.html": {"tab" : 1},
-        "page.view" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=view"
+        "page.view" : "index.html#/api/wk.lynx.core/lynx.config.PageDefinition#view"
     },
     "annotate" : {
         "authenticated": {"line":7, "value":

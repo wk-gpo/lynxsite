@@ -1,14 +1,14 @@
 {
     "links" : {
-        "module" : {"line" : 2 , "value": "../dist/app/docs.html#/api/wk.lynx.core/lynx"},
-        "velvetConfig" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration",
-        "wk.lynx.ui" : "../dist/app/docs.html#/api/%77k.lynx.ui/index",
-        "alias" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.ValueDefinition?scrollTo=alias",
-        " factory" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.ValueDefinition?scrollTo=factory",
-        "host" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.config.Configuration?scrollTo=host",
-        "apikey" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.config.Configuration?scrollTo=apikey",
-        "productId" : "../dist/app/docs.html#/api/wk.lynx.velvet/velvet.config.Configuration?scrollTo=productId",
-        "lynx" : {"line" : 2, "value" :"../dist/app/docs.html#/api/wk.lynx.core/lynx"}
+        "module" : {"line" : 2 , "value": "index.html#/api/wk.lynx.core/lynx"},
+        "velvetConfig" : "index.html#/api/wk.lynx.core/lynx.config.Configuration",
+        "wk.lynx.ui" : "index.html#/api/%77k.lynx.ui/index",
+        "alias" : "index.html#/api/wk.lynx.core/lynx.config.ValueDefinition#alias",
+        " factory" : "index.html#/api/wk.lynx.core/lynx.config.ValueDefinition#factory",
+        "host" : "index.html#/api/wk.lynx.velvet/velvet.config.Configuration#host",
+        "apikey" : "index.html#/api/wk.lynx.velvet/velvet.config.Configuration#apikey",
+        "productId" : "index.html#/api/wk.lynx.velvet/velvet.config.Configuration#productId",
+        "lynx" : {"line" : 2, "value" :"index.html#/api/wk.lynx.core/lynx"}
     },
     "annotate" : {
         "velvetConfig" : "provides information regarding Velvet instance to be used by application:  <code>host</code> sets url on which the velvet instance is exposed, <code>apikey</code> for authorize client application and <code>productId</code> used as default Carbon Product ID in communication with Velvet"

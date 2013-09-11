@@ -1,0 +1,122 @@
+<div>
+
+    <div class="pageTitle">
+        <h1>exceptions</h1>
+    </div>
+
+    <p>Lynx provides solution of exception handling. In case of problem it is required to have precise information of
+        causes of problem. From the other hand very detailed error messages makes code substantially larger. Lynx
+        exception handling is focused to solve both those contrary requirements.<br/>
+        Exception handling of Lynx code utilise one of LynxSite pages as a dictionary of all exceptions. Code in production
+        mode in case of exception will log error code and will generate URL for LynxSite error's dictionary page. That will
+        keep code as small as possible (only error code is needed) while still providing all information regarding
+        the error description.<br/>
+        To make life easer for developers, error message logging will work slightly differently in debug mode. All error
+        informations will be presented directly in log.
+    </p>
+    <h3>Error codes and messages definitions</h3>
+    <p>Error codes are defined in separate a kind of map structure. It defines:
+    <ul>
+        <li>error codes - error identifier</li>
+        <li>error type - it is more descriptive identifier of error e.g. IllegalArgumentException</li>
+        <li>error message - text of message assigned for certain error type</li>
+    </ul>
+    Example of that file is presented below.</p>
+    <pre class="prettyprint linenums">
+    if (DEBUG) {
+       /**
+        * @errormessages
+        * @type {ErrorMessagesDefinition}
+        */
+        lynx.errorMessages = {
+            "codes" : {
+                "{code1}" : {"type": "{type1}",
+                             "message": "Some console message",
+                             "description": "..."},
+                "{code2}" : "{type2}",
+                ...
+            },
+            "types" : {
+                "{type2}" : {
+                        "message": "console message with params like {0} and {1}",
+                        "description": "generic page content"
+                }
+                ...
+            }
+        }
+
+        error.messgaes(lynx.errorMessages);
+    }
+    </pre>
+    As you can see, all structure is enclosed in <code>if(DEBUG) { ...}</code> instruction. That causes compiler to
+    remove that code in production compilation.
+    </p>
+    <p>Error codes are mapped to error types in two ways:
+        <ul>
+        <li>directly (see {code1} and {type1} definition) or</li>
+        <li>with use of "types" map as presented for {code2} and {type2}</li>
+        </ul>
+        Each error type has assigend message and optionally description.
+        Error messages may be parametrized (see example above for {type2}).
+    </p>
+    <p>Notice usege of <code>@errormessages</code> annotation. It cause LynxSite to grab error codes defined in
+       annotated object. JSDoc reads error code definition using JSON thus it's important to define
+       <code>errorMessage</code> as JSON object.
+    </p>
+
+    <h3>Exceptions in source code</h3>
+    <p>Use of error codes in Lynx JavaScript source is presented below.
+    <pre class="prettyprint linenums">
+        /**
+        * @throws Error [{code}] when something and something
+        */
+        function someFunction() {
+            throw error({code}, {some_params});
+        }
+    </pre>
+    It will cause following error messages logged to console:
+
+    <pre class="prettyprint linenums">
+        // Console on Debug:
+        Error: [{code}]: {message_with_params}
+        http://home.lynxapp.net/error.html?c={code}&a={jsonized_args}
+
+        // Console on prod
+        Error: [{code}]:
+        http://home.lynxapp.net\error.html?c={code}&a={jsonized_args}
+    </pre>
+    </p>
+    <p>Use of <code>@throws</code> annotation will make api page to have link from error code to proper error.html anchor.
+    <pre class="prettyprint linenums">
+    // Link in someFunction documentation
+    Throws {type} when something and something
+    </pre>
+    </p>
+
+    <h3>Error codes presentation</h3>
+    <p>After submitting one of URLs presented in previouse paragraph user will be directed to LynxSite
+        <code>error.html</code> page. It's content is generated from Lynx sourcecode based on <code>@errormessages</code>
+        annotations.
+    </p>
+    <p>You may use that URL with or without parameters. It will process depending on parameters provided as follows:
+        <ul>
+        <li>no url params (e.g. http://.../error.html) will cause simple presentation of top of the page</li>
+        <li><code>c</code> parameter provided (e.g. http://.../error.html?c=554454) will cause error page to scroll to proper error
+            code
+        </li>
+        <li>both <code>c</code> and <code>a</code> (e.g. http://.../error.html/c=554454&a=['test1', 'test2']) will cause
+            scroll to error code <code>554454</code> and update of error message presented there with parameters
+            provided in <code>a</code>. In that case for error message
+            <ul>
+            <li><code>"That is simple {0} with param {1}."</code> and</li>
+            <li>parameters <code>['message', 'test']</code></li>
+            </ul>
+            user will see on page not standard error message but extended as follows:<br/>
+            <code>That is simple message with param test.</code>
+        </li>
+        </ul>
+    </p>
+
+
+
+</div>

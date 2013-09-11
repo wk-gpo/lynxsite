@@ -1,0 +1,55 @@
+<div>
+
+    <div class="pageTitle">
+        <h1>examples in documentation</h1>
+    </div>
+
+    <p>
+        Some objects may be documented with code examples (see <a href="http://usejsdoc.org/tags-example.html"><code>@example</code></a>
+        annotation). LynxSite extends <code>@example</code> annotation with new tag <code>&lt;run/&gt;</code>. See following example:
+    </p>
+    <pre class="prettyprint linenums">
+    /**
+     * @example &lt;run/&gt;
+     * &lt;input type="text" &lt;b&gt;lx-blur&lt;/b&gt;="out = 'blur on element'" /&gt;
+     * {{out}}
+     */
+    </pre>
+    <p>
+        It will cause JSDoc to generate both code snippet and live example build authomatically on the same code snippet
+        provided in comment.
+    </p>
+    <p>
+        Annotation <code>@example</code> allows use of <code>&lt;caption&gt;</code> tag. You may use either of or both
+        tags <code>&lt;caption&gt;</code> and <code>&lt;run/&gt;</code>. Order of these tags is not important.
+        Just keep in mind to put them in separate lines as presented in following example.
+    </p>
+    <pre class="prettyprint linenums">
+    /**
+     * @example &lt;run/&gt; | &lt;externalrun/&gt;
+     * &lt;input type="text" &lt;b&gt;lx-blur&lt;/b&gt;="out = 'blur on element'" /&gt;
+     * {{out}}
+     *
+     * @example &lt;run/&gt; | &lt;externalrun/&gt;
+     *          &lt;caption&gt;This is caption to be put in documentation&lt;/caption&gt;
+     * &lt;input type="text" &lt;b&gt;lx-blur&lt;/b&gt;="out = 'blur on element'" /&gt;
+     * {{out}}
+     *
+     * @example &lt;caption&gt;This is caption to be put in documentation&lt;/caption&gt;
+     *          &lt;run/&gt; | &lt;externalrun/&gt;
+     * &lt;input type="text" &lt;b&gt;lx-blur&lt;/b&gt;="out = 'blur on element'" /&gt;
+     * {{out}}
+     */
+    </pre>
+    <p>
+        You may still use <code>@example</code> without any of tags or just with <code>caption</code> tag.
+    </p>
+    <h2>Usage</h2>
+    <p>Mechanism similar to "Examples" is provided for "Usage" section. One can insert code into documentation
+    annotatig it with "@lynxsiteusage" JSDoc tag. The code can have &lt;caption&gt; tag with some text to describe
+    the code, but it can't be run in place via &lt;run/&gt; tag.</p>
+    <p>If comment contains @arg tags then resulting "parameters" section will be placed under "Usage" section. If there
+    is no "Usage" section, "Parameters" will be top level section on it's own.</p>
+    <p><b>&lt;externalrun/&gt;</b> tag operates like <b>&lt;run/&gt;</b> tag but also can send code to
+    <a href="http://jsfiddle.net/" target="_blank">jsFiddle</a>. </p>
+</div>

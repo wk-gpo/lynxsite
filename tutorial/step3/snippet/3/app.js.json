@@ -1,14 +1,14 @@
 {
     "links" : {
-        "module" : {"line" : 2 , "value": "../dist/app/docs.html#/api/wk.lynx.core/lynx"},
-        "moduleName" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=moduleName",
-        "pages" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=pages",
-        "defaultPath" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.Configuration?scrollTo=defaultPath",
-        "wk.lynx.ui" : "../dist/app/docs.html#/api/%77k.lynx.ui/index",
-        "name" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=name",
-        "path" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=path",
-        "view" : "../dist/app/docs.html#/api/wk.lynx.core/lynx.config.PageDefinition?scrollTo=view",
-        "lynx" : {"line" : 2, "value" :"../dist/app/docs.html#/api/wk.lynx.core/lynx"}
+        "module" : {"line" : 2 , "value": "index.html#/api/wk.lynx.core/lynx"},
+        "moduleName" : "index.html#/api/wk.lynx.core/lynx.config.Configuration#moduleName",
+        "pages" : "index.html#/api/wk.lynx.core/lynx.config.Configuration#pages",
+        "defaultPath" : "index.html#/api/wk.lynx.core/lynx.config.Configuration#defaultPath",
+        "wk.lynx.ui" : "index.html#/api/%77k.lynx.ui/index",
+        "name" : "index.html#/api/wk.lynx.core/lynx.config.PageDefinition#name",
+        "path" : "index.html#/api/wk.lynx.core/lynx.config.PageDefinition#path",
+        "view" : "index.html#/api/wk.lynx.core/lynx.config.PageDefinition#view",
+        "lynx" : {"line" : 2, "value" :"index.html#/api/wk.lynx.core/lynx"}
     },
     "annotate" : {
         "module" : {"line" : 2 , "value": "This is <strong>main</strong> lynx framework method. It returns <code>angular.Module</code> object based on configuration you provided."},

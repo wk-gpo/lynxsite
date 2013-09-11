@@ -1,0 +1,233 @@
+<div>
+
+    <div class="pageTitle">
+        <h1>e2e testing</h1>
+    </div>
+
+    <p>
+        End-to-End Testing is a methodology used to assure that application flow works as designed top to the bottom.
+        It allows to recognize any system dependencies which make problems while application is run in form of final assembly.<br/>
+        Applying E2E to web application testing one have to test application using it's UI as presented via web browser.
+        Lynx project environment provides solutions for e2e testing automation. Using that techniques you will be able
+        to run your E2E test within context of your CI infrastructure.
+    </p>
+    <h3>Environment</h3>
+    <h4><a href="http://nodejs.org/" target="_blank">Node</a></h4>
+    <p>Node is used as JavaScript run environment in project. Other tools
+        used in development are written in JavaScript (are actually a JavaScripts files). Node enables launching them in
+        development environment.
+    </p>
+
+    <h4><a href="http://karma-runner.github.io" target="_blank">Karma</a></h4>
+    <p>In Lynx environment Karma is used as test runner.
+        Although you may choose other tool for that purpose, Lynx project as well as examples presented here are base
+        on Karma.
+    </p>
+
+
+    <h3>Configuration</h3>
+    <p>Karma needs to be learnt some about your project. It's done through Karma
+        <a href="http://karma-runner.github.io/0.8/config/configuration-file.html">configuration file</a> settings.
+        You will prepare that configuration file within your project. As a good practice it is usually created
+        in folder <code>test</code> under root folder of your project.
+        <pre class="prettyprint linenums">
+            project_root/
+               test/                --> here goes all test files
+                   test-e2e.conf.js --> this is Karma config file
+        </pre>
+        Read Karma documentation regarding <a href="http://karma-runner.github.io/0.8/config/configuration-file.html">config file</a>
+        if you need more details on that topic. As we found useful for Lynx based project at least following
+        options should be configured:
+        <ul>
+        <li><a href="http://karma-runner.github.io/0.8/config/files.html"><code>files</code></a> allows to provide to
+            Karma list of files used in test run (read more in subparagraph)</li>
+        <li><code>baseDir</code> allows to set base folder for files paths resolution; it is related to <code>files</code>
+            parameter
+        </li>
+        <li><a href="http://karma-runner.github.io/0.8/config/browsers.html"><code>browsers</code></a> defines browsers
+            from local environments to be used for E2E tests
+        </li>
+        <li><code>autoWatch</code> flag to enable Karma to listen on files changes to rerun test; set to <code>true</code></li>
+        <li><code>singleRun</code> flag to enable CI mode of testing; if set to <code>true</code> Karma process will
+            be stopped after execution of all tests; set to <code>false</code></li>
+        <li><code>reporters</code> usually set in our project to <code>['dots', 'junit']</code>
+        </li>
+        <li><code>junitReporter</code> additional configuration for <code>junit</code> reporter (see parameter
+            <code>reporters</code>)
+        </li>
+        <li><code>proxies</code> it defines proxy paths to be used for requests issued to Karma to web server</li>
+        <li><code>port</code> is port number of web server run by Karma; we choose <code>8085</code>; it must be
+            different port web application under tests is exposed on
+        </li>
+        <!--<li><code>runnerPort</code></li>-->
+        </ul>
+        <h4><code>files</code> & <code>basePath</code></h4>
+        <p>This parameter allows to provide to Karma list of files used in test run. It should at least define following files:
+            <ul>
+            <li><a href="http://docs.angularjs.org/guide/dev_guide.e2e-testing">Angular Scenario Runner</a> Karma includes
+                Angular Scenario Runner as one of predefined runners. Lynx based project should use that runner as Lynx
+                itself is built on top of Angular JS.
+            </li>
+            <li><code>scenario.js</code> which includes some extensions to Angular Scenario Runner which are useful
+                in Lynx based application. You can find that file in Lynx package in <code>test/e2e</code> (<b>TODO:
+                    it's not currently included in Lynx package</b>)
+            </li>
+            <li>Page Object Pattern file which reflects your application page components. Read more about POP later in
+                that article.
+            </li>
+            <li>e2e test files - introduction to the structure of those files is pretty well described in
+                <a href="http://docs.angularjs.org/guide/dev_guide.e2e-testing">Angular Scenario Runner</a> web page.
+                Extensions defined in <code>scenario.js</code> file are described later in this article.
+            </li>
+            </ul>
+            We found it useful to set up following structure of test folder:
+                <pre class="prettyprint linenums">
+                    project_root/
+                       test/                   --> here goes all test files
+                          test-e2e.conf.js     --> this is Karma config file
+                          scenario.js          --> Lynx extension for Angular Scenario Runner
+                          e2e/                 --> all e2e test files
+                             pop/              --> Page Object Pattern implementation
+                             scenarios/        --> e2e tests
+                             report/           --> reports from test execution
+                </pre>
+            File <code>scenario.js</code> as being a part of Lynx library, may be included in your project as
+            part of Lynx and not be copied into test folder.<br/>
+            Having test folder structure as presented above configuration of files for Karma would be defined as
+            follows:
+                <pre class="prettyprint linenums">
+                basePath = '.';    //set paths be relative to folder of test-e2e.conf.js
+                files = [
+                    ANGULAR_SCENARIO,          //Angular Scenario Runner - constant define in Karma
+                    ANGULAR_SCENARIO_ADAPTER,  //Angular Scenario Runner - constant define in Karma
+                    'scenario.js',             //Lynx extension to Angular Scenario Runner
+                    'e2e/pop/**/*.js',         //Page Object Pattern implementation
+                    'e2e/scenarios/**/*.js'    //E2E tests
+                ];
+                </pre>
+        </p>
+
+    <h4><code>browsers</code></h4>
+    <p> You provide here browser names which are defined in Karma and mapped to local path for browser executable.
+        Read Karma <a href="http://karma-runner.github.io/0.8/config/browsers.html">documentation</a> on available
+        values for that option.
+        <pre class="prettyprint linenums">
+        browsers = ['Chrome'];
+        </pre>
+        If you will provide more than one browser name, Karma runner will initiate test on all of chosen
+        browsers.
+        <div class="bs-callout bs-callout-warning">
+            There is known bug in Karma for Chrome on Window environments (see Karma/lib/launchers/Chrome.js).
+            Currently launch command for win32 is defined as follows:<br/>
+            <code>win32: process.env.LOCALAPPDATA + '\\Google\\Chrome\\Application\\chrome.exe'</code><br/>
+            so it’s based on <code>%LOCALAPPDATA%</code> folder instead of <code>%PROGRAMFILES%</code>
+            environment variable.<br/>
+            As a workaround just define OS environment variable CHROME_BIN pointing to installation folder of Chrome
+            usually <code>C:\Program Files\Google\Chrome\Application\chrome.exe</code>.
+        </div>
+    </p>
+    <h4><code>autoWatch</code> & <code>singleRun</code></h4>
+    <p>We found it convenient to set Karma to watch every files changes done by developer. If any watched file is changes
+        Karma will rerun test. To make it work you need to keep Karma alive (thus <code>singleRun=false</code>) and to
+        make Karma to listen on any file change (<code>autoWatch=true</code>).
+    </p>
+
+    <h4><code>reporters</code> & <code>junitReporter</code></h4>
+    <p>Reporters are writing information after each test is run. For e2e test we usually test two reportes:
+        <ul>
+        <li><code>dots</code> causes output to console of '.' sign per each test run</li>
+        <li><code>junit</code> which makes additionally some data to be written to report files; that requires
+            <code>junitReporter</code> to be defined</li>
+        </ul>
+        Parameter <code>junitReporter</code> configures that reporter. Set it as follows:
+        <pre class="prettyprint linenums">
+        junitReporter = {
+            outputFile:'report/e2e.xml',
+            suite:'e2e'
+        };
+        </pre>
+        to make report file to subfolder <code>e2e</code> of <code>basePath</code>. Notice that <code>outputFile</code>
+        is defined as relative path. That particular configuration will make test report to be written here:
+        <pre class="prettyprint linenums">
+        project_root/
+           test/
+              e2e/          --> set in junitReporter.suite
+                 report/    --> set in junitReporter.outputFile
+                    e2e.xml --> set in junitReporter.outputFile
+        </pre>
+    </p>
+    <h4><code>proxies</code></h4>
+    <p>Karma runs its own webserver. All tests are actually performed by issuing http requests to Karma's web server.
+        To make them access other resources (e.g. tested web application) you need to define it as a proxy.
+        <pre class="prettyprint linenums">
+        proxies = {
+            '/':'http://localhost/testedApp/'
+        };
+        </pre>
+        This configuration would cause every call to Karma's root path to point to location where tested
+        application is available (here <code>localhost</code> and standard port 80).
+    </p>
+
+
+    <!--<h3>Lynx <code>scenario.js</code> extentions</h3>-->
+    <h3>Page Object Pattern</h3>
+    <p>Page Object Pattern (POP) represents application pages as set of objects each of them encapsulating
+        related page functionality and data. Read more about overall idea of PageObject
+        <a href="http://code.google.com/p/selenium/wiki/PageObjects">here</a>.
+    </p>
+    <p>We decided to use POP due to following reasons
+        <ul>
+        <li>reduction of code duplication<br/>
+            All implementation details directly related to page data&functions are aggregated in one POP object. Tests
+            does not need to know any technical details regarding page structure. Every time a change is introduced to
+            page it needs only related POP object to be adjusted - test code could be not affected.
+        </li>
+        <li>test readability improvement<br/>
+            Since test are implemented based on POP object functionality only important information is visible in
+            test implementation  e.g. test defines certain field should be set with certain data but does not exposes
+            technical details on how it should be done. The latter is wrapped by POP object.
+        </li>
+        <li>it improves test maintainability<br/>
+            Change to web application page does not directly affects tests but only one POP object related to that page.
+            For huge test set it's crucial not to get stuck updating thousands of test even on relatively simple
+            modification of you web application which is css selector change.
+        </li>
+        </ul>
+    </p>
+    <h3>E2E test </h3>
+    <p>Please <a href="download/StarterAppTestSuite.zip">download</a> example project we prepared for StarterApp where
+        you will find e2e test configuration, POP implementation as well as couple of e2e scenarios.
+    </p>
+    <p>StarterApp itself can be found <a href="download/StarterApp.zip">here</a>.</p>
+
+    <h4>How to run test suite</h4>
+    <ol>
+        <li>Deploy StarterApp on server of your choosing, note url under which it's available.</li>
+
+        <li>Unpack StarterAppTestSuite.zip, this will create directory StarterAppTestSuite.</li>
+
+        <li>Go to StarterAppTestSuite/test and edit runTest.sh or runTest.cmd for Windows users and change node executable
+            to one appropriate for your system:<br>
+            node-linux-32 node-linux-64 for Linux 32bit and 64bit<br>
+            node-win-32 node-win-64 for Windows 32bit and 64bit<br>
+            node-darwin-32 node-darwin-64 for MacOS X 32bit and 64bit<br>
+
+            Linux and Mac users need to set executable permission for file they are using, eg:<br>
+
+            chmod a+x ../Tools/NodeJs/node-linux-64
+        </li>
+        <li>Open file starterAppE2E.conf.js and in object proxies change
+            'http://localhost:8000/Base/Apps/LynxSite/LynxSiteWeb/resources/StarterApp/' to url under which StarterApp
+            is available on your system. If you have Firefox instead of Chrome, you should also modify Browsers object.
+        </li>
+        <li>Run "runTest" script, the browser will start and output on terminal should look like this
+        <pre class="prettyprint">
+            INFO [karma]: Karma server started at http://localhost:8051/__testacular/
+            INFO [launcher]: Starting browser Chrome
+            INFO [karma]: To run via this server, use "karma run --runner-port 9101"
+            INFO [Chrome 28.0 (Linux)]: Connected on socket id ZDjIgktxjyNljZE9EdZP
+            ....
+            Chrome 28.0 (Linux): Executed 4 of 4 SUCCESS (16.614 secs / 16.418 secs)
+        </pre>
+    </ol>
+</div>

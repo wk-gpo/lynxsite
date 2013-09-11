@@ -7,6 +7,11 @@
     "replace" : {
         "dynamic-app" : "ng-app"
     },
+    "annotate" : {
+        "message": {"first":true, "value":"This is directive which extends standard HTML vacabulary. It reads well and could be possible more informative then standard HTML. See message.js for details."},
+        "name": "Values are passed via models defined in scope of new directive",
+        "yourName": {"line":8, "value": "Still <code>yourName</code> is used locally but it provided to the scope of directive"}
+    },
     "fold": [[2,6, true]],
     "toolbar": true
 }

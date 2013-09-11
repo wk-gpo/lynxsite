@@ -42,11 +42,16 @@
 
     },
     "annotate" : {
-        "path": {"line" : 26, "value" : "please notice the path for data binded pages is changed, now the path contains some model bindings, in case of binded data change the url in application will be automatically updated accordingly, this also keeps the state of app in the url, such parametrized page can be bookmarked or shared"},
+        "name": "it is name which will appear in browser location and page history",
+        "path": {"line" : 15, "value" : "default path for this page; notice use of bindings in path template"},
+        "path": {"line" : 25, "value" : "please notice the path for data binded pages is changed, now the path contains some model bindings, in case of binded data change the url in application will be automatically updated accordingly, this also keeps the state of app in the url, such parametrized page can be bookmarked or shared"},
+        "eval": {"line": 26, "value": "if this <code>path</code> would be matched, <code>phrase</code> model value would be provided by Lynx routing mechanism to <code>$search.searchByPhrase()</code> function"},
+        "view": "relative path to code snippet for the page",
         "eventBinding": "this is collection of bindings to model events, if specified event will occur application will automatically switch the page, you do not have to care about page flow programmatically in application, all what you need to do is to call some method on model, e.g. if you want to perform the search on search model you have to call <code>searchByPhrase</code> method, this method fires <code>searchByPhrase</code> event, if your page is binded to this event on this model, your page will be immediately displayed",
-        "routes": "this is a collection of routes definitions, each route path can be parametrized, and the value of this parameter will be available for <code>eval</code> expression, if route will be matched, the page will be switched, and <code>eval</code> expression will be evaluated"
+        "routes": "this is a collection of routes definitions, each route path can be parametrized, and the value of this parameter will be available for <code>eval</code> expression, if route will be matched, the page will be switched, and <code>eval</code> expression will be evaluated",
+        "defaultPath": "this path will be used if no path is provided in location string"
     },
-    "fold" : [[4,7,true], [9,11, true], [13, 34,true]],
+    "fold" : [[4,7,true], [9,11,true], [13,34]],
     "hide" : [],
     "toolbar" : true
 }

@@ -1,6 +1,9 @@
 {
     "links" : {
-       "ng-autotest" : "http://docs.angularjs.org/guide/dev_guide.e2e-testing"
+       "ng-autotest" : "http://docs.angularjs.org/guide/dev_guide.e2e-testing",
+        "pages.js": {"tab": 1},
+        "components.js": {"tab": 2},
+        "scenarios.js": {"tab": 3}
     },
     "annotate" : {
         "angular-scenario.js": "for running e2e in angular application you have to load angular-scenario.js library",

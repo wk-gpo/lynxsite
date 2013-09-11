@@ -3,22 +3,32 @@
         "content/slides/angular/directives/example/message.html" : "message.html"
     },
     "links" : {
+        "module": "#/api/wk.lynx.core/lynx.core.Application",
+        "moduleName": "#/api/wk.lynx.core/lynx.config.Configuration#moduleName",
+        "velvetConfig": "#/api/wk.lynx.core/lynx.config.Configuration#velvetConfig",
+        "globals": "#/api/wk.lynx.core/lynx.config.Configuration#globals",
+        "AuthModel": "#/api/wk.lynx.core/lynx.models.AuthModel",
+        "SearchModel": "#/api/wk.lynx.core/lynx.models.SearchModel",
         "angular.Scope" : "http://docs.angularjs.org/api/ng.$rootScope.Scope",
-        "host" : "",
-        "velvet.service.Search" : "" ,
-        "velvet.service.Auth" : "",
-        "authenticate" : "",
-        "searchByPhrase" : "",
-        "apikey" : "",
-        "wk.lynx.ui" : ""
+        "host" : "#/api/wk.lynx.velvet/velvet.config/velvet.config.Configuration#host",
+        "velvet.service.Search" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Search" ,
+        "velvet.service.Auth" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth",
+        "authenticate" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#authenticate",
+        "authenticated" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#authenticated",
+        "searchByPhrase" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Search#searchByPhrase",
+        "apikey" : "#/api/wk.lynx.velvet/velvet.config/velvet.config.Configuration#apikey",
+        "wk.lynx.ui" : "#/api/wk.lynx.ui"
     },
     "annotate": {
-        "ServiceExampleCtrl" : "",
-        "configure" : "",
-        "doLogin" : "" ,
-        "doSearch" : "",
-        "wk.lynx.ui" : ""
+        "module" : "this will initiate Lynx application; you need to provide to it configuration <code>lynx.config.Configuration</code> object",
+        "moduleName" : "then name of application" ,
+        "velvetConfig" : "configuration of velvet ",
+        "globals": "all globally available services should be defined here",
+        "$auth": "<code>lynx.models.AuthModel</code> object will be exposed in this application under <code>$auth</code> global name" ,
+        "$search": "<code>lynx.models.SearchModel</code> object will be exposed in this application under <code>$search</code> global name" ,
+        "factory": {"first": true, "value":"function responsible for creation of service"},
+        "wk.lynx.ui" : "Module included to provide your application with Lynx UI components, directives and filters"
     },
-    "fold": [[4,7,true],[8,11,true]],
+    "fold": [[4,7,true],[8,11]],
     "toolbar": true
 }
