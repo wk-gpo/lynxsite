@@ -1,28 +1,10 @@
 {
-    "annotate" : {
-        "ServiceExampleCtrl" : "Controller instance creation on element scope.",
-        "doLogin" : "performing login action",
-        "doSearch" : "performing search action"
-    },
     "links" : {
         "ng-controller" : "http://docs.angularjs.org/api/ng.directive:ngController",
         "ng-model" : "http://docs.angularjs.org/api/ng.directive:ngModel",
-        "ng-app" :  "http://docs.angularjs.org/api/ng.directive:ngApp",
-        "ng-hide" :  "http://docs.angularjs.org/api/ng.directive:ngHide",
-        "ng-show" :  "http://docs.angularjs.org/api/ng.directive:ngShow",
-        "ng-click" :  "http://docs.angularjs.org/api/ng.directive:ngClick",
         "ng-submit" :  "http://docs.angularjs.org/api/ng.directive:ngSubmit",
-        "ServiceExampleCtrl": {"tab": 1},
-        "doSearch": {"tab": 1},
-        "doLogin": {"tab": 1},
-        "search" : {"tab": 1},
-        "getResult": "#/api/wk.lynx.velvet/velvet.vo/velvet.vo.Search#%67etResult",
-        "getItems": "#/api/wk.lynx.velvet/velvet.vo/velvet.vo.SearchResultList#%67etItems",
-        "Title": "#/api/wk.lynx.velvet/velvet.vo/velvet.vo.SearchResultListItem#%54itle"
-
+        "VelvetPlayCtrl": {"tab": 2}
     },
-    "replace" : {
-    },
-    "fold": [[2,7, true],[8,14,true],[15,20,true],[21,24,true]],
+    "fold": [[2,9, true],[10,12,true]],
     "toolbar": true
 }

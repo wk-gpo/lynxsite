@@ -12,6 +12,7 @@
         "name": "Values are passed via models defined in scope of new directive",
         "yourName": {"line":8, "value": "Still <code>yourName</code> is used locally but it provided to the scope of directive"}
     },
+    "hili": [[8]],
     "fold": [[2,6, true]],
     "toolbar": true
 }

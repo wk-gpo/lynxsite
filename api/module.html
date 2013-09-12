@@ -7,7 +7,7 @@
         <h2>Namespaces</h2>
         <ul>
             <li ng-repeat="item in names">
-                <a href="javascript:void(0);" ng-click="openLink(item);">
+                <a href="javascript:void(0);" ng-click="$api.open(item);">
                     {{ item.longname }}
                 </a>
             </li>
@@ -19,7 +19,7 @@
         <h2>Filters</h2>
         <ul>
             <li ng-repeat="item in filtr">
-                <a href="javascript:void(0);" ng-click="openLink(item);">
+                <a href="javascript:void(0);" ng-click="$api.open(item);">
                     {{ item.longname }}
                 </a>
             </li>
@@ -31,7 +31,7 @@
         <h2>Directives</h2>
         <ul>
             <li ng-repeat="item in dir">
-                <a href="javascript:void(0);" ng-click="openLink(item);">
+                <a href="javascript:void(0);" ng-click="$api.open(item);">
                     {{ item.memberof }}.{{ item.kindName }}
                 </a>
             </li>
@@ -43,7 +43,7 @@
         <h2>Services</h2>
         <ul>
             <li ng-repeat="item in ser">
-                <a href="javascript:void(0);" ng-click="openLink(item);">
+                <a href="javascript:void(0);" ng-click="$api.open(item);">
                     {{ item.memberof }}.{{ item.kindName }}
                 </a>
             </li>
@@ -55,7 +55,7 @@
     <div lx-if="classes.length > 0">
         <h2>Types</h2>
         <ul>
-            <li ng-repeat="item in classes" ng-click="openLink(item);">
+            <li ng-repeat="item in classes" ng-click="$api.open(item);">
                 <a href="javascript:void(0);">
                     {{ item.longname }}
                 </a>

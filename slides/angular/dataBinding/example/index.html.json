@@ -10,6 +10,7 @@
     "annotate" : {
         "yourName": "This name of model which you will be use; it binds to input text element value"
     },
+    "hili": [[6]],
     "fold": [[2,5, true]],
     "toolbar": true
 }

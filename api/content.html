@@ -7,7 +7,7 @@
         <h1>{{ $api.content.kindName }}</h1>
         <h3 lx-if="$api.content.augments.length > 0" class="ex">
             extends
-            <a href="javascript:void(0)" ng-click="openLink($api.content.augments[0], 'class')">
+            <a href="javascript:void(0)" ng-click="$api.open($api.content.augments[0])">
                 {{ $api.content.augments[0] }}
             </a>
         </h3>
@@ -15,19 +15,18 @@
 
     <ul class="extends" lx-if="$api.content.allAugments.length > 0">
         <li>
-            <a href="javascript:void(0);" ng-click="openLink('Object');">
+            <a href="javascript:void(0);" ng-click="$api.open('Object');">
                 Object
             </a>
         </li>
         <li ng-repeat="item in $api.content.allAugments.reverse()">
-            <a href="javascript:void(0);" ng-click="openLink(item);">
+            <a href="javascript:void(0);" ng-click="$api.open(item);">
                 <i class="icon-circle-arrow-up"></i>
                 {{ item }}
             </a>
         </li>
         <li>
-            <a href="javascript:void(0);"
-                ng-click="openLink($api.content.longname, $api.content.kind, $api.content.module);">
+            <a href="javascript:void(0);">
                 <i class="icon-circle-arrow-up"></i>
                 {{ $api.content.longname }}
             </a>
@@ -91,7 +90,7 @@
                 <div class="section">
                     <ul>
                         <li ng-repeat="item in $api.content.members.namespace">
-                            <a href="javascript:void(0);" ng-click="openLink(item);">
+                            <a href="javascript:void(0);" ng-click="$api.open(item);">
                                 {{ item.name }}
                             </a>
                         </li>
@@ -104,7 +103,7 @@
                 <div class="section">
                     <ul>
                         <li ng-repeat="item in $api.content.members.directive">
-                            <a href="javascript:void(0);" ng-click="openLink(item);">
+                            <a href="javascript:void(0);" ng-click="$api.open(item);">
                                 {{ item.name }}
                             </a>
                         </li>
@@ -117,7 +116,7 @@
                 <div class="section">
                     <ul>
                         <li ng-repeat="item in $api.content.members.filter">
-                            <a href="javascript:void(0);" ng-click="openLink(item);">
+                            <a href="javascript:void(0);" ng-click="$api.open(item);">
                                 {{ item.name }}
                             </a>
                         </li>
@@ -131,8 +130,18 @@
                 <div class="title">Types</div>
                 <div class="section">
                     <ul>
-                        <li ng-repeat="item in ($api.types($api.content.members) | orderBy:'longname')">
-                            <a href="javascript:void(0);" ng-click="openLink(item);">
+                        <li ng-repeat="item in ($api.content.members.interface | orderBy:'longname')">
+                            <a href="javascript:void(0);" ng-click="$api.open(item);">
+                                {{ item.name }}
+                            </a>
+                        </li>
+                        <li ng-repeat="item in ($api.content.members.typedef | orderBy:'longname')">
+                            <a href="javascript:void(0);" ng-click="$api.open(item);">
+                                {{ item.name }}
+                            </a>
+                        </li>
+                        <li ng-repeat="item in ($api.content.members.class | orderBy:'longname')">
+                            <a href="javascript:void(0);" ng-click="$api.open(item);">
                                 {{ item.name }}
                             </a>
                         </li>
@@ -143,6 +152,5 @@
 
     </ng-switch>
 
-    <!--<pre >{{ $api.content | json }}</pre>-->
 
 </div>

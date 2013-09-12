@@ -10,5 +10,6 @@
     "annotate" : {
         "name": "Values are passed via models defined in scope of new directive"
     },
+    "hili": [[4,6]],
     "toolbar": true
 }

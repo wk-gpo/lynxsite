@@ -1,22 +1,11 @@
 {
-    "replace" : {
-        "content/slides/angular/directives/example/message.html" : "message.html"
-    },
     "links" : {
         "angular.Scope" : "http://docs.angularjs.org/api/ng.$rootScope.Scope",
-        "host" : {"first":true, "value":"#/api/wk.lynx.velvet/velvet.config/velvet.config.Configuration#host"},
-        "velvet.service.Search" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Search" ,
-        "velvet.service.Auth" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth",
-        "authenticate" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#authenticate",
-        "searchByPhrase" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Search#searchByPhrase",
-        "apikey" : {"first":true, "value":"#/api/wk.lynx.velvet/velvet.config/velvet.config.Configuration#apikey"}
+        "angular.$http" : "http://docs.angularjs.org/api/ng.$http",
+        "get" : "http://docs.angularjs.org/api/ng.$http#get",
+        "Base64": "#/api/any/any/velvet.util.Base64",
+        "encode": "#/api/any/any/velvet.util.Base64#encode"
     },
-    "annotate": {
-        "ServiceExampleCtrl" : "angularJs controller which encompass logic used in this example",
-        "configure" : "",
-        "doLogin" : "" ,
-        "doSearch" : ""
-    },
-    "fold": [[1,5,true],[13,26,true]],
+    "fold": [[11,22,true]],
     "toolbar": true
 }
