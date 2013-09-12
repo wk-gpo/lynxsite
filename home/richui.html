@@ -4,7 +4,7 @@
         <div>
             <div class="info">
                 Set cursor on input box and leave the element.
-                Watch label underneath input box.
+                Watch the label underneath the input box.
             </div>
             <input type="text"
                 lx-blur="model.out = 'blur on element'"
@@ -23,9 +23,9 @@
             },
             "annotate": {
                     "lx-blur": "Directive specifies actions to be undertaken on blur event of <code>input</code> element.",
-                    "lx-focus": "Similarly to <code>lx-blur</code> defines actions in case of focus event.",
-                    "{{model.out = model.out || 'no event received, yet'}}": "That defines model in angular scope which encompass <code>input</code> element. Since <code>lx-focus</code> creates it's own scope it's crutial to use model defined in encompasing scope to be able to pass values from <code>lx-focus</code>.<br/>Notice syntax used here which is supposed to assign initial value to <code>model.out</code>.",
-                    "model.out": "Here model value is altered."
+                    "lx-focus": "Similarly to <code>lx-blur</code>, it defines actions to be performed on focus event.",
+                    "{{model.out = model.out || 'no event received, yet'}}": "That defines model in angular scope which encompasses <code>input</code> element. Since <code>lx-focus</code> creates it's own scope it's crutial to use model defined in encompasing scope to be able to pass values from <code>lx-focus</code>.<br/>Notice syntax used here which is supposed to assign initial value to <code>model.out</code>.",
+                    "model.out": "Here the model value is changed."
                 },
             "fold" : [[3,5,true],[8,11,true]],
             "toolbar": true
@@ -34,13 +34,13 @@
 
 
     <div class="topF" >
-        <h2>realy rich ui</h2>
+        <h2>rich ui</h2>
         <div class="desc">
-			Lynx provides rich set of directives which extends standard HTML language. This simplifies implementation 
-            of applications with complex layouts and speeds up development cycle. Available filters lets easily operate 
+			Lynx provides rich set of directives which extend standard HTML language. This simplifies implementation 
+            of applications with complex layouts and speeds up development cycle. Available filters let easily operate 
 			on data. Standard logic lets effectively manage application flow directly from HTML code. Furthermore, Lynx 
-            enables provisioning of own dedicated functional components. At the same time, Lynx does not enforces use of 
-            its directives, filters, logic but is easily integrated with other libraries.<br/>
+            enables provisioning of your own dedicated functional components. At the same time, Lynx does not enforce use of 
+            its directives, filters, logic but easily integrates with other libraries.<br/>
         </div>
 
         <div class="right higlightable foldable">
