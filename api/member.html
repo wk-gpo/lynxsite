@@ -2,9 +2,10 @@
     <span class="pointer" id="{{ doclet.name|functionName }}"></span>
 
     <div class=signature>
+        <span ng-show="doclet.readonly">readonly</span>
         <span class="assess">{{ doclet.access }}</span>
+        <span ng-show="doclet.kind == 'constant'">constant</span>
         <span class="static" ng-show="doclet.scope == 'static' && doclet.kind != 'class'">static</span>
-
         <span class="name">{{ doclet.name | functionName }}</span>
         <a class="type" href="javascript:void(0)" ng-click="$api.open(doclet.returns[0].type.names[0])" lx-if="doclet.kind != 'class'">
             :{{ doclet.type.names[0] }}

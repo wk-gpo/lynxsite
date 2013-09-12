@@ -1,8 +1,9 @@
 {
     "annotate" : {
         "ServiceExampleCtrl" : "Controller instance creation on element scope.",
-        "doLogin" : "performing login action",
-        "doSearch" : "performing search action"
+        "doLogin" : "calling the method exposed by controller on scope",
+        "doSearch" : "calling the method exposed by controller on scope",
+        "search" : {"line":22, "value": "binding to search object exposed in scope by controller, this value not exsists at start"}
     },
     "links" : {
         "ng-controller" : "http://docs.angularjs.org/api/ng.directive:ngController",
@@ -10,11 +11,12 @@
         "ng-app" :  "http://docs.angularjs.org/api/ng.directive:ngApp",
         "ng-hide" :  "http://docs.angularjs.org/api/ng.directive:ngHide",
         "ng-show" :  "http://docs.angularjs.org/api/ng.directive:ngShow",
+        "ng-init" :  "http://docs.angularjs.org/api/ng.directive:ngInit",
         "ng-click" :  "http://docs.angularjs.org/api/ng.directive:ngClick",
         "ServiceExampleCtrl": {"tab": 1},
         "doSearch": {"tab": 1},
         "doLogin": {"tab": 1},
-        "search" : {"line":22, "value":"#/api/wk.lynx.velvet/velvet.service/velvet.service.Search"},
+        "search" : {"line":22, "tab": 1},
         "getResult": "#/api/wk.lynx.velvet/velvet.vo/velvet.vo.Search#%67etResult",
         "getItems": "#/api/wk.lynx.velvet/velvet.vo/velvet.vo.SearchResultList#%67etItems",
         "Title": "#/api/wk.lynx.velvet/velvet.vo/velvet.vo.SearchResultListItem#%54itle"

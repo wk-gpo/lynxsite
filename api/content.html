@@ -13,8 +13,8 @@
         </h3>
     </div>
 
-    <ul class="extends" lx-if="$api.content.allAugments.length > 0">
-        <li>
+    <ul class="extends" lx-if="$api.content.kind == 'class' || $api.content.kind == 'interface'">
+        <li lx-if="$api.content.kind != 'interface'">
             <a href="javascript:void(0);" ng-click="$api.open('Object');">
                 Object
             </a>
@@ -27,7 +27,7 @@
         </li>
         <li>
             <a href="javascript:void(0);">
-                <i class="icon-circle-arrow-up"></i>
+                <i class="icon-circle-arrow-up" lx-if="$api.content.kind != 'interface'"></i>
                 {{ $api.content.longname }}
             </a>
         </li>
@@ -60,28 +60,29 @@
 
             <div lx-if="$api.content.kind == 'class'" class="constructor">
                 <div class="title">Constructor</div>
-                <div ng-include="'content/api/function.html'" class="section"></div>
+                <div ng-include="'content/api/function.html'" class="section" autoscroll></div>
             </div>
 
-            <div ng-include="'content/api/usages.html'"></div>
+            <div ng-include="'content/api/usages.html'" autoscroll></div>
 
             <div lx-if="$api.content.kind == 'directive' || $api.content.kind == 'filter'">
-                <div ng-include="'content/api/parameters.html'"></div>
+                <div ng-include="'content/api/parameters.html'" autoscroll></div>
             </div>
 
-            <div ng-include="'content/api/examples.html'"></div>
+            <div ng-include="'content/api/examples.html'" autoscroll></div>
 
-            <div lx-if="$api.content.members.member.length > 0" class="functions">
+            <div lx-if="$api.content.members.member.length > 0 || $api.content.members.constant.length > 0" class="functions">
                 <div class="title">Members</div>
                 <div class="section">
-                    <div ng-repeat="doclet in $api.content.members.member" ng-include="'content/api/member.html'"></div>
+                    <div ng-repeat="doclet in $api.content.members.constant" ng-include="'content/api/member.html'" autoscroll></div>
+                    <div ng-repeat="doclet in $api.content.members.member" ng-include="'content/api/member.html'" autoscroll></div>
                 </div>
             </div>
 
             <div lx-if="$api.content.members.function.length > 0" class="functions">
                 <div class="title">Functions</div>
                 <div class="section">
-                    <div ng-repeat="doclet in $api.content.members.function" ng-include="'content/api/function.html'"></div>
+                    <div ng-repeat="doclet in $api.content.members.function" ng-include="'content/api/function.html'" autoscroll></div>
                 </div>
             </div>
 
@@ -152,5 +153,5 @@
 
     </ng-switch>
 
-
+     <pre>{{ $api.content | json  }}</pre>
 </div>

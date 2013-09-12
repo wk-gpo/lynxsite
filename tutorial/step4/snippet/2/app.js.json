@@ -7,7 +7,7 @@
         "globals" : "index.html#/api/wk.lynx.core/lynx.config.Configuration#globals",
         "velvetConfig" : "index.html#/api/wk.lynx.core/lynx.config.Configuration",
         "AuthModel": "index.html#/api/wk.lynx.core/lynx.models.%41uthModel",
-        "AUTH_RC4_TOKEN": "index.html#/api/wk.lynx.velvet/velvet.service.Auth#AUTH_RC4_TOKEN",
+        "AUTH_RC4_TOKEN": "index.html#/api/wk.lynx.velvet/velvet.service.Authenticate#AUTH_RC4_TOKEN",
         "wk.lynx.ui" : "index.html#/api/%77k.lynx.ui/index",
         "name" : "index.html#/api/wk.lynx.core/lynx.config.PageDefinition#name",
         "path" : "index.html#/api/wk.lynx.core/lynx.config.PageDefinition#path",

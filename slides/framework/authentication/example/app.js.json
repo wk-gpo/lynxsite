@@ -12,9 +12,9 @@
         "angular.Scope" : "http://docs.angularjs.org/api/ng.$rootScope.Scope",
         "host" : "#/api/wk.lynx.velvet/velvet.config/velvet.config.Configuration#host",
         "velvet.service.Search" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Search" ,
-        "velvet.service.Auth" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth",
-        "authenticate" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#authenticate",
-        "authenticated" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#authenticated",
+        "velvet.service.Authenticate" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Authenticate",
+        "authenticate" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Authenticate#authenticate",
+        "authenticated" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Authenticate#authenticated",
         "searchByPhrase" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Search#searchByPhrase",
         "apikey" : "#/api/wk.lynx.velvet/velvet.config/velvet.config.Configuration#apikey"
     },

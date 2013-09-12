@@ -8,7 +8,7 @@ velvet.configure({
 /**
  * @param {angular.Scope} $scope
  * @param {velvet.service.Search} $velvetSearch
- * @param {velvet.service.Auth} $velvetAuth
+ * @param {velvet.service.Authenticate} $velvetAuth
  */
 var ServiceExampleCtrl =
     function($scope, $velvetSearch, $velvetAuth) {

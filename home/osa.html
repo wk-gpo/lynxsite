@@ -10,7 +10,7 @@
         /**
          * @param {angular.Scope} $scope
          * @param {velvet.service.Search} $velvetSearch
-         * @param {velvet.service.Auth} $velvetAuth
+         * @param {velvet.service.Authenticate} $velvetAuth
          */
         function OsaSearchCtl($scope, $velvetSearch, $velvetAuth) {
             $scope.doSearch = function(id, pswd, query) {
@@ -52,7 +52,7 @@
         "links" :{
             "angular.Scope": "http://docs.angularjs.org/api/ng.$rootScope.Scope",
             "velvet.service.Search": "docs.html",
-            "velvet.service.Auth": "docs.html",
+            "velvet.service.Authenticate": "docs.html",
             "configure": "docs.html",
             "authenticate" : "docs.html",
             "searchByPhrase": "docs.html"
@@ -96,8 +96,8 @@
             <div class="desc">
                 Lynx provides encapsulation of OSA services which expose enterprise-wide functionality. Through the
                 RESTfull Velvet interface Lynx-based application may be easily integrated with GPO Atlas Platform or any other
-                system, which provides its own OSA implementation. All the details of the communication with other systems 
-                (including cross-domain requests) are implemented in well documented Lynx API. 
+                system, which provides its own OSA implementation. All the details of the communication with other systems
+                (including cross-domain requests) are implemented in well documented Lynx API.
                 <br/>
             </div>
             <div class="right higlightable foldable">

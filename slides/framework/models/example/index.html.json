@@ -1,6 +1,6 @@
 {
     "annotate" : {
-        "authenticated": "<code>$auth</code> service model used as guard for authentication. It is set to <code>true</code> if user identity is positively verified",
+        "authenticated": "<code>$auth</code> model used as guard for authentication. It is set to <code>true</code> if user identity is positively verified",
         "authentionFailed": "use that model of <code>$auth</code> to parametrize processing in case of authentication failure",
         "login" : "login action executed by model functionality",
         "logout" : "logout action executed by model functionality"
@@ -14,13 +14,13 @@
         "ng-click" :  "http://docs.angularjs.org/api/ng.directive:ngClick",
         "search" : {"tab": 1},
         "auth" : {"tab":1},
-        "login":"#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#login",
-        "logout": "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#logout",
-        "userName" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#userName",
-        "userPassword" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#password",
-        "authenticated" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#authenticated",
-        "authentionFailed" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#authenticationFailed",
-        "rememberUserName" : "#/api/wk.lynx.velvet/velvet.service/velvet.service.Auth#rememberUserName",
+        "login":"#/api/wk.lynx.core/lynx.models/lynx.models.AuthModel#login",
+        "logout": "#/api/wk.lynx.core/lynx.models/lynx.models.AuthModel#logout",
+        "userName" : "#/api/wk.lynx.core/lynx.models/lynx.models.AuthModel#userName",
+        "userPassword" : "#/api/wk.lynx.core/lynx.models/lynx.models.AuthModel#password",
+        "authenticated" : "#/api/wk.lynx.core/lynx.models/lynx.models.AuthModel#authenticated",
+        "authentionFailed" : "#/api/wk.lynx.core/lynx.models/lynx.models.AuthModel#authenticationFailed",
+        "rememberUserName" : "#/api/wk.lynx.core/lynx.models/lynx.models.AuthModel#rememberUserName",
         "searchByPhrase" :  "#/api/wk.lynx.velvet/velvet.vo/velvet.vo.Search#searchByPhrase",
         "getSearch" :  "#/api/wk.lynx.velvet/velvet.vo/velvet.vo.Search#getSearch",
         "getResult": "#/api/wk.lynx.velvet/velvet.vo/velvet.vo.Search#getResult",

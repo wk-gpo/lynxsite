@@ -52,17 +52,17 @@
     If you will not define <code>authMode</code>, Lynx will by default assume <code>Basic</code> authentication
     for your application.<br/>
     To configur that parameter use constants defined in
-    <a href="docs.html#/api/wk.lynx.velvet/velvet.service.Auth">velvet.service.Auth</a> object:
+    <a href="docs.html#/api/wk.lynx.velvet/velvet.service.Authenticate">velvet.service.Auth</a> object:
     <ul>
-    <li><a href="docs.html#/api/wk.lynx.velvet/velvet.service.Auth#AUTH_BASIC">AUTH_BASIC</a> - for basic mode authentication</li>
-    <li><a href="docs.html#/api/wk.lynx.velvet/velvet.service.Auth#AUTH_RC4_TOKEN">AUTH_RC4_TOKEN</a> - for RC4 Token mode authentication</li>
+    <li><a href="docs.html#/api/wk.lynx.velvet/velvet.service.Authenticate#AUTH_BASIC">AUTH_BASIC</a> - for basic mode authentication</li>
+    <li><a href="docs.html#/api/wk.lynx.velvet/velvet.service.Authenticate#AUTH_RC4_TOKEN">AUTH_RC4_TOKEN</a> - for RC4 Token mode authentication</li>
     </ul>
     The following example will configure your app to use RC4 Token authentication algorithm
 <pre class="prettyprint linenums">
     ...
     var velvetConfig = {
         ...
-        authMode: velvet.service.Auth.AUTH_RC4_TOKEN,
+        authMode: velvet.service.Authenticate.AUTH_RC4_TOKEN,
         ...
     };
     ...

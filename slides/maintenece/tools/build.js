@@ -1,5 +1,3 @@
-// Importing toolset
-
 var file = require('file'),
     path = require('path'),
     build = require('lynxbuild'),
@@ -9,11 +7,9 @@ var file = require('file'),
 
 const OUT_PATH = "dist";
 
-// Lookup for modules
 var modules = build.modules.find([
     path.resolve(__dirname)]);
 
-////Project definition
 project("App", "dist", function () {
 
     target("dist", ["compile", "test"]);
@@ -38,7 +34,6 @@ project("App", "dist", function () {
 
     });
 
-    // Target for run tests on sinle module
     target("test", function (done) {
         task.karma(done, modules["modulename"],
             { type: "unit" }
