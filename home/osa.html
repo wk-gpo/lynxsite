@@ -1,6 +1,6 @@
 <div id="osa">
     <script id="osa.js">
-        /* Configurate velvet connection */
+        /* Configure velvet connection */
         velvet.configure({
             host: "http://velvet.cheetah.dev.lynxapp.net",
             apikey: "5D2000D799874109A65DD0C984102DCC",
@@ -18,7 +18,7 @@
                     if (authenticated) {
                         $scope.search = $velvetSearch.searchByPhrase(query);
                     } else {
-                        alert("Untable to authenticate");
+                        alert("Unable to authenticate");
                     }
                 });
             };
@@ -58,11 +58,11 @@
             "searchByPhrase": "docs.html"
         },
         "annotate" : {
-            "configure": "To work with OSA/Velvet you have to provide url to endpoint, and apikey.",
+            "configure": "To work with OSA/Velvet you have to provide url to its endpoint, and apikey.",
             "doSearch": "Expose search trigger function in controller scope",
-            "authenticate": "At start you have to authenticate to Velvet instance",
+            "authenticate": "At start you have to authenticate against Velvet instance",
             "search": "Put the promiss of service call to scope",
-            "searchByPhrase": "On callback (afrer authentication), you are able to perform the search on OSA/Velvet. The result of each service call is promisse of server response."
+            "searchByPhrase": "On callback (afrer authentication), you are able to perform searches on OSA/Velvet. The result of each service call is a promisse of server response."
         },
         "fold" : [[2,6,true],[18,20,true]],
         "toolbar": true
@@ -82,8 +82,8 @@
         "annotate" : {
             "OsaSearchCtl": "Initilalize controller",
             "doSearch": "On click calling search method definied in <code>OsaSearchCtl</code>",
-            "search.": "This object will be created by controller on search performing",
-            "getResult": "All what you have to do to diosplay results is binding to the search object. <code>Search</code> object (also the result of method <code>getResults</code>) is a promis, but you do not have to care about this, the view will be rewrited automatically on data bacs from server side."
+            "search.": "This object will be created by the controller when search is performed",
+            "getResult": "All you have to do to diosplay results is to bind to the search object. <code>Search</code> object (also the result of method <code>getResults</code>) is a promiss, but you do not have to care about this, the view will be rewritten automatically when data comes back from the server."
         },
         "fold" : [[3,6,true],[9,13,true]],
         "toolbar": true
